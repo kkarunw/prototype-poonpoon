@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import poonpoonHero from "./poonpoon-hero.png";
 import kanchanaburiMap from "./kanchanaburi-map.png";
+import posterRegister from "./Poster-Rigister.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -422,6 +423,7 @@ function NavigationBar({ screen, onNavigate }) {
    LANDING SCREEN
    ============================================================ */
 function LandingScreen({ onRegisterRace, onAsk, onLogin }) {
+  const [showPoster, setShowPoster] = useState(true);
   return (
     <div className="h-full w-full flex flex-col justify-between relative overflow-hidden" style={{ background: heroGradient }}>
       <div className="absolute inset-0 opacity-[0.08]" style={{
@@ -466,8 +468,31 @@ function LandingScreen({ onRegisterRace, onAsk, onLogin }) {
           เข้าสู่ระบบ
         </button>
       </div>
+     {/* Poster Popup */}
+  {showPoster && (
+    <div className="absolute inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+      <div className="relative w-full max-w-[360px]">
+        
+        <img
+          src={posterRegister}
+          alt="Run for Peace Run for Freedom"
+          className="w-full max-h-[85dvh] object-contain rounded-2xl shadow-2xl"
+        />
+
+        <button
+          onClick={() => setShowPoster(false)}
+          className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-white text-slate-800 shadow-lg flex items-center justify-center active:scale-95"
+          aria-label="ปิดโปสเตอร์"
+        >
+          <X size={22} />
+        </button>
+
+      </div>
     </div>
-  );
+  )}
+
+</div>
+);
 }
 
 /* ============================================================
