@@ -475,6 +475,7 @@ function LandingScreen({ onRegisterRace, onAsk, onLogin }) {
    ============================================================ */
 function RegisterForm({ type, onBack, onDone }) {
   const [submitted, setSubmitted] = useState(false);
+  const [selectedDistance, setSelectedDistance] = useState("5 KM City");
   const isRace = type === "race";
   const isLogin = type === "login";
   if (submitted) {
@@ -528,11 +529,20 @@ function RegisterForm({ type, onBack, onDone }) {
         <div>
           <p className="text-xs font-semibold text-slate-500 mb-2">เลือกระยะทาง</p>
           <div className="grid grid-cols-3 gap-2">
-            {["3.5 KM Freedom", "5 KM City", "10 KM Heritage"].map((d, i) => (
-              <button key={d} className={`py-2.5 rounded-xl text-xs font-semibold border ${i === 1 ? "bg-blue-600 text-white border-blue-600" : "bg-white text-slate-600 border-slate-200"}`}>
-                {d}
-              </button>
-            ))}
+            {["3.5 KM Freedom", "5 KM City", "10 KM Heritage"].map((d) => (
+  <button
+    key={d}
+    type="button"
+    onClick={() => setSelectedDistance(d)}
+    className={`py-2.5 rounded-xl text-xs font-semibold border ${
+      selectedDistance === d
+        ? "bg-blue-600 text-white border-blue-600"
+        : "bg-white text-slate-600 border-slate-200"
+    }`}
+  >
+    {d}
+  </button>
+))}
           </div>
         </div>
       </div>
