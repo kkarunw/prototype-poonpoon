@@ -422,8 +422,13 @@ function NavigationBar({ screen, onNavigate }) {
 /* ============================================================
    LANDING SCREEN
    ============================================================ */
-function LandingScreen({ onRegisterRace, onAsk, onLogin }) {
-  const [showPoster, setShowPoster] = useState(true);
+function LandingScreen({
+  onRegisterRace,
+  onAsk,
+  onLogin,
+  showPoster,
+  setShowPoster
+}) {
   return (
     <div className="h-full w-full flex flex-col justify-between relative overflow-hidden" style={{ background: heroGradient }}>
       <div className="absolute inset-0 opacity-[0.08]" style={{
@@ -1230,6 +1235,7 @@ function ProfileScreen({ missions, savedIds }) {
    ============================================================ */
 export default function App() {
   const [screen, setScreen] = useState("landing");
+  const [showPoster, setShowPoster] = useState(true);
   const [prevMainScreen, setPrevMainScreen] = useState("home");
   const [missions, setMissions] = useState(MISSIONS);
   const [activeMission, setActiveMission] = useState(null);
@@ -1242,6 +1248,7 @@ export default function App() {
   const [savedIds, setSavedIds] = useState([]);
   const [toast, setToast] = useState(null);
   const [aiFromLanding, setAiFromLanding] = useState(false);
+  
 
   const showToast = (msg) => {
     setToast(msg);
@@ -1307,13 +1314,25 @@ export default function App() {
 
         {screen === "landing" && (
           <LandingScreen
-            onRegisterRace={() => setScreen("registerRace")}
-            onAsk={() => {
-              setAiFromLanding(true);
-              setScreen("ai");
-            }}
-            onLogin={() => setScreen("login")}
-          />
+  showPoster={showPoster}
+  setShowPoster={setShowPoster}
+
+  onRegisterRace={() => {
+    setShowPoster(false);
+    setScreen("registerRace");
+  }}
+
+  onAsk={() => {
+    setShowPoster(false);
+    setAiFromLanding(true);
+    setScreen("ai");
+  }}
+
+  onLogin={() => {
+    setShowPoster(false);
+    setScreen("login");
+  }}
+/>
         )}
 
         {screen === "registerRace" && <RegisterForm type="race" onBack={() => setScreen("landing")} onDone={() => navigate("home")} />}
