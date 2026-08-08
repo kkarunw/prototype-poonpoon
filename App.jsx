@@ -1096,18 +1096,22 @@ function AIScreen({ onNavigateMarker, onNavigateFoodList, onNavigateHome, onBack
         ))}
       </div>
 
-      <div className="px-4 pb-6 pt-2 flex items-center gap-2 border-t border-slate-100 bg-white">
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send(input)}
-          placeholder="พิมพ์คำถามถึงปูนปูน..."
-          className="flex-1 bg-slate-100 rounded-full px-4 py-2.5 text-sm outline-none"
-        />
-        <button onClick={() => send(input)} className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
-          <Send size={16} />
-        </button>
-      </div>
+     <div className="px-4 pb-20 pt-2 flex items-center gap-2 border-t border-slate-100 bg-white">
+  <input
+    value={input}
+    onChange={(e) => setInput(e.target.value)}
+    onKeyDown={(e) => e.key === "Enter" && send(input)}
+    placeholder="พิมพ์คำถามถึงปูนปูน..."
+    className="flex-1 bg-slate-100 rounded-full px-4 py-2.5 text-sm outline-none"
+  />
+
+  <button
+    onClick={() => send(input)}
+    className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0"
+  >
+    <Send size={16} />
+  </button>
+</div>
     </div>
   );
 }
