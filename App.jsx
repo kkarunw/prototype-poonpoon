@@ -520,7 +520,7 @@ function RegisterForm({ type, onBack, onDone }) {
 
   return (
     <div className="h-full flex flex-col bg-slate-50">
-      <ScreenHeader title="สมัครวิ่ง" subtitle="10 KM Heritage Run" onBack={onBack} />
+      <ScreenHeader title="สมัครวิ่ง" subtitle="เลือกเส้นทางที่ใช่สำหรับคุณ" onBack={onBack} />
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
         <Field label="ชื่อ-นามสกุล" placeholder="กรอกชื่อของคุณ" />
         <Field label="เบอร์โทรศัพท์" placeholder="08X-XXX-XXXX" />
