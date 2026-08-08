@@ -434,9 +434,12 @@ function LandingScreen({ onRegisterRace, onAsk, onLogin }) {
         <p className="text-white/90 tracking-[0.35em] text-sm font-semibold mt-2">KANCHANABURI</p>
       </div>
 
-      <div className="relative flex-1 flex items-center justify-center">
-        <div className="absolute w-56 h-56 rounded-full bg-white/10 blur-2xl" />
-        <PoonpoonMascot size={650} />
+      <div className="relative flex-1 min-h-0 overflow-visible">
+        <div className="absolute w-56 h-56 rounded-full bg-white/10 blur-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <PoonpoonMascot
+        size={1000}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+      />
       </div>
 
       <div className="relative px-6 pb-8 space-y-3">
