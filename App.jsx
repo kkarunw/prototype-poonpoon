@@ -557,10 +557,16 @@ function Field({ label, placeholder, type = "text" }) {
 /* ============================================================
    HOME SCREEN
    ============================================================ */
-function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList }) {
+function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
   return (
     <div className="h-full overflow-y-auto pb-24 bg-slate-50">
       <div className="px-5 pt-6 pb-8 rounded-b-[32px] text-white relative overflow-hidden" style={{ background: heroGradient }}>
+        <button
+  onClick={onBack}
+  className="absolute top-5 left-4 z-20 w-9 h-9 rounded-full bg-white/15 flex items-center justify-center active:bg-white/25"
+>
+  <ChevronLeft size={22} className="text-white" />
+</button>
         <div className="flex items-start justify-between">
           <div>
             <p className="text-lg font-bold">สวัสดี 👋</p>
@@ -1275,7 +1281,12 @@ export default function App() {
         {screen === "login" && <RegisterForm type="login" onBack={() => setScreen("landing")} onDone={() => navigate("home")} />}
 
         {screen === "home" && (
-          <HomeScreen onNavigate={navigate} onOpenMarker={openMarkerById} onOpenFoodList={openFoodList} />
+  <HomeScreen
+    onNavigate={navigate}
+    onOpenMarker={openMarkerById}
+    onOpenFoodList={openFoodList}
+    onBack={() => setScreen("landing")}
+  />
         )}
 
         {screen === "anotherLens" && (
