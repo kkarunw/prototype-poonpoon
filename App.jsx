@@ -8,6 +8,7 @@ import {
   CalendarDays, ChevronDown, Loader2
 } from "lucide-react";
 import poonpoonHero from "./poonpoon-hero.png";
+import kanchanaburiMap from "./kanchanaburi-map.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -22,7 +23,7 @@ const IMAGES = {
   relaxkan: { cover: null },
   sup: { cover: null },
   restaurants: { covers: [null, null, null, null, null, null] },
-  map: { base: null }, // e.g. "/images/map/festival-map.png" — marker x/y (%) in MAP_MARKERS may need re-tuning to match the real map
+  map: { base: kanchanaburiMap },
 };
 
 /* ============================================================
