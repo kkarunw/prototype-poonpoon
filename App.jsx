@@ -436,7 +436,7 @@ function LandingScreen({ onRegisterRace, onAsk, onLogin }) {
 
       <div className="relative flex-1 flex items-center justify-center">
         <div className="absolute w-56 h-56 rounded-full bg-white/10 blur-2xl" />
-        <PoonpoonMascot size={300} />
+        <PoonpoonMascot size={600} />
       </div>
 
       <div className="relative px-6 pb-8 space-y-3">
