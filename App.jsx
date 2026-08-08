@@ -803,7 +803,13 @@ function ExploreMapScreen({ onBack, mapFilter, setMapFilter, onMarkerClick }) {
         className="flex-1 relative mx-5 mb-5 rounded-3xl overflow-hidden border border-slate-200"
         style={
           IMAGES.map.base
-            ? { backgroundImage: `url(${IMAGES.map.base})`, backgroundSize: "cover", backgroundPosition: "center" }
+? {
+    backgroundImage: `url(${IMAGES.map.base})`,
+    backgroundSize: "100% auto",
+    backgroundPosition: "center center",
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "#eef8f5"
+  }
             : { background: "linear-gradient(135deg,#E6F4EA 0%,#DCEFFB 45%,#EAF7F5 100%)" }
         }
       >
