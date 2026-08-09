@@ -2690,10 +2690,9 @@ function ExploreMapScreen({
   setMapFilter,
   onMarkerClick
 }) {
-  const markers =
-    mapFilter === "all"
-      ? MAP_MARKERS
-      : MAP_MARKERS.filter((m) => m.type === mapFilter);
+const markers = MAP_MARKERS.filter(
+  (m) => m.type === mapFilter
+);
 
   const [mapZoom, setMapZoom] = useState(1);
   const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 });
@@ -2846,10 +2845,6 @@ function ExploreMapScreen({
                 : "bg-white text-slate-500 border-slate-200"
             }`}
           >
-            {f.id === "all" && (
-              <Filter size={11} />
-            )}
-
             {f.label}
           </button>
         ))}
@@ -2944,22 +2939,51 @@ function ExploreMapScreen({
                 `,
               }}
             >
-              <div
-                className={`
-                  w-9 h-9
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                  text-white
-                  shadow-md
-                  border-2
-                  border-white
-                  ${markerColor(m.type)}
-                `}
-              >
-                <m.icon size={16} />
-              </div>
+             <div
+  className={`
+    w-10 h-10
+    rounded-full
+    flex
+    items-center
+    justify-center
+    shadow-md
+    border-2
+    border-white
+    overflow-hidden
+    ${
+      m.logo
+        ? "bg-white"
+        : markerColor(m.type)
+    }
+  `}
+>
+  {m.logo ? (
+    <img
+      src={m.logo}
+      alt={m.name}
+      draggable={false}
+      className="
+        w-[82%]
+        h-[82%]
+        object-contain
+        pointer-events-none
+      "
+    />
+  ) : m.serviceType === "gas" ? (
+    <span className="text-[16px] pointer-events-none">
+      ⛽
+    </span>
+  ) : m.serviceType === "ev" ? (
+    <span className="text-[17px] pointer-events-none">
+      ⚡
+    </span>
+  ) : m.icon ? (
+    <m.icon
+      size={16}
+      className="text-white pointer-events-none"
+    />
+  ) : null}
+</div>
             </button>
           ))}
 
@@ -3082,14 +3106,22 @@ function ExploreMapScreen({
 }
 function markerColor(type) {
   switch (type) {
-    case "wellness": return "bg-teal-500";
-    case "activity": return "bg-blue-500";
-    case "food": return "bg-orange-500";
-    case "service": return "bg-slate-500";
-    default: return "bg-blue-500";
+    case "relaxkan":
+      return "bg-teal-500";
+
+    case "sup":
+      return "bg-blue-500";
+
+    case "food":
+      return "bg-orange-500";
+
+    case "service":
+      return "bg-slate-500";
+
+    default:
+      return "bg-slate-500";
   }
 }
-
 function MarkerSheet({ marker, onClose, onOpenRestaurant, onOpenFoodList, savedIds, onToggleSave }) {
   const [expanded, setExpanded] = useState(false);
   useEffect(() => setExpanded(false), [marker]);
@@ -3620,7 +3652,7 @@ export default function App() {
   const [gallery, setGallery] = useState(INITIAL_GALLERY);
   const [galleryFilter, setGalleryFilter] = useState("all");
   const [galleryPost, setGalleryPost] = useState(null);
-  const [mapFilter, setMapFilter] = useState("all");
+  const [mapFilter, setMapFilter] = useState("relaxkan");
   const [activeMarker, setActiveMarker] = useState(null);
   const [foodListOpen, setFoodListOpen] = useState(false);
   const [savedIds, setSavedIds] = useState([]);
