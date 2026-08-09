@@ -10,6 +10,7 @@ import {
 import poonpoonHero from "./poonpoon-hero.png";
 import kanchanaburiMap from "./kanchanaburi-map.png";
 import posterRegister from "./Poster-Rigister.png";
+import poonpoonBackground from "./poonpoon-background.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -430,7 +431,13 @@ function LandingScreen({
   setShowPoster
 }) {
   return (
-    <div className="h-full w-full flex flex-col justify-between relative overflow-hidden" style={{ background: heroGradient }}>
+    <div className="h-full w-full flex flex-col justify-between relative overflow-hidden" style={{
+    backgroundImage: `url(${poonpoonBackground})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
       <div className="absolute inset-0 opacity-[0.08]" style={{
         backgroundImage: "repeating-linear-gradient(115deg, #fff 0px, #fff 2px, transparent 2px, transparent 40px)"
       }} />
