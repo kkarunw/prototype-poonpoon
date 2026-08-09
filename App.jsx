@@ -2476,22 +2476,23 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
   </button>
 </div>
 
-        {/* ================= FEATURE GRID ================= */}
+{/* ================= FEATURE GRID ================= */}
 <div className="px-5 pt-5 grid grid-cols-2 gap-3">
 
-  {/* ANOTHER LENS */}
+  {/* ================= ANOTHER LENS ================= */}
   <button
     type="button"
     onClick={() => onNavigate("anotherLens")}
     className="
       relative
       w-full
-      aspect-[1.35/1]
+      h-[145px]
       rounded-[22px]
       overflow-hidden
       shadow-md
       active:scale-[0.97]
       transition-transform
+      text-left
     "
   >
     <img
@@ -2499,21 +2500,42 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
       alt="Another Lens"
       className="absolute inset-0 w-full h-full object-cover"
     />
+
+    {/* ไล่ดำด้านล่างให้ตัวหนังสืออ่านง่าย */}
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+      }}
+    />
+
+    <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+      <p className="text-[15px] font-extrabold leading-tight">
+        Another Lens
+      </p>
+
+      <p className="text-[10px] font-medium text-white/90 mt-1">
+        ภารกิจมองกาญอีกมุม
+      </p>
+    </div>
   </button>
 
-  {/* MABOKKAN */}
+
+  {/* ================= MABOKKAN ================= */}
   <button
     type="button"
     onClick={() => onNavigate("mabokkan")}
     className="
       relative
       w-full
-      aspect-[1.35/1]
+      h-[145px]
       rounded-[22px]
       overflow-hidden
       shadow-md
       active:scale-[0.97]
       transition-transform
+      text-left
     "
   >
     <img
@@ -2521,21 +2543,41 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
       alt="MABOKKAN"
       className="absolute inset-0 w-full h-full object-cover"
     />
+
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+      }}
+    />
+
+    <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+      <p className="text-[15px] font-extrabold leading-tight">
+        MABOKKAN
+      </p>
+
+      <p className="text-[10px] font-medium text-white/90 mt-1">
+        เรื่องราวจากทุกคน
+      </p>
+    </div>
   </button>
 
-  {/* EXPLORE MAP */}
+
+  {/* ================= EXPLORE MAP ================= */}
   <button
     type="button"
     onClick={() => onNavigate("exploreMap")}
     className="
       relative
       w-full
-      aspect-[1.35/1]
+      h-[145px]
       rounded-[22px]
       overflow-hidden
       shadow-md
       active:scale-[0.97]
       transition-transform
+      text-left
     "
   >
     <img
@@ -2543,21 +2585,41 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
       alt="Explore Map"
       className="absolute inset-0 w-full h-full object-cover"
     />
+
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+      }}
+    />
+
+    <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+      <p className="text-[15px] font-extrabold leading-tight">
+        Explore Map
+      </p>
+
+      <p className="text-[10px] font-medium text-white/90 mt-1">
+        แผนที่กิจกรรม
+      </p>
+    </div>
   </button>
 
-  {/* POONPOON AI */}
+
+  {/* ================= POONPOON AI ================= */}
   <button
     type="button"
     onClick={() => onNavigate("ai")}
     className="
       relative
       w-full
-      aspect-[1.35/1]
+      h-[145px]
       rounded-[22px]
       overflow-hidden
       shadow-md
       active:scale-[0.97]
       transition-transform
+      text-left
     "
   >
     <img
@@ -2565,6 +2627,24 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
       alt="POONPOON AI"
       className="absolute inset-0 w-full h-full object-cover"
     />
+
+    <div
+      className="absolute inset-0"
+      style={{
+        background:
+          "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+      }}
+    />
+
+    <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+      <p className="text-[15px] font-extrabold leading-tight">
+        POONPOON AI
+      </p>
+
+      <p className="text-[10px] font-medium text-white/90 mt-1">
+        ถาม POONPOON
+      </p>
+    </div>
   </button>
 
 </div>
