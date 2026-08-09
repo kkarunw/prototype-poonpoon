@@ -1344,11 +1344,6 @@ if (step === "detail") {
           title: "Finisher Bag",
           desc: "กระเป๋า Finisher Bag สำหรับนักวิ่ง 5 KM",
         },
-        {
-          icon: Check,
-          title: "E-Certificate",
-          desc: "ใบประกาศนียบัตรออนไลน์หลังจบการแข่งขัน",
-        },
       ],
     },
 
