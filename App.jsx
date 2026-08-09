@@ -1917,6 +1917,68 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
 
       {/* ================= SCROLL CONTENT ================= */}
       <div className="flex-1 overflow-y-auto pb-24">
+        {/* ================= RACE REGISTRATION ================= */}
+<div className="px-5 pt-5">
+  <button
+    onClick={() => onNavigate("registerRace")}
+    className="
+      w-full
+      rounded-[22px]
+      px-5 py-4
+      text-left
+      text-white
+      shadow-md
+      active:scale-[0.98]
+      transition-transform
+      relative
+      overflow-hidden
+    "
+    style={{
+      background:
+        "linear-gradient(110deg,#14B8A6 0%,#2FB6D9 48%,#F4C542 100%)",
+    }}
+  >
+    <div className="flex items-center gap-3">
+
+      <div className="
+        w-11 h-11
+        rounded-2xl
+        bg-white/20
+        flex items-center
+        justify-center
+        shrink-0
+      ">
+        <Flag size={21} />
+      </div>
+
+      <div className="flex-1 min-w-0">
+        <p className="text-[10px] font-bold text-white/75">
+          RUN FOR PEACE • RUN FOR FREEDOM
+        </p>
+
+        <p className="text-[16px] font-extrabold leading-tight mt-0.5">
+          สมัครการแข่งขัน
+        </p>
+
+        <p className="text-[11px] text-white/80 mt-1">
+          3.5 KM • 5 KM • 10 KM
+        </p>
+      </div>
+
+      <div className="
+        w-9 h-9
+        rounded-full
+        bg-white/20
+        flex items-center
+        justify-center
+        shrink-0
+      ">
+        <ChevronRight size={19} />
+      </div>
+
+    </div>
+  </button>
+</div>
 
         {/* FEATURE GRID */}
         <div className="px-5 pt-5 grid grid-cols-2 gap-3">
