@@ -12,6 +12,9 @@ import kanchanaburiMap from "./kanchanaburi-map.png";
 import posterRegister from "./Poster-Rigister.png";
 import poonpoonBackground from "./poonpoon-background.png";
 import poonpoonLogo from "./poonpoon-logo.png";
+import package35 from "./package-35.png";
+import package5 from "./package-5.png";
+import package10 from "./package-10.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
