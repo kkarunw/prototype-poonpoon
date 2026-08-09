@@ -1421,7 +1421,7 @@ function LandingScreen({
             {/* TEXT */}
             <div className="flex-1 min-w-0">
               <span className="text-[11px] font-bold text-cyan-100">
-                ตลอดกาญ(น.)
+                คลิกเพือดูข้อมูล ตลอดกาญ(น.)
               </span>
 
               <p className="font-extrabold text-[16px] leading-tight mt-0.5">
