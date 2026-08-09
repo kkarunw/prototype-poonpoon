@@ -1319,10 +1319,10 @@ LANDING SCREEN
 ============================================================ */
 function LandingScreen({
   onRegisterRace,
-  onAsk,
+  onAboutEvent,
   onLogin,
   showPoster,
-  setShowPoster
+  setShowPoster,
 }) {
   return (
     <div
@@ -1335,94 +1335,101 @@ function LandingScreen({
       }}
     >
       {/* ================= LOGO ================= */}
-      <img
-        src={poonpoonLogo}
-        alt="POONPOON Kanchanaburi"
-        className="object-contain"
-        style={{
-          width: "290px",
-          height: "82px",
-        }}
-      />
+      <div className="relative z-20 w-full flex justify-center pt-3">
+        <img
+          src={poonpoonLogo}
+          alt="POONPOON Kanchanaburi"
+          className="object-contain"
+          style={{
+            width: "250px",
+            height: "72px",
+          }}
+        />
+      </div>
 
       {/* ================= MASCOT ================= */}
       <div className="relative flex-1 min-h-0 overflow-visible">
         <div className="absolute w-60 h-60 rounded-full bg-white/20 blur-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
 
         <PoonpoonMascot
-          size={720}
+          size={620}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
         />
       </div>
 
       {/* ================= CTA AREA ================= */}
       <div className="relative z-20 px-5 pb-6 shrink-0">
+        {/* ABOUT EVENT */}
+        <button
+          type="button"
+          onClick={onAboutEvent}
+          className="
+            w-full
+            rounded-[22px]
+            px-5 py-4
+            text-left
+            text-white
+            shadow-xl
+            active:scale-[0.98]
+            transition-transform
+            border border-white/40
+          "
+          style={{
+            background:
+              "linear-gradient(110deg,#123E8C 0%,#1D63C9 48%,#2FB6D9 100%)",
+          }}
+        >
+          <div className="flex items-center gap-3">
+            <div
+              className="
+                w-12 h-12
+                rounded-2xl
+                bg-white/20
+                flex items-center
+                justify-center
+                shrink-0
+              "
+            >
+              <Info size={25} strokeWidth={2.3} />
+            </div>
 
-       <button
-  onClick={onAboutEvent}
-  className="
-    w-full
-    rounded-[22px]
-    px-5 py-4
-    text-left
-    text-white
-    shadow-xl
-    active:scale-[0.98]
-    transition-transform
-    border border-white/40
-  "
-  style={{
-    background:
-      "linear-gradient(110deg,#123E8C 0%,#1D63C9 48%,#2FB6D9 100%)",
-  }}
->
-  <div className="flex items-center gap-3">
+            <div className="flex-1 min-w-0">
+              <span className="text-[11px] font-bold text-cyan-100">
+                ตลอดกาญ(น.)
+              </span>
 
-    <div className="
-      w-12 h-12
-      rounded-2xl
-      bg-white/20
-      flex items-center
-      justify-center
-      shrink-0
-    ">
-      <Info size={25} strokeWidth={2.3} />
-    </div>
+              <p className="font-extrabold text-[16px] leading-tight mt-0.5">
+                RUN FOR PEACE • RUN FOR FREEDOM
+              </p>
 
-    <div className="flex-1 min-w-0">
-      <span className="text-[11px] font-bold text-cyan-100">
-        ตลอดกาญ(น.)
-      </span>
+              <p className="text-[11px] text-white/80 mt-1">
+                รู้จักแนวคิด • เรื่องราว • กิจกรรมภายในงาน
+              </p>
+            </div>
 
-      <p className="font-extrabold text-[16px] leading-tight mt-0.5">
-        RUN FOR PEACE • RUN FOR FREEDOM
-      </p>
-
-      <p className="text-[11px] text-white/80 mt-1">
-        รู้จักแนวคิด • เรื่องราว • กิจกรรมภายในงาน
-      </p>
-    </div>
-
-    <div className="
-      w-9 h-9
-      rounded-full
-      bg-white/15
-      flex items-center
-      justify-center
-      shrink-0
-    ">
-      <ArrowRight size={18} />
-    </div>
-
-  </div>
-</button>
+            <div
+              className="
+                w-9 h-9
+                rounded-full
+                bg-white/15
+                flex items-center
+                justify-center
+                shrink-0
+              "
+            >
+              <ArrowRight size={18} />
+            </div>
+          </div>
+        </button>
 
         <p className="text-center text-[11px] text-blue-900/70 font-medium mt-2 mb-3">
-          จากสงคราม สู่สันติภาพ และอิสรภาพ”
+          จากสงคราม สู่สันติภาพ และอิสรภาพ
         </p>
 
+        {/* BUTTONS */}
         <div className="grid grid-cols-2 gap-3">
           <button
+            type="button"
             onClick={onRegisterRace}
             className="
               py-3.5
@@ -1444,6 +1451,7 @@ function LandingScreen({
           </button>
 
           <button
+            type="button"
             onClick={onLogin}
             className="
               py-3.5
@@ -1464,6 +1472,7 @@ function LandingScreen({
         </div>
       </div>
 
+      {/* ================= POSTER MODAL ================= */}
       {showPoster && (
         <div className="absolute inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
           <div className="relative w-full max-w-[360px]">
@@ -1474,6 +1483,7 @@ function LandingScreen({
             />
 
             <button
+              type="button"
               onClick={() => setShowPoster(false)}
               className="
                 absolute -top-3 -right-3
