@@ -1227,22 +1227,39 @@ function RegisterForm({ type, onBack, onDone }) {
         <div className="flex-1 overflow-y-auto px-5 py-5 pb-8 space-y-4">
           {Object.entries(packages).map(([key, item]) => (
             <button
-              key={key}
-              onClick={() => {
-                setSelectedDistance(key);
-                setStep("detail");
-              }}
-              className="w-full rounded-[26px] overflow-hidden text-left shadow-md active:scale-[0.98] transition-transform"
-            >
-              <div
-                className="p-5 text-white"
-                style={{
-  backgroundImage: `linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)), url(${item.backgroundImage})`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-}}
-              >
+  key={key}
+  onClick={() => {
+    setSelectedDistance(key);
+    setStep("detail");
+  }}
+  className="
+    w-full
+    h-[190px]
+    rounded-[26px]
+    overflow-hidden
+    text-left
+    shadow-md
+    active:scale-[0.98]
+    transition-transform
+    relative
+  "
+  style={{
+    backgroundImage: `url(${item.backgroundImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  }}
+>
+  {/* overlay ทำให้ตัวหนังสืออ่านง่าย */}
+  <div
+    className="absolute inset-0"
+    style={{
+      background:
+        "linear-gradient(90deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.12) 60%, rgba(0,0,0,0.08) 100%)",
+    }}
+  />
+
+  <div className="relative z-10 h-full p-5 text-white flex flex-col justify-between">
                 <p className="text-[10px] font-bold text-white/75">
                   RACE PACKAGE
                 </p>
