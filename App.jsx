@@ -1170,9 +1170,12 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
           <div>
             <p className="text-lg font-bold">สวัสดี 👋</p>
             <p className="text-sm text-white/85 mt-1 leading-snug max-w-[190px]">วันนี้อยากให้ POONPOON พาไปไหน?</p>
-          </div>
-          <PoonpoonMascot size={180} />
-        </div>
+          <div className="relative h-36 flex items-center justify-center overflow-visible">
+  <PoonpoonMascot
+    size={210}
+    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+  />
+</div>
         <button onClick={() => onNavigate("ai")} className="mt-5 w-full flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-2xl px-4 py-3 text-left border border-white/20">
           <Search size={16} className="text-white/70" />
           <span className="text-sm text-white/70">ถาม POONPOON เช่น "หิวแล้ว กินอะไรดี?"</span>
