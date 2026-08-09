@@ -2917,11 +2917,11 @@ useEffect(() => {
               "
             />
           )}
-
-          {/* ================= MARKERS ================= */}
+{/* ================= MARKERS ================= */}
 {markers.map((m) => (
   <button
     key={m.id}
+    type="button"
     onPointerDown={(e) => {
       e.stopPropagation();
     }}
@@ -2980,9 +2980,13 @@ useEffect(() => {
           "
         />
       ) : m.serviceType === "gas" ? (
-        <span className="text-[18px] pointer-events-none">⛽</span>
+        <span className="text-[18px] pointer-events-none">
+          ⛽
+        </span>
       ) : m.serviceType === "ev" ? (
-        <span className="text-[18px] pointer-events-none">⚡</span>
+        <span className="text-[18px] pointer-events-none">
+          ⚡
+        </span>
       ) : m.icon ? (
         <m.icon
           size={17}
@@ -2992,6 +2996,90 @@ useEffect(() => {
     </div>
   </button>
 ))}
+
+{/* ปิด MOVING MAP ตรงนี้ */}
+</div>
+
+{/* ================= ZOOM CONTROLS ================= */}
+<div
+  className="
+    absolute
+    right-3
+    bottom-3
+    z-50
+    flex
+    flex-col
+    gap-2
+  "
+  onPointerDown={(e) => e.stopPropagation()}
+>
+  <button
+    type="button"
+    onClick={() =>
+      setMapZoom((z) => clampZoom(z + 0.25))
+    }
+    className="
+      w-10 h-10
+      rounded-full
+      bg-white
+      shadow-lg
+      border
+      border-slate-200
+      text-slate-700
+      text-xl
+      font-bold
+      flex
+      items-center
+      justify-center
+    "
+  >
+    +
+  </button>
+
+  <button
+    type="button"
+    onClick={() =>
+      setMapZoom((z) => clampZoom(z - 0.25))
+    }
+    className="
+      w-10 h-10
+      rounded-full
+      bg-white
+      shadow-lg
+      border
+      border-slate-200
+      text-slate-700
+      text-xl
+      font-bold
+      flex
+      items-center
+      justify-center
+    "
+  >
+    −
+  </button>
+
+  <button
+    type="button"
+    onClick={resetMap}
+    className="
+      w-10 h-10
+      rounded-full
+      bg-white
+      shadow-lg
+      border
+      border-slate-200
+      text-slate-600
+      text-sm
+      font-bold
+      flex
+      items-center
+      justify-center
+    "
+  >
+    ↺
+  </button>
+</div>
         {/* ================= ZOOM CONTROLS ================= */}
         <div
           className="
