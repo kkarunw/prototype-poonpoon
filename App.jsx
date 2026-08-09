@@ -3872,6 +3872,834 @@ function AIScreen({
   );
 }
 /* ============================================================
+POONPOON RUN MINI GAME
+============================================================ */
+function PoonpoonRunScreen({ onBack }) {
+  const LANES = [22, 50, 78];
+
+  const [lane, setLane] = useState(1);
+  const [score, setScore] = useState(0);
+  const [hearts, setHearts] = useState(3);
+  const [distance, setDistance] = useState(0);
+  const [gameState, setGameState] = useState("ready"); // ready | playing | gameover
+  const [objects, setObjects] = useState([]);
+  const [flash, setFlash] = useState(null);
+
+  const gameRef = useRef(null);
+  const objectIdRef = useRef(1);
+  const lastSpawnRef = useRef(0);
+  const lastTimeRef = useRef(0);
+  const scoreRef = useRef(0);
+  const heartsRef = useRef(3);
+  const distanceRef = useRef(0);
+  const laneRef = useRef(1);
+
+  useEffect(() => {
+    laneRef.current = lane;
+  }, [lane]);
+
+  const resetGame = () => {
+    setLane(1);
+    laneRef.current = 1;
+
+    setScore(0);
+    scoreRef.current = 0;
+
+    setHearts(3);
+    heartsRef.current = 3;
+
+    setDistance(0);
+    distanceRef.current = 0;
+
+    setObjects([]);
+    setFlash(null);
+
+    lastSpawnRef.current = 0;
+    lastTimeRef.current = 0;
+
+    setGameState("playing");
+  };
+
+  const moveLeft = () => {
+    if (gameState !== "playing") return;
+
+    setLane((current) => {
+      const next = Math.max(0, current - 1);
+      laneRef.current = next;
+      return next;
+    });
+  };
+
+  const moveRight = () => {
+    if (gameState !== "playing") return;
+
+    setLane((current) => {
+      const next = Math.min(2, current + 1);
+      laneRef.current = next;
+      return next;
+    });
+  };
+
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "ArrowLeft" || e.key === "a") {
+        moveLeft();
+      }
+
+      if (e.key === "ArrowRight" || e.key === "d") {
+        moveRight();
+      }
+
+      if (
+        (e.key === "Enter" || e.key === " ") &&
+        gameState !== "playing"
+      ) {
+        resetGame();
+      }
+    };
+
+    window.addEventListener("keydown", handleKey);
+
+    return () => {
+      window.removeEventListener("keydown", handleKey);
+    };
+  }, [gameState]);
+
+  useEffect(() => {
+    if (gameState !== "playing") return;
+
+    let animationFrame;
+
+    const loop = (timestamp) => {
+      if (!lastTimeRef.current) {
+        lastTimeRef.current = timestamp;
+      }
+
+      const delta = Math.min(
+        (timestamp - lastTimeRef.current) / 16.67,
+        2.2
+      );
+
+      lastTimeRef.current = timestamp;
+
+      distanceRef.current += 0.0035 * delta;
+      setDistance(distanceRef.current);
+
+      const difficulty = Math.min(
+        1 + distanceRef.current * 0.07,
+        2.1
+      );
+
+      const spawnInterval = Math.max(
+        520,
+        900 - distanceRef.current * 12
+      );
+
+      if (timestamp - lastSpawnRef.current > spawnInterval) {
+        lastSpawnRef.current = timestamp;
+
+        const random = Math.random();
+
+        let type = "color";
+
+        if (random < 0.48) {
+          type = "color";
+        } else if (random < 0.65) {
+          type = "peace";
+        } else if (random < 0.76) {
+          type = "water";
+        } else {
+          type = "obstacle";
+        }
+
+        const newObject = {
+          id: objectIdRef.current++,
+          lane: Math.floor(Math.random() * 3),
+          y: -12,
+          type,
+          hit: false,
+        };
+
+        setObjects((prev) => [...prev, newObject]);
+      }
+
+      setObjects((prev) => {
+        const nextObjects = [];
+
+        prev.forEach((obj) => {
+          const nextY =
+            obj.y +
+            (0.82 + distanceRef.current * 0.014) *
+              difficulty *
+              delta;
+
+          const playerLane = laneRef.current;
+
+          const collisionZone =
+            nextY >= 73 && nextY <= 88;
+
+          if (
+            !obj.hit &&
+            collisionZone &&
+            obj.lane === playerLane
+          ) {
+            obj.hit = true;
+
+            if (obj.type === "color") {
+              scoreRef.current += 100;
+              setScore(scoreRef.current);
+
+              setFlash({
+                text: "+100 🌈",
+                type: "good",
+              });
+
+              setTimeout(() => setFlash(null), 350);
+
+              return;
+            }
+
+            if (obj.type === "peace") {
+              scoreRef.current += 300;
+              setScore(scoreRef.current);
+
+              setFlash({
+                text: "+300 🕊️",
+                type: "good",
+              });
+
+              setTimeout(() => setFlash(null), 350);
+
+              return;
+            }
+
+            if (obj.type === "water") {
+              scoreRef.current += 200;
+              setScore(scoreRef.current);
+
+              setFlash({
+                text: "BOOST! 💧",
+                type: "good",
+              });
+
+              setTimeout(() => setFlash(null), 450);
+
+              return;
+            }
+
+            if (obj.type === "obstacle") {
+              heartsRef.current -= 1;
+              setHearts(heartsRef.current);
+
+              setFlash({
+                text: "-1 ❤️",
+                type: "bad",
+              });
+
+              setTimeout(() => setFlash(null), 450);
+
+              if (heartsRef.current <= 0) {
+                setTimeout(() => {
+                  setGameState("gameover");
+                }, 200);
+              }
+
+              return;
+            }
+          }
+
+          if (nextY < 105) {
+            nextObjects.push({
+              ...obj,
+              y: nextY,
+            });
+          }
+        });
+
+        return nextObjects;
+      });
+
+      if (heartsRef.current > 0) {
+        animationFrame = requestAnimationFrame(loop);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(loop);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [gameState]);
+
+  const getObjectContent = (type) => {
+    if (type === "color") return "🌈";
+    if (type === "peace") return "🕊️";
+    if (type === "water") return "💧";
+    return "🚧";
+  };
+
+  const freedomLevel = Math.min(
+    100,
+    Math.round(distance * 6 + score / 180)
+  );
+
+  const background =
+    freedomLevel < 30
+      ? "linear-gradient(180deg,#64748b 0%,#cbd5e1 45%,#e2e8f0 100%)"
+      : freedomLevel < 65
+      ? "linear-gradient(180deg,#67b7e8 0%,#bae6fd 46%,#d9f99d 100%)"
+      : "linear-gradient(180deg,#38bdf8 0%,#bae6fd 35%,#86efac 68%,#fde68a 100%)";
+
+  return (
+    <div
+      className="h-full flex flex-col relative overflow-hidden"
+      style={{ background }}
+    >
+      {/* ================= HEADER ================= */}
+      <div className="relative z-40 shrink-0 px-4 pt-4">
+        <div className="flex items-center justify-between">
+          <button
+            type="button"
+            onClick={onBack}
+            className="
+              w-10 h-10
+              rounded-full
+              bg-white/90
+              shadow-md
+              flex items-center
+              justify-center
+              text-slate-700
+            "
+          >
+            <ChevronLeft size={22} />
+          </button>
+
+          <div className="text-center">
+            <p className="text-[11px] font-bold text-blue-700">
+              RUN FOR PEACE • RUN FOR FREEDOM
+            </p>
+
+            <h1 className="text-[18px] font-black text-slate-800">
+              POONPOON RUN!
+            </h1>
+          </div>
+
+          <div className="w-10" />
+        </div>
+      </div>
+
+      {/* ================= SCORE ================= */}
+      <div className="relative z-30 px-4 mt-3">
+        <div
+          className="
+            bg-white/85
+            backdrop-blur-md
+            rounded-2xl
+            shadow-sm
+            px-4 py-3
+            flex items-center
+            justify-between
+          "
+        >
+          <div>
+            <p className="text-[9px] text-slate-400 font-bold">
+              SCORE
+            </p>
+
+            <p className="text-lg font-black text-slate-800">
+              {score.toLocaleString()}
+            </p>
+          </div>
+
+          <div className="text-center">
+            <p className="text-[9px] text-slate-400 font-bold">
+              DISTANCE
+            </p>
+
+            <p className="text-sm font-black text-blue-600">
+              {distance.toFixed(1)} KM
+            </p>
+          </div>
+
+          <div className="text-right">
+            <p className="text-[9px] text-slate-400 font-bold">
+              LIFE
+            </p>
+
+            <p className="text-sm">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <span
+                  key={index}
+                  className={
+                    index < hearts
+                      ? ""
+                      : "opacity-20 grayscale"
+                  }
+                >
+                  ❤️
+                </span>
+              ))}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= GAME AREA ================= */}
+      <div
+        ref={gameRef}
+        className="
+          relative
+          flex-1
+          mx-4
+          mt-3
+          mb-4
+          rounded-[28px]
+          overflow-hidden
+          border-2
+          border-white/70
+          shadow-xl
+        "
+      >
+        {/* BACKGROUND STORY */}
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{
+              background:
+                "repeating-linear-gradient(90deg,transparent 0%,transparent 32%,rgba(255,255,255,.8) 33%,transparent 34%)",
+            }}
+          />
+
+          <div
+            className="
+              absolute
+              left-0 right-0
+              bottom-[17%]
+              h-[2px]
+              bg-white/70
+            "
+          />
+
+          {/* MOUNTAIN */}
+          <div
+            className="
+              absolute
+              bottom-[14%]
+              left-[-10%]
+              w-[70%]
+              h-[34%]
+              bg-emerald-900/10
+              rounded-[50%]
+            "
+          />
+
+          <div
+            className="
+              absolute
+              bottom-[13%]
+              right-[-15%]
+              w-[75%]
+              h-[28%]
+              bg-blue-900/10
+              rounded-[50%]
+            "
+          />
+
+          {/* ROAD */}
+          <div
+            className="
+              absolute
+              left-[10%]
+              right-[10%]
+              bottom-0
+              top-[18%]
+              bg-slate-700/15
+            "
+            style={{
+              clipPath:
+                "polygon(28% 0%,72% 0%,100% 100%,0% 100%)",
+            }}
+          />
+
+          {/* ROAD LINES */}
+          <div
+            className="
+              absolute
+              top-[18%]
+              bottom-0
+              left-[38%]
+              w-[2px]
+              bg-white/60
+            "
+            style={{
+              transform: "rotate(5deg)",
+            }}
+          />
+
+          <div
+            className="
+              absolute
+              top-[18%]
+              bottom-0
+              right-[38%]
+              w-[2px]
+              bg-white/60
+            "
+            style={{
+              transform: "rotate(-5deg)",
+            }}
+          />
+        </div>
+
+        {/* STORY LABEL */}
+        <div
+          className="
+            absolute
+            top-3
+            left-1/2
+            -translate-x-1/2
+            z-20
+            bg-black/30
+            text-white
+            text-[10px]
+            font-bold
+            px-3 py-1.5
+            rounded-full
+            whitespace-nowrap
+          "
+        >
+          {freedomLevel < 30
+            ? "อดีต • WAR"
+            : freedomLevel < 65
+            ? "ก้าวสู่ • PEACE"
+            : "วิ่งไปสู่ • FREEDOM 🌈"}
+        </div>
+
+        {/* OBJECTS */}
+        {objects.map((obj) => (
+          <div
+            key={obj.id}
+            className="
+              absolute
+              z-20
+              -translate-x-1/2
+              -translate-y-1/2
+              text-[30px]
+              drop-shadow-md
+            "
+            style={{
+              left: `${LANES[obj.lane]}%`,
+              top: `${obj.y}%`,
+            }}
+          >
+            {getObjectContent(obj.type)}
+          </div>
+        ))}
+
+        {/* PLAYER */}
+        <div
+          className="
+            absolute
+            z-30
+            bottom-[8%]
+            -translate-x-1/2
+            transition-all
+            duration-150
+          "
+          style={{
+            left: `${LANES[lane]}%`,
+          }}
+        >
+          <div className="relative w-[76px] h-[92px]">
+            <div
+              className="
+                absolute
+                bottom-0
+                left-1/2
+                -translate-x-1/2
+                w-[58px]
+                h-[15px]
+                rounded-full
+                bg-black/20
+                blur-[2px]
+              "
+            />
+
+            <PoonpoonMascot
+              size={100}
+              className="
+                absolute
+                left-1/2
+                bottom-0
+                -translate-x-1/2
+                max-w-none
+              "
+            />
+          </div>
+        </div>
+
+        {/* FLASH */}
+        {flash && (
+          <div
+            className={`
+              absolute
+              z-50
+              left-1/2
+              top-[55%]
+              -translate-x-1/2
+              -translate-y-1/2
+              font-black
+              text-xl
+              px-4 py-2
+              rounded-full
+              shadow-lg
+              ${
+                flash.type === "good"
+                  ? "bg-white text-emerald-600"
+                  : "bg-red-500 text-white"
+              }
+            `}
+          >
+            {flash.text}
+          </div>
+        )}
+
+        {/* READY */}
+        {gameState === "ready" && (
+          <div
+            className="
+              absolute inset-0 z-50
+              bg-slate-900/65
+              backdrop-blur-[2px]
+              flex flex-col
+              items-center
+              justify-center
+              text-center
+              px-8
+            "
+          >
+            <PoonpoonMascot size={150} />
+
+            <h2 className="text-white text-2xl font-black mt-2">
+              POONPOON RUN!
+            </h2>
+
+            <p className="text-white/85 text-sm mt-2">
+              วิ่งเก็บสีแห่งอิสรภาพ
+            </p>
+
+            <div className="mt-5 bg-white/10 rounded-2xl px-5 py-4">
+              <p className="text-white text-xs leading-relaxed">
+                🌈 เก็บสี +100
+                <br />
+                🕊️ Peace +300
+                <br />
+                💧 Water +200
+                <br />
+                🚧 ชนแล้วเสียหัวใจ
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={resetGame}
+              className="
+                mt-6
+                px-10 py-3.5
+                rounded-full
+                bg-gradient-to-r
+                from-yellow-300
+                to-orange-400
+                text-blue-950
+                font-black
+                shadow-xl
+                active:scale-95
+              "
+            >
+              🏃 START RUN
+            </button>
+          </div>
+        )}
+
+        {/* GAME OVER */}
+        {gameState === "gameover" && (
+          <div
+            className="
+              absolute inset-0 z-50
+              bg-slate-900/75
+              backdrop-blur-sm
+              flex flex-col
+              items-center
+              justify-center
+              text-center
+              px-7
+            "
+          >
+            <div className="text-5xl">
+              🏆
+            </div>
+
+            <h2 className="text-white text-2xl font-black mt-3">
+              RUN COMPLETE!
+            </h2>
+
+            <p className="text-white/70 text-xs mt-1">
+              From War • To Peace • To Freedom
+            </p>
+
+            <div
+              className="
+                w-full
+                mt-5
+                bg-white
+                rounded-3xl
+                p-5
+                shadow-xl
+              "
+            >
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <p className="text-[10px] text-slate-400">
+                    SCORE
+                  </p>
+
+                  <p className="text-2xl font-black text-slate-800">
+                    {score.toLocaleString()}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[10px] text-slate-400">
+                    DISTANCE
+                  </p>
+
+                  <p className="text-2xl font-black text-blue-600">
+                    {distance.toFixed(1)}
+                    <span className="text-xs ml-1">
+                      KM
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 text-left">
+                <div className="flex items-center justify-between">
+                  <p className="text-[10px] font-bold text-slate-500">
+                    FREEDOM LEVEL
+                  </p>
+
+                  <p className="text-[10px] font-black text-emerald-600">
+                    {freedomLevel}%
+                  </p>
+                </div>
+
+                <div className="mt-1.5 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div
+                    className="
+                      h-full
+                      rounded-full
+                      bg-gradient-to-r
+                      from-cyan-400
+                      via-emerald-400
+                      to-yellow-400
+                    "
+                    style={{
+                      width: `${freedomLevel}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={resetGame}
+              className="
+                mt-5
+                w-full
+                py-3.5
+                rounded-full
+                font-black
+                text-blue-950
+                bg-gradient-to-r
+                from-yellow-300
+                to-orange-400
+                shadow-xl
+              "
+            >
+              🔄 เล่นอีกครั้ง
+            </button>
+
+            <button
+              type="button"
+              onClick={onBack}
+              className="
+                mt-2
+                w-full
+                py-3
+                rounded-full
+                text-white
+                text-sm
+                font-bold
+                bg-white/10
+              "
+            >
+              กลับหน้าหลัก
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* ================= CONTROLS ================= */}
+      {gameState === "playing" && (
+        <div
+          className="
+            shrink-0
+            px-5 pb-6
+            grid grid-cols-2 gap-3
+          "
+        >
+          <button
+            type="button"
+            onClick={moveLeft}
+            className="
+              py-3.5
+              rounded-2xl
+              bg-white
+              shadow-lg
+              border border-slate-100
+              text-blue-600
+              font-black
+              text-xl
+              active:scale-95
+            "
+          >
+            ←
+          </button>
+
+          <button
+            type="button"
+            onClick={moveRight}
+            className="
+              py-3.5
+              rounded-2xl
+              bg-white
+              shadow-lg
+              border border-slate-100
+              text-blue-600
+              font-black
+              text-xl
+              active:scale-95
+            "
+          >
+            →
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+/* ============================================================
    PROFILE
    ============================================================ */
 function ProfileScreen({ missions, savedIds }) {
