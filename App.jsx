@@ -199,7 +199,6 @@ function ImagePlaceholder({ src, hue = "from-blue-400 to-cyan-300", icon: Icon =
   }
   return (
     <div className={`bg-gradient-to-br ${hue} ${rounded} ${className} flex flex-col items-center justify-center text-white/90 relative overflow-hidden`}>
-      <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 30% 20%, white 0%, transparent 40%)" }} />
       <Icon size={28} className="mb-1 opacity-90" strokeWidth={1.75} />
       {label && <span className="text-[10px] font-medium opacity-90 px-2 text-center leading-tight">{label}</span>}
     </div>
