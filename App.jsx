@@ -10,7 +10,7 @@ import {
 import poonpoonHero from "./poonpoon-hero.png";
 import kanchanaburiMap from "./kanchanaburi-map.png";
 import posterRegister from "./Poster-Rigister.png";
-import poonpoonBackground from "./poonpoon-background.png";
+
 
 /* ============================================================
    IMAGE ASSET CONFIG
