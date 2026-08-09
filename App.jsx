@@ -18,6 +18,9 @@ import package10 from "./package-10.png";
 import race35bg from "./race35bg.png";
 import race5bg from "./race5bg.png";
 import race10bg from "./race10bg.png";
+import aroikanLogo from "./aroikan.png";
+import relaxkanLogo from "./relaxkan.png";
+import supLogo from "./sup-experience.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -2024,30 +2027,26 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
           </div>
 
           <div className="flex gap-3 px-5 overflow-x-auto pb-2">
-            <ActivityCard
-              title="RelaxKAN"
-              subtitle="Wellness & Recovery"
-              hue="from-teal-400 to-cyan-300"
-              icon={Waves}
-              onClick={() => onOpenMarker("relaxkan")}
-            />
 
-            <ActivityCard
-              title="SUP Experience"
-              subtitle="Outdoor Activity"
-              hue="from-blue-400 to-indigo-300"
-              icon={Navigation}
-              onClick={() => onOpenMarker("sup")}
-            />
+  <ActivityCard
+    image={relaxkanLogo}
+    title="RelaxKAN"
+    onClick={() => onOpenMarker("relaxkan")}
+  />
 
-            <ActivityCard
-              title="อร่อยเมืองกาญ"
-              subtitle="Local Food"
-              hue="from-orange-400 to-amber-300"
-              icon={UtensilsCrossed}
-              onClick={onOpenFoodList}
-            />
-          </div>
+  <ActivityCard
+    image={supLogo}
+    title="SUP Experience"
+    onClick={() => onOpenMarker("sup")}
+  />
+
+  <ActivityCard
+    image={aroikanLogo}
+    title="อร่อยเมืองกาญ"
+    onClick={() => onOpenMarker("food")}
+  />
+
+</div>
         </div>
 
         {/* ================= TODAY SCHEDULE ================= */}
