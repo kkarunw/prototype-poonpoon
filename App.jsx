@@ -2443,26 +2443,6 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
             onClick={() => onNavigate("ai")}
           />
         </div>
-{/* ================= SHARE TO CHANCE ================= */}
-<div className="px-5 mt-4">
-  <div
-    className="
-      w-full
-      rounded-[22px]
-      overflow-hidden
-      bg-white
-      shadow-sm
-      border border-slate-100
-    "
-  >
-    <img
-  src={shareToChance}
-  alt="Share to Chance"
-  className="w-full h-[112px] object-cover block"
-  draggable={false}
-/>
-  </div>
-</div>
         {/* ================= SHARE TO CHANCE ================= */}
 <div className="px-5 mt-4">
   <img
