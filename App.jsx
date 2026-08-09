@@ -898,25 +898,23 @@ function LandingScreen({
   return (
     <div
       className="h-full w-full flex flex-col relative overflow-hidden"
-style={{
-  backgroundImage: `url(${item.backgroundImage})`,
-  backgroundSize: "135% auto",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-}}
+      style={{
+        backgroundImage: `url(${poonpoonBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       {/* ================= LOGO ================= */}
-      <div className="relative z-10 flex justify-center pt-6 px-6 shrink-0">
-        <img
-          src={poonpoonLogo}
-          alt="POONPOON Kanchanaburi"
-          className="object-contain"
-          style={{
-            width: "290px",
-            height: "82px",
-          }}
-        />
-      </div>
+      <img
+        src={poonpoonLogo}
+        alt="POONPOON Kanchanaburi"
+        className="object-contain"
+        style={{
+          width: "290px",
+          height: "82px",
+        }}
+      />
 
       {/* ================= MASCOT ================= */}
       <div className="relative flex-1 min-h-0 overflow-visible">
@@ -931,7 +929,6 @@ style={{
       {/* ================= CTA AREA ================= */}
       <div className="relative z-20 px-5 pb-6 shrink-0">
 
-        {/* MAIN AI CTA */}
         <button
           onClick={onAsk}
           className="
@@ -951,18 +948,14 @@ style={{
           }}
         >
           <div className="flex items-center gap-3">
-            {/* Icon */}
             <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
               <MessageCircle size={25} strokeWidth={2.3} />
             </div>
 
-            {/* Text */}
             <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-bold text-cyan-100">
-                  ✨ POONPOON AI
-                </span>
-              </div>
+              <span className="text-[11px] font-bold text-cyan-100">
+                ✨ POONPOON AI
+              </span>
 
               <p className="font-extrabold text-[17px] leading-tight mt-0.5">
                 ถาม POONPOON เกี่ยวกับงาน
@@ -979,14 +972,11 @@ style={{
           </div>
         </button>
 
-        {/* Hint */}
         <p className="text-center text-[11px] text-blue-900/70 font-medium mt-2 mb-3">
           ลองถาม เช่น “วันนี้มีอะไรน่าสนใจบ้าง?”
         </p>
 
-        {/* SECONDARY BUTTONS */}
         <div className="grid grid-cols-2 gap-3">
-          {/* REGISTER */}
           <button
             onClick={onRegisterRace}
             className="
@@ -1008,7 +998,6 @@ style={{
             🏃 สมัครวิ่ง
           </button>
 
-          {/* LOGIN */}
           <button
             onClick={onLogin}
             className="
@@ -1030,7 +1019,6 @@ style={{
         </div>
       </div>
 
-      {/* ================= POSTER POPUP ================= */}
       {showPoster && (
         <div className="absolute inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
           <div className="relative w-full max-w-[360px]">
@@ -1216,85 +1204,85 @@ function RegisterForm({ type, onBack, onDone }) {
 
   /* ================= SELECT ================= */
   if (step === "select") {
-    return (
-      <div className="h-full flex flex-col bg-slate-50">
-        <ScreenHeader
-          title="เลือกระยะการแข่งขัน"
-          subtitle="เลือกระยะที่ใช่สำหรับคุณ"
-          onBack={onBack}
-        />
+  return (
+    <div className="h-full flex flex-col bg-slate-50">
+      <ScreenHeader
+        title="เลือกระยะการแข่งขัน"
+        subtitle="เลือกระยะที่ใช่สำหรับคุณ"
+        onBack={onBack}
+      />
 
-        <div className="flex-1 overflow-y-auto px-5 py-5 pb-8 space-y-4">
-          {Object.entries(packages).map(([key, item]) => (
-            <button
-  key={key}
-  onClick={() => {
-    setSelectedDistance(key);
-    setStep("detail");
-  }}
-  className="
-    w-full
-h-[190px]
-p-0
-rounded-[26px]
-overflow-hidden
-    text-left
-    shadow-md
-    active:scale-[0.98]
-    transition-transform
-    relative
-  "
-  style={{
-    backgroundImage: `url(${item.backgroundImage})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-  {/* overlay ทำให้ตัวหนังสืออ่านง่าย */}
-  <div
-    className="absolute inset-0"
-    style={{
-      background:
-        "linear-gradient(90deg, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.12) 60%, rgba(0,0,0,0.08) 100%)",
-    }}
-  />
+      <div className="flex-1 overflow-y-auto px-5 py-5 pb-8 space-y-4">
+        {Object.entries(packages).map(([key, item]) => (
+          <button
+            key={key}
+            onClick={() => {
+              setSelectedDistance(key);
+              setStep("detail");
+            }}
+            className="
+              w-full
+              h-[190px]
+              p-0
+              rounded-[26px]
+              overflow-hidden
+              text-left
+              shadow-md
+              active:scale-[0.98]
+              transition-transform
+              relative
+            "
+            style={{
+              backgroundImage: `url(${item.backgroundImage})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {/* overlay */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(90deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 60%, rgba(0,0,0,0.04) 100%)",
+              }}
+            />
 
-  <div className="relative z-10 h-full p-5 text-white flex flex-col justify-between">
-                <p className="text-[10px] font-bold text-white/75">
-                  RACE PACKAGE
-                </p>
+            {/* text */}
+            <div className="relative z-10 h-full p-5 text-white flex flex-col">
+              <p className="text-[10px] font-bold text-white/80">
+                RACE PACKAGE
+              </p>
 
-                <div className="flex items-end justify-between mt-2">
-                  <div>
-                    <h2 className="text-[38px] font-black leading-none">
-                      {item.short}
-                    </h2>
+              <h2 className="text-[38px] font-black leading-none mt-2">
+                {item.short}
+              </h2>
 
-                    <p className="text-sm font-extrabold mt-2">
-                      {item.route}
-                    </p>
+              <p className="text-sm font-extrabold mt-2">
+                {item.route}
+              </p>
 
-                    <p className="text-[10px] text-white/75 mt-5">
-                      ค่าสมัคร
-                    </p>
+              <div className="mt-auto flex items-end justify-between">
+                <div>
+                  <p className="text-[10px] text-white/75">
+                    ค่าสมัคร
+                  </p>
 
-                    <p className="text-2xl font-black">
-                      {item.price.toLocaleString()}
-                      <span className="text-xs ml-1">บาท</span>
-                    </p>
-                  </div>
-
-                  <ChevronRight size={26} />
+                  <p className="text-2xl font-black">
+                    {item.price.toLocaleString()}
+                    <span className="text-xs ml-1">บาท</span>
+                  </p>
                 </div>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
+                <ChevronRight size={26} />
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
   /* ================= DETAIL ================= */
 if (step === "detail") {
   const packageDetails = {
