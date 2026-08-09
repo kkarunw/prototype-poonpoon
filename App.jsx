@@ -1697,122 +1697,291 @@ function FoodListSheet({ open, onClose, onSelect, savedIds, onToggleSave }) {
 /* ============================================================
    POONPOON AI
    ============================================================ */
-function AIScreen({ onNavigateMarker, onNavigateFoodList, onNavigateHome, onBack }) {
+function AIScreen({
+  onNavigateMarker,
+  onNavigateFoodList,
+  onNavigateHome,
+  onBack
+}) {
   const [messages, setMessages] = useState([
-    { sender: "bot", text: "สวัสดี! ปูนปูนพร้อมพาคุณเที่ยวกาญจนบุรีวันนี้แล้ว ถามมาได้เลยนะ 🐣" },
+    {
+      sender: "bot",
+      text: "สวัสดี! ปูนปูนพร้อมพาคุณเที่ยวกาญจนบุรีวันนี้แล้ว ถามมาได้เลยนะ 🐣"
+    },
   ]);
+
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
+    scrollRef.current?.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages, typing]);
 
   const send = (text) => {
     if (!text.trim()) return;
-    setMessages((m) => [...m, { sender: "user", text }]);
+
+    setMessages((m) => [
+      ...m,
+      { sender: "user", text }
+    ]);
+
     setInput("");
     setTyping(true);
+
     setTimeout(() => {
       const reply = botReply(text);
-      setMessages((m) => [...m, { sender: "bot", ...reply }]);
+
+      setMessages((m) => [
+        ...m,
+        { sender: "bot", ...reply }
+      ]);
+
       setTyping(false);
     }, 700);
   };
 
   const handleCta = (action) => {
     if (!action) return;
-    if (action.type === "marker") onNavigateMarker(action.id);
-    if (action.type === "foodList") onNavigateFoodList();
-    if (action.type === "home") onNavigateHome();
+
+    if (action.type === "marker") {
+      onNavigateMarker(action.id);
+    }
+
+    if (action.type === "foodList") {
+      onNavigateFoodList();
+    }
+
+    if (action.type === "home") {
+      onNavigateHome();
+    }
   };
 
   return (
     <div className="h-full flex flex-col bg-slate-50">
-      <div className="px-5 pt-6 pb-4 text-white" style={{ background: heroGradient }}>
-        <div className="flex items-center gap-3">
+
+      {/* ================= HEADER ================= */}
+      <div
+        className="relative shrink-0 text-white"
+        style={{
+          background:
+            "linear-gradient(145deg,#123E8C 0%,#1D63C9 55%,#2FB6D9 100%)",
+        }}
+      >
+        <div className="relative h-[128px] flex items-center px-5">
+
+          {/* BACK BUTTON */}
           {onBack && (
-            <button onClick={onBack} className="p-1.5 -ml-1.5 rounded-full active:bg-white/10 shrink-0">
-              <ChevronLeft size={22} className="text-white" />
+            <button
+              type="button"
+              onClick={onBack}
+              className="
+                relative z-50
+                w-10 h-10
+                flex items-center justify-center
+                rounded-full
+                bg-white/10
+                hover:bg-white/20
+                active:bg-white/30
+                active:scale-95
+                transition
+                cursor-pointer
+                shrink-0
+              "
+              style={{ pointerEvents: "auto" }}
+              aria-label="ย้อนกลับ"
+            >
+              <ChevronLeft
+                size={24}
+                className="text-white pointer-events-none"
+              />
             </button>
           )}
-          <div className="relative w-20 h-20 shrink-0 overflow-visible">
-  <PoonpoonMascot
-    size={180}
-    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
-  />
-</div>
-          <div>
-            <p className="font-bold text-base">POONPOON AI</p>
-            <p className="text-xs text-white/80">“ถามมาได้เลย เดี๋ยวปูนปูนช่วยเอง!”</p>
+
+          {/* MASCOT */}
+          <div className="relative w-[105px] h-[105px] shrink-0 ml-1">
+            <PoonpoonMascot
+              size={150}
+              className="
+                absolute
+                left-1/2 top-1/2
+                -translate-x-1/2 -translate-y-1/2
+                max-w-none
+                pointer-events-none
+              "
+            />
           </div>
+
+          {/* TITLE */}
+          <div className="min-w-0 -ml-1">
+            <p className="font-extrabold text-[18px] leading-tight">
+              POONPOON AI
+            </p>
+
+            <p className="text-[11px] text-white/85 mt-1 leading-snug">
+              “ถามมาได้เลย เดี๋ยวปูนปูนช่วยเอง!”
+            </p>
+          </div>
+
         </div>
       </div>
 
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 space-y-3">
+
+      {/* ================= CHAT AREA ================= */}
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto px-4 py-4 space-y-3"
+      >
         {messages.map((m, i) => (
-          <div key={i} className={`flex ${m.sender === "user" ? "justify-end" : "justify-start"}`}>
-            <div className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${m.sender === "user" ? "bg-blue-600 text-white rounded-br-md" : "bg-white text-slate-700 shadow-sm border border-slate-100 rounded-bl-md"}`}>
+          <div
+            key={i}
+            className={`flex ${
+              m.sender === "user"
+                ? "justify-end"
+                : "justify-start"
+            }`}
+          >
+            <div
+              className={`
+                max-w-[80%]
+                rounded-2xl
+                px-4 py-2.5
+                text-sm
+                leading-relaxed
+                ${
+                  m.sender === "user"
+                    ? "bg-blue-600 text-white rounded-br-md"
+                    : "bg-white text-slate-700 shadow-sm border border-slate-100 rounded-bl-md"
+                }
+              `}
+            >
               <p>{m.text}</p>
+
+              {/* RESTAURANT CARDS */}
               {m.restaurantCards && (
                 <div className="mt-2.5 space-y-2">
                   {m.restaurantCards.map((r) => (
-                    <div key={r.id} className="flex gap-2 bg-slate-50 rounded-xl p-2">
-                      <ImagePlaceholder hue={r.hue} icon={UtensilsCrossed} className="w-14 h-14 shrink-0" />
+                    <div
+                      key={r.id}
+                      className="flex gap-2 bg-slate-50 rounded-xl p-2"
+                    >
+                      <ImagePlaceholder
+                        hue={r.hue}
+                        icon={UtensilsCrossed}
+                        className="w-14 h-14 shrink-0"
+                      />
+
                       <div className="min-w-0">
-                        <p className="text-xs font-semibold text-slate-800 truncate">{r.name}</p>
-                        <p className="text-[10px] text-slate-400">{r.category} · {r.distance}</p>
+                        <p className="text-xs font-semibold text-slate-800 truncate">
+                          {r.name}
+                        </p>
+
+                        <p className="text-[10px] text-slate-400">
+                          {r.category} · {r.distance}
+                        </p>
                       </div>
                     </div>
                   ))}
                 </div>
               )}
+
+              {/* CTA */}
               {m.cta && (
-                <button onClick={() => handleCta(m.cta.action)} className="mt-2.5 flex items-center gap-1 text-xs font-bold text-blue-600">
-                  {m.cta.label} <ArrowRight size={13} />
+                <button
+                  type="button"
+                  onClick={() => handleCta(m.cta.action)}
+                  className="mt-2.5 flex items-center gap-1 text-xs font-bold text-blue-600"
+                >
+                  {m.cta.label}
+                  <ArrowRight size={13} />
                 </button>
               )}
             </div>
           </div>
         ))}
+
+        {/* TYPING */}
         {typing && (
           <div className="flex justify-start">
             <div className="bg-white shadow-sm border border-slate-100 rounded-2xl rounded-bl-md px-4 py-3">
-              <Loader2 size={14} className="animate-spin text-slate-400" />
+              <Loader2
+                size={14}
+                className="animate-spin text-slate-400"
+              />
             </div>
           </div>
         )}
       </div>
 
-      <div className="px-4 pb-2 flex gap-2 overflow-x-auto">
+
+      {/* ================= QUICK QUESTIONS ================= */}
+      <div className="px-4 pb-2 flex gap-2 overflow-x-auto bg-white">
         {AI_QUICK_QUESTIONS.map((q) => (
-          <button key={q} onClick={() => send(q)} className="shrink-0 text-xs font-medium text-blue-600 bg-blue-50 px-3 py-1.5 rounded-full">
+          <button
+            key={q}
+            type="button"
+            onClick={() => send(q)}
+            className="
+              shrink-0
+              text-xs
+              font-medium
+              text-blue-600
+              bg-blue-50
+              px-3 py-1.5
+              rounded-full
+            "
+          >
             {q}
           </button>
         ))}
       </div>
 
-     <div className="px-4 pb-20 pt-2 flex items-center gap-2 border-t border-slate-100 bg-white">
-  <input
-    value={input}
-    onChange={(e) => setInput(e.target.value)}
-    onKeyDown={(e) => e.key === "Enter" && send(input)}
-    placeholder="พิมพ์คำถามถึงปูนปูน..."
-    className="flex-1 bg-slate-100 rounded-full px-4 py-2.5 text-sm outline-none"
-  />
 
-  <button
-    onClick={() => send(input)}
-    className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0"
-  >
-    <Send size={16} />
-  </button>
-</div>
+      {/* ================= INPUT ================= */}
+      <div className="px-4 pb-20 pt-2 flex items-center gap-2 border-t border-slate-100 bg-white">
+
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              send(input);
+            }
+          }}
+          placeholder="พิมพ์คำถามถึงปูนปูน..."
+          className="
+            flex-1
+            bg-slate-100
+            rounded-full
+            px-4 py-2.5
+            text-sm
+            outline-none
+          "
+        />
+
+        <button
+          type="button"
+          onClick={() => send(input)}
+          className="
+            w-10 h-10
+            rounded-full
+            bg-blue-600
+            text-white
+            flex items-center justify-center
+            shrink-0
+            active:scale-95
+          "
+        >
+          <Send size={16} />
+        </button>
+
+      </div>
     </div>
   );
 }
-
 /* ============================================================
    PROFILE
    ============================================================ */
