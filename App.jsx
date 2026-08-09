@@ -1383,71 +1383,119 @@ function LandingScreen({
       <div className="relative z-20 px-5 pb-6 shrink-0">
 
         {/* ================= ABOUT EVENT BUTTON ================= */}
-        <button
-          type="button"
-          onClick={onAboutEvent}
-          className="
-            w-full
-            rounded-[22px]
-            px-5 py-4
-            text-left
-            text-white
-            shadow-xl
-            active:scale-[0.98]
-            transition-transform
-            border border-white/40
-          "
-          style={{
-            background:
-              "linear-gradient(110deg,#123E8C 0%,#1D63C9 48%,#2FB6D9 100%)",
-          }}
-        >
-          <div className="flex items-center gap-3">
+<button
+  type="button"
+  onClick={onAboutEvent}
+  className="
+    w-full
+    rounded-[22px]
+    px-5 py-4
+    text-left
+    text-white
+    shadow-2xl
+    active:scale-[0.98]
+    transition-transform
+    border-2
+    border-yellow-300
+    relative
+    overflow-hidden
+  "
+  style={{
+    background:
+      "linear-gradient(120deg,#082B72 0%,#0B48C5 55%,#008ED6 100%)",
+    boxShadow:
+      "0 10px 28px rgba(8,43,114,0.32), 0 0 0 1px rgba(255,255,255,0.18) inset",
+  }}
+>
+  {/* GLOW */}
+  <div
+    className="
+      absolute
+      -top-12
+      -right-10
+      w-32 h-32
+      rounded-full
+      bg-cyan-300/20
+      blur-2xl
+      pointer-events-none
+    "
+  />
 
-            {/* ICON */}
-            <div
-              className="
-                w-12 h-12
-                rounded-2xl
-                bg-white/20
-                flex items-center
-                justify-center
-                shrink-0
-              "
-            >
-              <Info size={25} strokeWidth={2.3} />
-            </div>
+  <div className="relative z-10 flex items-center gap-3">
 
-            {/* TEXT */}
-            <div className="flex-1 min-w-0">
-              <span className="text-[11px] font-bold text-cyan-100">
-                คลิกเพือดูข้อมูล ตลอดกาญ(น.)
-              </span>
+    {/* ICON */}
+    <div
+      className="
+        w-12 h-12
+        rounded-2xl
+        flex
+        items-center
+        justify-center
+        shrink-0
+        text-blue-900
+        shadow-md
+      "
+      style={{
+        background:
+          "linear-gradient(180deg,#FFE66B 0%,#FFB800 100%)",
+      }}
+    >
+      <Info size={25} strokeWidth={2.5} />
+    </div>
 
-              <p className="font-extrabold text-[16px] leading-tight mt-0.5">
-                RUN FOR PEACE • RUN FOR FREEDOM
-              </p>
+    {/* TEXT */}
+    <div className="flex-1 min-w-0">
 
-              <p className="text-[11px] text-white/80 mt-1">
-                รู้จักแนวคิด • เรื่องราว • กิจกรรมภายในงาน
-              </p>
-            </div>
+      <span
+        className="
+          inline-flex
+          items-center
+          px-2.5 py-1
+          rounded-full
+          text-[10px]
+          font-extrabold
+          text-blue-950
+          mb-1.5
+        "
+        style={{
+          background:
+            "linear-gradient(180deg,#FFE97A,#FFC928)",
+        }}
+      >
+        ตลอดกาญ(น.)
+      </span>
 
-            {/* ARROW */}
-            <div
-              className="
-                w-9 h-9
-                rounded-full
-                bg-white/15
-                flex items-center
-                justify-center
-                shrink-0
-              "
-            >
-              <ArrowRight size={18} />
-            </div>
-          </div>
-        </button>
+      <p className="font-black text-[16px] leading-tight tracking-tight">
+        RUN FOR PEACE • RUN FOR FREEDOM
+      </p>
+
+      <p className="text-[11px] text-white/90 mt-1">
+        รู้จักแนวคิด • เรื่องราว • กิจกรรมภายในงาน
+      </p>
+    </div>
+
+    {/* ARROW */}
+    <div
+      className="
+        w-10 h-10
+        rounded-full
+        flex
+        items-center
+        justify-center
+        shrink-0
+        text-blue-900
+        shadow-md
+      "
+      style={{
+        background:
+          "linear-gradient(180deg,#FFE66B 0%,#FFB800 100%)",
+      }}
+    >
+      <ArrowRight size={19} strokeWidth={2.7} />
+    </div>
+
+  </div>
+</button>
 
         {/* ================= TAGLINE ================= */}
         <p className="text-center text-[11px] text-blue-900/70 font-medium mt-2 mb-3">
