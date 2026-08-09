@@ -529,6 +529,7 @@ const MAP_MARKERS = [
 ];
 
 const MAP_FILTERS = [
+  { id: "all", label: "ทั้งหมด" },
   { id: "relaxkan", label: "RelaxKAN" },
   { id: "food", label: "อร่อยเมืองกาญ" },
   { id: "sup", label: "SUP Experience" },
@@ -2690,9 +2691,10 @@ function ExploreMapScreen({
   setMapFilter,
   onMarkerClick
 }) {
-const markers = MAP_MARKERS.filter(
-  (m) => m.type === mapFilter
-);
+const markers =
+  mapFilter === "all"
+    ? MAP_MARKERS
+    : MAP_MARKERS.filter((m) => m.type === mapFilter);
 
   const [mapZoom, setMapZoom] = useState(1);
   const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 });
@@ -2907,89 +2909,79 @@ const markers = MAP_MARKERS.filter(
           )}
 
           {/* ================= MARKERS ================= */}
-          {markers.map((m) => (
-            <button
-              key={m.id}
-              onPointerDown={(e) => {
-                e.stopPropagation();
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                onMarkerClick(m);
-              }}
-              className="
-                absolute
-                flex
-                items-center
-                justify-center
-                z-20
-              "
-              style={{
-                left: `${m.x}%`,
-                top: `${m.y}%`,
-
-                /*
-                  สำคัญ:
-                  scale(1 / mapZoom)
-                  ทำให้หมุดคงขนาดเดิม
-                */
-                transform: `
-                  translate(-50%, -50%)
-                  scale(${1 / mapZoom})
-                `,
-              }}
-            >
-             <div
-  className={`
-    w-10 h-10
-    rounded-full
-    flex
-    items-center
-    justify-center
-    shadow-md
-    border-2
-    border-white
-    overflow-hidden
-    ${
-      m.logo
-        ? "bg-white"
-        : markerColor(m.type)
-    }
-  `}
->
-  {m.logo ? (
-    <img
-      src={m.logo}
-      alt={m.name}
-      draggable={false}
-      className="
-        w-[82%]
-        h-[82%]
-        object-contain
-        pointer-events-none
-      "
-    />
-  ) : m.serviceType === "gas" ? (
-    <span className="text-[16px] pointer-events-none">
-      ⛽
-    </span>
-  ) : m.serviceType === "ev" ? (
-    <span className="text-[17px] pointer-events-none">
-      ⚡
-    </span>
-  ) : m.icon ? (
-    <m.icon
-      size={16}
-      className="text-white pointer-events-none"
-    />
-  ) : null}
-</div>
-            </button>
-          ))}
-
-        </div>
-
-
+{markers.map((m) => (
+  <button
+    key={m.id}
+    onPointerDown={(e) => {
+      e.stopPropagation();
+    }}
+    onClick={(e) => {
+      e.stopPropagation();
+      onMarkerClick(m);
+    }}
+    className="
+      absolute
+      flex
+      items-center
+      justify-center
+      z-20
+    "
+    style={{
+      left: `${m.x}%`,
+      top: `${m.y}%`,
+      transform: `
+        translate(-50%, -50%)
+        scale(${1 / mapZoom})
+      `,
+    }}
+  >
+    <div
+      className={`
+        w-11 h-11
+        rounded-full
+        flex
+        items-center
+        justify-center
+        shadow-md
+        border-2
+        border-white
+        overflow-hidden
+        ${
+          m.type === "relaxkan"
+            ? "bg-emerald-100"
+            : m.type === "food"
+            ? "bg-orange-100"
+            : m.type === "sup"
+            ? "bg-cyan-100"
+            : "bg-slate-500"
+        }
+      `}
+    >
+      {m.logo ? (
+        <img
+          src={m.logo}
+          alt={m.name}
+          draggable={false}
+          className="
+            w-[34px]
+            h-[34px]
+            object-contain
+            pointer-events-none
+          "
+        />
+      ) : m.serviceType === "gas" ? (
+        <span className="text-[18px] pointer-events-none">⛽</span>
+      ) : m.serviceType === "ev" ? (
+        <span className="text-[18px] pointer-events-none">⚡</span>
+      ) : m.icon ? (
+        <m.icon
+          size={17}
+          className="text-white pointer-events-none"
+        />
+      ) : null}
+    </div>
+  </button>
+))}
         {/* ================= ZOOM CONTROLS ================= */}
         <div
           className="
@@ -3652,7 +3644,7 @@ export default function App() {
   const [gallery, setGallery] = useState(INITIAL_GALLERY);
   const [galleryFilter, setGalleryFilter] = useState("all");
   const [galleryPost, setGalleryPost] = useState(null);
-  const [mapFilter, setMapFilter] = useState("relaxkan");
+  const [mapFilter, setMapFilter] = useState("all");
   const [activeMarker, setActiveMarker] = useState(null);
   const [foodListOpen, setFoodListOpen] = useState(false);
   const [savedIds, setSavedIds] = useState([]);
