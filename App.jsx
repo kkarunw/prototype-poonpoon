@@ -1086,9 +1086,9 @@ function RegisterForm({ type, onBack, onDone }) {
       <div className="h-full flex flex-col bg-slate-50">
         <ScreenHeader title="เข้าสู่ระบบ" subtitle="POONPOON KANCHANABURI" onBack={onBack} />
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
-         <div className="relative h-32 flex items-center justify-center">
+         <div className="relative h-48 flex items-center justify-center overflow-visible">
   <PoonpoonMascot
-    size={180}
+    size={240}
     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
   />
 </div>
@@ -1172,7 +1172,7 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
             <p className="text-sm text-white/85 mt-1 leading-snug max-w-[190px]">วันนี้อยากให้ POONPOON พาไปไหน?</p>
           <div className="relative h-36 flex items-center justify-center overflow-visible">
   <PoonpoonMascot
-    size={210}
+    size={260}
     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
   />
 </div>
@@ -1637,7 +1637,12 @@ function AIScreen({ onNavigateMarker, onNavigateFoodList, onNavigateHome, onBack
               <ChevronLeft size={22} className="text-white" />
             </button>
           )}
-          <PoonpoonMascot size={150} />
+          <div className="relative w-20 h-20 shrink-0 overflow-visible">
+  <PoonpoonMascot
+    size={180}
+    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+  />
+</div>
           <div>
             <p className="font-bold text-base">POONPOON AI</p>
             <p className="text-xs text-white/80">“ถามมาได้เลย เดี๋ยวปูนปูนช่วยเอง!”</p>
