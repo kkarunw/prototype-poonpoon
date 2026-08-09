@@ -898,12 +898,12 @@ function LandingScreen({
   return (
     <div
       className="h-full w-full flex flex-col relative overflow-hidden"
-      style={{
-        backgroundImage: `url(${poonpoonBackground})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
+style={{
+  backgroundImage: `url(${item.backgroundImage})`,
+  backgroundSize: "135% auto",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+}}
     >
       {/* ================= LOGO ================= */}
       <div className="relative z-10 flex justify-center pt-6 px-6 shrink-0">
@@ -1234,9 +1234,10 @@ function RegisterForm({ type, onBack, onDone }) {
   }}
   className="
     w-full
-    h-[190px]
-    rounded-[26px]
-    overflow-hidden
+h-[190px]
+p-0
+rounded-[26px]
+overflow-hidden
     text-left
     shadow-md
     active:scale-[0.98]
