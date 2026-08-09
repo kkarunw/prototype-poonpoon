@@ -2849,8 +2849,8 @@ function HomeScreen({
               </p>
             </div>
           </button>
-        </div>
 
+        </div>
         {/* ================= SHARE TO CHANCE ================= */}
         <div className="px-5 mt-5">
           <div
