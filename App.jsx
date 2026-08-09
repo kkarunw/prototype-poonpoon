@@ -103,12 +103,224 @@ const GALLERY_FILTERS = [
 ];
 
 const RESTAURANTS = [
-  { id: 1, name: "ครัวริมแคว", category: "อาหารท้องถิ่น", distance: "850 เมตร", closes: "21:00", menu: "แกงป่าปลาแม่น้ำแคว, ผัดไทยกุ้งสด", badge: "ร้านเด็ดเมืองกาญ", hue: "from-orange-400 to-amber-300", x: 28, y: 62 },
-  { id: 2, name: "คาเฟ่เขาแหลม", category: "คาเฟ่", distance: "1.1 กม.", closes: "20:00", menu: "ลาเต้เย็น, เค้กกล้วยหอม", badge: null, hue: "from-amber-300 to-yellow-200", x: 68, y: 40 },
-  { id: 3, name: "ก๋วยเตี๋ยวเรือป้านิด", category: "อาหารท้องถิ่น", distance: "400 เมตร", closes: "22:00", menu: "ก๋วยเตี๋ยวเรือเนื้อ, ก๋วยเตี๋ยวเรือหมู", badge: "ร้านเด็ดเมืองกาญ", hue: "from-red-400 to-orange-300", x: 45, y: 75 },
-  { id: 4, name: "ของหวานยายเล็ก", category: "ของหวาน", distance: "600 เมตร", closes: "19:30", menu: "ข้าวเหนียวมะม่วง, ลอดช่องสิงคโปร์", badge: null, hue: "from-pink-400 to-rose-300", x: 55, y: 55 },
-  { id: 5, name: "ส้มตำริมทาง ป้าแดง", category: "อาหารท้องถิ่น", distance: "1.3 กม.", closes: "21:30", menu: "ส้มตำปูปลาร้า, ไก่ย่างเขาสวนกวาง", badge: "ร้านเด็ดเมืองกาญ", hue: "from-lime-400 to-green-300", x: 20, y: 45 },
-  { id: 6, name: "กาแฟท่าน้ำ", category: "คาเฟ่", distance: "300 เมตร", closes: "18:00", menu: "อเมริกาโน่, ชาเย็น", badge: null, hue: "from-cyan-400 to-blue-300", x: 78, y: 65 },
+  {
+    id: 1,
+    name: "Keereetara Riverside",
+    category: "อาหารไทย",
+    distance: "โซนสะพานแม่น้ำแคว",
+    closes: "22:00",
+    menu: "ปลาคัง, ต้มยำปลาคัง, ฉู่ฉี่ปลา",
+    badge: "ร้านแนะนำ",
+    hue: "from-orange-400 to-amber-300",
+
+    x: 44,
+    y: 27,
+
+    address:
+      "433/1 ตำบลท่ามะขาม อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Keereetara%20Riverside%20Kanchanaburi&query_place_id=ChIJE--sLI914zARmDSQIZY1qIA",
+  },
+
+  {
+    id: 2,
+    name: "Plakan Log Home",
+    category: "อาหารไทย",
+    distance: "เมืองกาญจนบุรี",
+    closes: "22:00",
+    menu: "อาหารไทย, เมนูปลา",
+    badge: "ร้านแนะนำ",
+    hue: "from-amber-400 to-orange-300",
+
+    x: 60,
+    y: 39,
+
+    address:
+      "222 หมู่ 2 อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Plakan%20Log%20Home%20Kanchanaburi&query_place_id=ChIJj6vaxnJz4zARxT0dDPeun_M",
+  },
+
+  {
+    id: 3,
+    name: "KAAN Riverkwai Restaurant",
+    category: "อาหารไทย",
+    distance: "ท่ามะขาม",
+    closes: "22:00",
+    menu: "อาหารไทย, ซีฟู้ด, เมนูปลา",
+    badge: null,
+    hue: "from-orange-400 to-red-300",
+
+    x: 55,
+    y: 34,
+
+    address:
+      "166 ตำบลท่ามะขาม อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=KAAN%20Riverkwai%20Restaurant&query_place_id=ChIJza8epUR14zARKVfUFzpFvT8",
+  },
+
+  {
+    id: 4,
+    name: "Saiyok Riverkwai Restaurant",
+    category: "อาหารไทย",
+    distance: "River Kwai Rd",
+    closes: "20:00",
+    menu: "อาหารไทย, เมนูปลา",
+    badge: null,
+    hue: "from-orange-400 to-amber-300",
+
+    x: 39,
+    y: 31,
+
+    address:
+      "429 ถนนแม่น้ำแคว ตำบลท่ามะขาม อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Saiyok%20Riverkwai%20Restaurant&query_place_id=ChIJQ35-tfl04zARKIC_0ADN2Zs",
+  },
+
+  {
+    id: 5,
+    name: "By De River",
+    category: "อาหารริมน้ำ",
+    distance: "River Kwai Rd",
+    closes: "00:00",
+    menu: "อาหารไทย, อาหารเย็น",
+    badge: null,
+    hue: "from-orange-500 to-amber-300",
+
+    x: 52,
+    y: 43,
+
+    address:
+      "337/1 ถนนแม่น้ำแคว ตำบลท่ามะขาม อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=By%20De%20River%20Kanchanaburi&query_place_id=ChIJhwqqWvB04zARyYwwRkojTD8",
+  },
+
+  {
+    id: 6,
+    name: "Keeree Tara",
+    category: "อาหารไทย",
+    distance: "River Kwai Rd",
+    closes: "22:00",
+    menu: "ฉู่ฉี่ปลาคัง, ต้มยำปลาคัง, ปลากดทอดน้ำปลา",
+    badge: "ร้านดัง",
+    hue: "from-orange-400 to-yellow-300",
+
+    x: 35,
+    y: 35,
+
+    address:
+      "431/1 ถนนแม่น้ำแคว อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Keeree%20Tara%20Kanchanaburi&query_place_id=ChIJvX2vTfh04zAR_ovqFujxLEo",
+  },
+
+  {
+    id: 7,
+    name: "แพอาหารคุณอี๊ด",
+    category: "อาหาร Local",
+    distance: "ท่ามะขาม",
+    closes: "21:00",
+    menu: "ปลาคังผัดฉ่า, แกงป่าปลาคัง, ปลาทับทิมนึ่งมะนาว",
+    badge: "Local",
+    hue: "from-orange-500 to-red-300",
+
+    x: 42,
+    y: 46,
+
+    address: "กาญจนบุรี",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=แพอาหารคุณอี๊ด%20กาญจนบุรี",
+  },
+
+  {
+    id: 8,
+    name: "The Story ร้านอาหารริมน้ำกาญจนบุรี",
+    category: "อาหารริมน้ำ",
+    distance: "สะพานแควใหญ่",
+    closes: "00:00",
+    menu: "อาหารไทย",
+    badge: null,
+    hue: "from-orange-400 to-pink-300",
+
+    x: 49,
+    y: 30,
+
+    address:
+      "111/13 สะพานแควใหญ่ ตำบลท่ามะขาม กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=The%20Story%20Kanchanaburi&query_place_id=ChIJm_AEDgB14zAR9jAHWYuWHZw",
+  },
+
+  {
+    id: 9,
+    name: "ร้านแจ๋ว แกงป่า ปลาเผา",
+    category: "อาหาร Local",
+    distance: "ท่ามะขาม",
+    closes: "21:00",
+    menu: "แกงป่า, ปลาเผา, อาหารพื้นถิ่น",
+    badge: "Local",
+    hue: "from-red-400 to-orange-300",
+
+    x: 67,
+    y: 48,
+
+    address:
+      "69/4 ตำบลท่ามะขาม อำเภอเมืองกาญจนบุรี กาญจนบุรี",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=ร้านแจ๋ว%20แกงป่า%20ปลาเผา%20กาญจนบุรี&query_place_id=ChIJi0ludlt04zAR6-d1sV7kc5c",
+  },
+
+  {
+    id: 10,
+    name: "ร้านอาหาร แพหน้าเมือง",
+    category: "อาหารแพ",
+    distance: "ปากแพรก",
+    closes: "23:00",
+    menu: "อาหารไทย, ปลา, อาหารแพ",
+    badge: "Local",
+    hue: "from-orange-400 to-amber-300",
+
+    x: 48,
+    y: 69,
+
+    address:
+      "3 ถนนสองแคว ตำบลปากแพรก อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=แพหน้าเมือง%20กาญจนบุรี&query_place_id=ChIJOfm-gLx04zAR9RQKPgDs_Rw",
+  },
+
+  {
+    id: 11,
+    name: "ต้นประดู่ครัวไทย อาหารป่า ปลาแม่น้ำ",
+    category: "อาหาร Local",
+    distance: "ปากแพรก",
+    closes: "22:00",
+    menu: "ปลาแม่น้ำ, อาหารป่า",
+    badge: "Local Cuisine",
+    hue: "from-orange-500 to-amber-400",
+
+    x: 63,
+    y: 73,
+
+    address:
+      "97/20 หมู่ 9 ตำบลปากแพรก อำเภอเมืองกาญจนบุรี กาญจนบุรี 71000",
+
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=ต้นประดู่ครัวไทย%20อาหารป่า%20ปลาแม่น้ำ&query_place_id=ChIJrSa_3jN14zARw0qPQADqSxE",
+  },
 ];
 
 const FOOD_FILTERS = [
