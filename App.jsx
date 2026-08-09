@@ -1086,9 +1086,12 @@ function RegisterForm({ type, onBack, onDone }) {
       <div className="h-full flex flex-col bg-slate-50">
         <ScreenHeader title="เข้าสู่ระบบ" subtitle="POONPOON KANCHANABURI" onBack={onBack} />
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
-          <div className="flex flex-col items-center py-4">
-            <PoonpoonMascot size={270} />
-          </div>
+         <div className="relative h-32 flex items-center justify-center">
+  <PoonpoonMascot
+    size={180}
+    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+  />
+</div>
           <Field label="เบอร์โทรศัพท์ หรือ อีเมล" placeholder="08X-XXX-XXXX / you@email.com" />
           <Field label="รหัสผ่าน" placeholder="กรอกรหัสผ่าน" type="password" />
           <button className="text-xs font-semibold text-blue-600">ลืมรหัสผ่าน?</button>
