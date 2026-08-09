@@ -1087,7 +1087,7 @@ function RegisterForm({ type, onBack, onDone }) {
         <ScreenHeader title="เข้าสู่ระบบ" subtitle="POONPOON KANCHANABURI" onBack={onBack} />
         <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
           <div className="flex flex-col items-center py-4">
-            <PoonpoonMascot size={88} />
+            <PoonpoonMascot size={150} />
           </div>
           <Field label="เบอร์โทรศัพท์ หรือ อีเมล" placeholder="08X-XXX-XXXX / you@email.com" />
           <Field label="รหัสผ่าน" placeholder="กรอกรหัสผ่าน" type="password" />
@@ -1168,7 +1168,7 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
             <p className="text-lg font-bold">สวัสดี 👋</p>
             <p className="text-sm text-white/85 mt-1 leading-snug max-w-[190px]">วันนี้อยากให้ POONPOON พาไปไหน?</p>
           </div>
-          <PoonpoonMascot size={64} />
+          <PoonpoonMascot size={95} />
         </div>
         <button onClick={() => onNavigate("ai")} className="mt-5 w-full flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-2xl px-4 py-3 text-left border border-white/20">
           <Search size={16} className="text-white/70" />
