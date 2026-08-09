@@ -1060,90 +1060,629 @@ function LandingScreen({
    REGISTRATION FORMS (mock)
    ============================================================ */
 function RegisterForm({ type, onBack, onDone }) {
-  const [submitted, setSubmitted] = useState(false);
-  const [selectedDistance, setSelectedDistance] = useState("5 KM City");
   const isRace = type === "race";
   const isLogin = type === "login";
+
+  const [submitted, setSubmitted] = useState(false);
+  const [raceStep, setRaceStep] = useState("select");
+  const [selectedPackage, setSelectedPackage] = useState(null);
+
+  const RACE_PACKAGES = [
+    {
+      id: "3.5",
+      distance: "3.5 KM",
+      route: "FREEDOM ROUTE",
+      price: 700,
+      accent: "linear-gradient(135deg,#18A999 0%,#F5B335 100%)",
+      soft: "linear-gradient(135deg,#E8FBF7 0%,#FFF6DC 100%)",
+      routeText: "สะพานข้ามแม่น้ำแคว • สนามกีฬา 36 พรรษา",
+      extras: [],
+    },
+    {
+      id: "5",
+      distance: "5 KM",
+      route: "CITY ROUTE",
+      price: 900,
+      accent: "linear-gradient(135deg,#FF5A1F 0%,#FFB11B 100%)",
+      soft: "linear-gradient(135deg,#FFF0EA 0%,#FFF7DC 100%)",
+      routeText: "ศาลหลักเมือง • สกายวอล์ค • โรงงานกระดาษ",
+      extras: [
+        "Running Socks",
+        "Finisher Bag",
+      ],
+    },
+    {
+      id: "10",
+      distance: "10 KM",
+      route: "HERITAGE ROUTE",
+      price: 1200,
+      accent: "linear-gradient(135deg,#0B2E6B 0%,#1D63C9 55%,#67D4B8 100%)",
+      soft: "linear-gradient(135deg,#EAF2FF 0%,#EAFBF5 100%)",
+      routeText: "สะพานข้ามแม่น้ำแคว • สุสานดอนรัก • โรงงานกระดาษ",
+      extras: [
+        "Running Socks",
+        "Finisher Bag",
+        "Limited Tumbler",
+        "Finisher Towel",
+        "10K Exclusive Pin",
+      ],
+    },
+  ];
+
+  const COMMON_ITEMS = [
+    { label: "Finisher Medal", icon: Star },
+    { label: "BIB", icon: QrCode },
+    { label: "Bandana", icon: Flag },
+    { label: "Neon Wristband", icon: Sparkles },
+  ];
+
+  const FESTIVAL_ACCESS = [
+    { label: "Concert", icon: PartyPopper },
+    { label: "Drone Show", icon: Sparkles },
+    { label: "Lighting Show", icon: Sun },
+  ];
+
+  const handleBack = () => {
+    if (isLogin) {
+      onBack();
+      return;
+    }
+
+    if (raceStep === "confirm") {
+      setRaceStep("detail");
+      return;
+    }
+
+    if (raceStep === "detail") {
+      setRaceStep("select");
+      return;
+    }
+
+    onBack();
+  };
+
+  /* ============================================================
+     SUCCESS
+  ============================================================ */
   if (submitted) {
     return (
-      <div className="h-full flex flex-col items-center justify-center px-8 text-center" style={{ background: heroGradient }}>
+      <div
+        className="h-full flex flex-col items-center justify-center px-8 text-center"
+        style={{ background: heroGradient }}
+      >
         <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-5">
           <Check size={40} className="text-white" />
         </div>
-        <h2 className="text-white text-xl font-bold mb-2">{isLogin ? "เข้าสู่ระบบสำเร็จ!" : "ลงทะเบียนสำเร็จ!"}</h2>
-        <p className="text-white/80 text-sm mb-8">
-          {isLogin ? "ยินดีต้อนรับกลับสู่ POONPOON KANCHANABURI" : "เตรียมตัวให้พร้อม แล้วมาวิ่งด้วยกันที่กาญจนบุรี"}
+
+        <h2 className="text-2xl font-extrabold text-white">
+          {isLogin ? "เข้าสู่ระบบสำเร็จ!" : "ลงทะเบียนสำเร็จ!"}
+        </h2>
+
+        <p className="text-sm text-white/80 mt-2 max-w-[270px] leading-relaxed">
+          {isLogin
+            ? "ยินดีต้อนรับกลับสู่ POONPOON KANCHANABURI"
+            : `${selectedPackage?.distance || ""} ${selectedPackage?.route || ""} แล้วพบกันที่กาญจนบุรี`}
         </p>
-        <button onClick={onDone} className="px-8 py-3.5 rounded-full font-bold text-sm text-blue-900 shadow-lg" style={{ background: "linear-gradient(180deg,#FFDE7A,#F5A623)" }}>
+
+        <button
+          onClick={onDone}
+          className="mt-7 px-8 py-3.5 rounded-full font-bold text-sm text-blue-900 shadow-lg"
+          style={{
+            background: "linear-gradient(180deg,#FFDE7A,#F5A623)",
+          }}
+        >
           เข้าสู่แอป POONPOON
         </button>
       </div>
     );
   }
 
+  /* ============================================================
+     LOGIN
+  ============================================================ */
   if (isLogin) {
     return (
       <div className="h-full flex flex-col bg-slate-50">
-        <ScreenHeader title="เข้าสู่ระบบ" subtitle="POONPOON KANCHANABURI" onBack={onBack} />
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
-         <div className="relative h-48 flex items-center justify-center overflow-visible">
-  <PoonpoonMascot
-    size={240}
-    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
-  />
-</div>
-          <Field label="เบอร์โทรศัพท์ หรือ อีเมล" placeholder="08X-XXX-XXXX / you@email.com" />
-          <Field label="รหัสผ่าน" placeholder="กรอกรหัสผ่าน" type="password" />
-          <button className="text-xs font-semibold text-blue-600">ลืมรหัสผ่าน?</button>
+        <div className="bg-white border-b border-slate-100 px-5 py-4 flex items-center gap-3">
+          <button
+            onClick={handleBack}
+            className="w-9 h-9 rounded-full flex items-center justify-center active:bg-slate-100"
+          >
+            <ChevronLeft size={22} className="text-slate-700" />
+          </button>
+
+          <div>
+            <h1 className="font-bold text-slate-800">เข้าสู่ระบบ</h1>
+            <p className="text-xs text-slate-400">
+              POONPOON KANCHANABURI
+            </p>
+          </div>
         </div>
-        <div className="px-5 pb-6 pt-3 bg-white border-t border-slate-100 space-y-3">
-          <button onClick={() => setSubmitted(true)} className="w-full py-3.5 rounded-full font-bold text-sm text-white shadow-md" style={{ background: "linear-gradient(90deg,#1D63C9,#2FB6D9)" }}>
+
+        <div className="flex-1 px-5 pt-10">
+          <div className="flex justify-center mb-10">
+            <PoonpoonMascot size={150} />
+          </div>
+
+          <div className="space-y-4">
+            <Field
+              label="เบอร์โทรศัพท์ หรือ อีเมล"
+              placeholder="08X-XXX-XXXX / you@email.com"
+            />
+
+            <Field
+              label="รหัสผ่าน"
+              placeholder="กรอกรหัสผ่าน"
+              type="password"
+            />
+
+            <button className="text-xs font-bold text-blue-600">
+              ลืมรหัสผ่าน?
+            </button>
+          </div>
+        </div>
+
+        <div className="px-5 pb-7">
+          <button
+            onClick={() => setSubmitted(true)}
+            className="w-full py-3.5 rounded-full font-bold text-sm text-white shadow-md"
+            style={{
+              background: "linear-gradient(90deg,#1D63C9,#2FB6D9)",
+            }}
+          >
             เข้าสู่ระบบ
           </button>
-          <p className="text-center text-xs text-slate-400">
-            ยังไม่มีบัญชี? <span className="font-semibold text-blue-600">สมัครสมาชิก</span>
+
+          <p className="text-center text-xs text-slate-400 mt-3">
+            ยังไม่มีบัญชี?{" "}
+            <span className="font-bold text-blue-600">
+              สมัครสมาชิก
+            </span>
           </p>
         </div>
       </div>
     );
   }
 
-  return (
-    <div className="h-full flex flex-col bg-slate-50">
-      <ScreenHeader title="สมัครวิ่ง" subtitle="เลือกเส้นทางที่ใช่สำหรับคุณ" onBack={onBack} />
-      <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4">
-        <Field label="ชื่อ-นามสกุล" placeholder="กรอกชื่อของคุณ" />
-        <Field label="เบอร์โทรศัพท์" placeholder="08X-XXX-XXXX" />
-        <Field label="อีเมล" placeholder="you@email.com" />
-        <div>
-          <p className="text-xs font-semibold text-slate-500 mb-2">เลือกระยะทาง</p>
-          <div className="grid grid-cols-3 gap-2">
-            {["3.5 KM Freedom", "5 KM City", "10 KM Heritage"].map((d) => (
-  <button
-    key={d}
-    type="button"
-    onClick={() => setSelectedDistance(d)}
-    className={`py-2.5 rounded-xl text-xs font-semibold border ${
-      selectedDistance === d
-        ? "bg-blue-600 text-white border-blue-600"
-        : "bg-white text-slate-600 border-slate-200"
-    }`}
-  >
-    {d}
-  </button>
-))}
+  /* ============================================================
+     STEP 1 : SELECT DISTANCE
+  ============================================================ */
+  if (isRace && raceStep === "select") {
+    return (
+      <div className="h-full flex flex-col bg-[#F7F9FC]">
+        <div className="bg-white border-b border-slate-100 px-5 py-4 flex items-center gap-3 shrink-0">
+          <button
+            onClick={handleBack}
+            className="w-9 h-9 rounded-full flex items-center justify-center active:bg-slate-100"
+          >
+            <ChevronLeft size={22} className="text-slate-700" />
+          </button>
+
+          <div>
+            <h1 className="font-extrabold text-slate-800">
+              เลือกระยะการแข่งขัน
+            </h1>
+            <p className="text-xs text-slate-400 mt-0.5">
+              เลือกระยะที่ใช่สำหรับคุณ
+            </p>
+          </div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-5 py-5 pb-8">
+          <div className="space-y-4">
+            {RACE_PACKAGES.map((pkg) => (
+              <button
+                key={pkg.id}
+                onClick={() => {
+                  setSelectedPackage(pkg);
+                  setRaceStep("detail");
+                }}
+                className="w-full rounded-[24px] overflow-hidden text-left shadow-sm border border-white active:scale-[0.98] transition-transform"
+                style={{ background: pkg.soft }}
+              >
+                <div className="p-5">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <span
+                        className="inline-block px-3 py-1 rounded-full text-[10px] font-extrabold text-white"
+                        style={{ background: pkg.accent }}
+                      >
+                        RACE PACKAGE
+                      </span>
+
+                      <div className="flex items-end gap-2 mt-3">
+                        <span
+                          className="text-[42px] leading-none font-black"
+                          style={{
+                            background: pkg.accent,
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                          }}
+                        >
+                          {pkg.distance.replace(" KM", "")}
+                        </span>
+
+                        <span className="font-black text-lg text-slate-700 mb-1">
+                          KM
+                        </span>
+                      </div>
+
+                      <p className="font-extrabold text-[15px] text-blue-950 mt-1">
+                        {pkg.route}
+                      </p>
+                    </div>
+
+                    <div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-sm"
+                      style={{ background: pkg.accent }}
+                    >
+                      <Flag size={24} />
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-start gap-2">
+                    <MapPin
+                      size={15}
+                      className="text-blue-800 mt-0.5 shrink-0"
+                    />
+                    <p className="text-[11px] leading-relaxed text-slate-600">
+                      {pkg.routeText}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] text-slate-400">
+                        ค่าสมัคร
+                      </p>
+
+                      <div className="flex items-end gap-1">
+                        <span className="text-2xl font-black text-slate-800">
+                          {pkg.price.toLocaleString()}
+                        </span>
+                        <span className="text-xs font-semibold text-slate-500 mb-1">
+                          บาท
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-sm font-bold text-blue-700">
+                      ดูรายละเอียด
+                      <ChevronRight size={18} />
+                    </div>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-5 bg-white rounded-2xl border border-slate-100 p-4 text-center">
+            <p className="text-xs font-bold text-slate-700">
+              ทุกระยะได้รับ
+            </p>
+
+            <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+              Finisher Medal • BIB • Bandana • Neon Wristband
+              <br />
+              พร้อมสิทธิ์เข้าร่วมกิจกรรม Festival
+            </p>
           </div>
         </div>
       </div>
-      <div className="px-5 pb-6 pt-3 bg-white border-t border-slate-100">
-        <button onClick={() => setSubmitted(true)} className="w-full py-3.5 rounded-full font-bold text-sm text-white shadow-md" style={{ background: "linear-gradient(90deg,#1D63C9,#2FB6D9)" }}>
-          ยืนยันการสมัคร
-        </button>
-      </div>
-    </div>
-  );
-}
+    );
+  }
 
+  /* ============================================================
+     STEP 2 : PACKAGE DETAIL
+  ============================================================ */
+  if (isRace && raceStep === "detail" && selectedPackage) {
+    return (
+      <div className="h-full flex flex-col bg-[#F7F9FC]">
+        <div className="bg-white border-b border-slate-100 px-5 py-4 flex items-center gap-3 shrink-0">
+          <button
+            onClick={handleBack}
+            className="w-9 h-9 rounded-full flex items-center justify-center active:bg-slate-100"
+          >
+            <ChevronLeft size={22} className="text-slate-700" />
+          </button>
+
+          <div>
+            <h1 className="font-extrabold text-slate-800">
+              Package Detail
+            </h1>
+            <p className="text-xs text-slate-400">
+              รายละเอียดแพ็กเกจการแข่งขัน
+            </p>
+          </div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-5 pt-5 pb-28">
+          <div
+            className="rounded-[26px] p-5 text-white relative overflow-hidden shadow-md"
+            style={{ background: selectedPackage.accent }}
+          >
+            <span className="text-[10px] font-bold text-white/80">
+              RACE PACKAGE
+            </span>
+
+            <div className="flex items-end gap-2 mt-2">
+              <h2 className="text-4xl font-black">
+                {selectedPackage.distance}
+              </h2>
+            </div>
+
+            <p className="font-extrabold mt-1">
+              {selectedPackage.route}
+            </p>
+
+            <div className="mt-5 flex items-center gap-2 text-xs text-white/85">
+              <MapPin size={14} />
+              KANCHANABURI
+            </div>
+
+            <div className="mt-1 flex items-center gap-2 text-xs text-white/85">
+              <CalendarDays size={14} />
+              13 AUGUST 2027
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-white/20">
+              <span className="text-3xl font-black">
+                {selectedPackage.price.toLocaleString()}
+              </span>
+              <span className="text-sm ml-1">
+                บาท
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <p className="text-[12px] font-extrabold text-slate-800 mb-3">
+              EVERY RUNNER RECEIVES
+            </p>
+
+            <div className="grid grid-cols-4 gap-2">
+              {COMMON_ITEMS.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.label}
+                    className="bg-white rounded-2xl border border-slate-100 px-2 py-3 flex flex-col items-center text-center shadow-sm"
+                  >
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center">
+                      <Icon size={19} />
+                    </div>
+
+                    <p className="text-[9px] font-bold text-slate-600 mt-2 leading-tight">
+                      {item.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {selectedPackage.extras.length > 0 && (
+            <div className="mt-6">
+              <p className="text-[12px] font-extrabold text-slate-800 mb-3">
+                EXTRA FOR {selectedPackage.distance} RUNNERS
+              </p>
+
+              <div className="grid grid-cols-2 gap-2.5">
+                {selectedPackage.extras.map((item) => (
+                  <div
+                    key={item}
+                    className="bg-white rounded-2xl border border-slate-100 px-3 py-3 flex items-center gap-3 shadow-sm"
+                  >
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center text-white shrink-0"
+                      style={{ background: selectedPackage.accent }}
+                    >
+                      <Check size={17} />
+                    </div>
+
+                    <p className="text-[11px] font-semibold text-slate-700">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="mt-6 bg-white rounded-2xl border border-slate-100 p-4 shadow-sm">
+            <p className="text-[12px] font-extrabold text-center text-emerald-600 mb-4">
+              FESTIVAL ACCESS INCLUDED
+            </p>
+
+            <div className="grid grid-cols-3 gap-3">
+              {FESTIVAL_ACCESS.map((item) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.label}
+                    className="flex flex-col items-center text-center"
+                  >
+                    <Icon
+                      size={21}
+                      className="text-blue-700"
+                    />
+
+                    <p className="text-[9px] font-bold text-slate-600 mt-2">
+                      {item.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-5 py-4">
+          <div className="flex items-center gap-4">
+            <div className="shrink-0">
+              <p className="text-[10px] text-slate-400">
+                ค่าสมัคร
+              </p>
+
+              <p className="text-xl font-black text-slate-800">
+                {selectedPackage.price.toLocaleString()}{" "}
+                <span className="text-xs font-medium">บาท</span>
+              </p>
+            </div>
+
+            <button
+              onClick={() => setRaceStep("confirm")}
+              className="flex-1 py-3.5 rounded-full text-white text-sm font-extrabold shadow-md active:scale-[0.98]"
+              style={{ background: selectedPackage.accent }}
+            >
+              สมัครเลย
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /* ============================================================
+     STEP 3 : CONFIRM REGISTRATION
+  ============================================================ */
+  if (isRace && raceStep === "confirm" && selectedPackage) {
+    return (
+      <div className="h-full flex flex-col bg-[#F7F9FC]">
+        <div className="bg-white border-b border-slate-100 px-5 py-4 flex items-center gap-3 shrink-0">
+          <button
+            onClick={handleBack}
+            className="w-9 h-9 rounded-full flex items-center justify-center active:bg-slate-100"
+          >
+            <ChevronLeft size={22} className="text-slate-700" />
+          </button>
+
+          <div>
+            <h1 className="font-extrabold text-slate-800">
+              ยืนยันการสมัคร
+            </h1>
+
+            <p className="text-xs text-slate-400">
+              ตรวจสอบข้อมูลก่อนดำเนินการต่อ
+            </p>
+          </div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto px-5 pt-5 pb-28">
+          <div className="bg-white rounded-2xl border border-slate-100 p-4 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xl font-black text-blue-950">
+                  {selectedPackage.distance}
+                </p>
+
+                <p className="text-xs font-extrabold text-blue-800 mt-0.5">
+                  {selectedPackage.route}
+                </p>
+              </div>
+
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center text-white"
+                style={{ background: selectedPackage.accent }}
+              >
+                <Flag size={24} />
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between mt-4 pt-4 border-t border-slate-100">
+              <span className="text-xs text-slate-400">
+                ค่าสมัคร
+              </span>
+
+              <span className="text-lg font-black text-slate-800">
+                {selectedPackage.price.toLocaleString()} บาท
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <p className="text-xs font-extrabold text-slate-800 mb-3">
+              ข้อมูลผู้สมัคร
+            </p>
+
+            <div className="space-y-3">
+              <Field
+                label="ชื่อ-นามสกุล"
+                placeholder="กรอกชื่อ-นามสกุล"
+              />
+
+              <Field
+                label="เบอร์โทรศัพท์"
+                placeholder="08X-XXX-XXXX"
+              />
+
+              <Field
+                label="อีเมล"
+                placeholder="you@email.com"
+                type="email"
+              />
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <p className="text-xs font-extrabold text-slate-800 mb-3">
+              ช่องทางการชำระเงิน
+            </p>
+
+            <div className="bg-white rounded-2xl border-2 border-blue-500 p-4 flex items-center gap-3 shadow-sm">
+              <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                <QrCode size={22} />
+              </div>
+
+              <div className="flex-1">
+                <p className="text-sm font-bold text-slate-800">
+                  QR Code / PromptPay
+                </p>
+
+                <p className="text-[10px] text-slate-400 mt-0.5">
+                  ชำระเงินผ่าน Mobile Banking
+                </p>
+              </div>
+
+              <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
+                <Check size={12} className="text-white" />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-5 bg-blue-50 rounded-2xl p-4">
+            <div className="flex justify-between items-center">
+              <span className="font-bold text-slate-700">
+                ยอดรวม
+              </span>
+
+              <span className="text-xl font-black text-blue-800">
+                {selectedPackage.price.toLocaleString()} บาท
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-5 py-4">
+          <button
+            onClick={() => setSubmitted(true)}
+            className="w-full py-3.5 rounded-full text-white font-extrabold text-sm shadow-md active:scale-[0.98]"
+            style={{
+              background:
+                "linear-gradient(90deg,#13AAA3 0%,#0097A7 100%)",
+            }}
+          >
+            ดำเนินการต่อ
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
 function Field({ label, placeholder, type = "text" }) {
   return (
     <div>
