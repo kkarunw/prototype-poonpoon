@@ -777,13 +777,39 @@ function FeatureCard({ icon: Icon, titleEn, titleTh, hue, onClick }) {
   );
 }
 
-function ActivityCard({ title, subtitle, hue, icon, onClick }) {
+function ActivityCard({ title, subtitle, image, onClick }) {
   return (
-    <button onClick={onClick} className="min-w-[150px] bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden text-left active:scale-[0.97] transition-transform">
-      <ImagePlaceholder hue={hue} icon={icon} className="h-24 w-full" rounded="rounded-none" />
+    <button
+      onClick={onClick}
+      className="
+        min-w-[150px]
+        bg-white
+        rounded-2xl
+        shadow-sm
+        border
+        border-slate-100
+        overflow-hidden
+        text-left
+        active:scale-[0.98]
+        transition-transform
+      "
+    >
+      <div className="h-24 w-full bg-white flex items-center justify-center p-3">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-full object-contain"
+        />
+      </div>
+
       <div className="p-3">
-        <p className="font-semibold text-sm text-slate-800">{title}</p>
-        <p className="text-[11px] text-slate-500 mt-0.5">{subtitle}</p>
+        <p className="font-semibold text-sm text-slate-800">
+          {title}
+        </p>
+
+        <p className="text-[11px] text-slate-500 mt-0.5">
+          {subtitle}
+        </p>
       </div>
     </button>
   );
