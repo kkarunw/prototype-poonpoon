@@ -1154,72 +1154,172 @@ function Field({ label, placeholder, type = "text" }) {
 }
 
 /* ============================================================
-   HOME SCREEN
-   ============================================================ */
+HOME SCREEN
+============================================================ */
 function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
   return (
-    <div className="h-full overflow-y-auto pb-24 bg-slate-50">
-      <div className="px-5 pt-6 pb-5 rounded-b-[32px] text-white relative overflow-hidden" style={{ background: heroGradient }}>
+    <div className="h-full flex flex-col bg-slate-50 overflow-hidden">
+
+      {/* ================= COMPACT HERO ================= */}
+      <div
+        className="relative shrink-0 px-5 pt-5 pb-4 text-white rounded-b-[28px] overflow-hidden"
+        style={{
+          background:
+            "linear-gradient(145deg,#123E8C 0%,#1D63C9 55%,#2FB6D9 100%)",
+        }}
+      >
+        {/* BACK */}
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center active:bg-white/20"
+            aria-label="ย้อนกลับ"
+          >
+            <ChevronLeft size={19} className="text-white" />
+          </button>
+        )}
+
+        {/* GREETING + MASCOT */}
+        <div className="flex items-start justify-between pl-8 min-h-[78px]">
+          <div className="pt-1">
+            <p className="text-[17px] font-extrabold leading-tight">
+              สวัสดี 👋
+            </p>
+
+            <p className="text-[14px] text-white/90 leading-snug mt-1.5 max-w-[190px]">
+              วันนี้อยากให้ POONPOON พาไปไหน?
+            </p>
+          </div>
+
+          {/* เล็กลง และไม่กินพื้นที่ header */}
+          <div className="relative w-[88px] h-[78px] shrink-0">
+            <PoonpoonMascot
+              size={120}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+            />
+          </div>
+        </div>
+
+        {/* SEARCH */}
         <button
-  onClick={onBack}
-  className="absolute top-5 left-4 z-20 w-9 h-9 rounded-full bg-white/15 flex items-center justify-center active:bg-white/25"
->
-  <ChevronLeft size={22} className="text-white" />
-</button>
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-lg font-bold">สวัสดี 👋</p>
-            <p className="text-sm text-white/85 mt-1 leading-snug max-w-[190px]">วันนี้อยากให้ POONPOON พาไปไหน?</p>
-          <div className="relative h-24 flex items-center justify-center overflow-visible">
-  <PoonpoonMascot
-    size={260}
-    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
-  />
-</div>
-        <button onClick={() => onNavigate("ai")} className="mt-5 w-full flex items-center gap-2 bg-white/15 backdrop-blur-sm rounded-2xl px-4 py-3 text-left border border-white/20">
-          <Search size={16} className="text-white/70" />
-          <span className="text-sm text-white/70">ถาม POONPOON เช่น "หิวแล้ว กินอะไรดี?"</span>
+          onClick={() => onNavigate("ai")}
+          className="mt-3 w-full h-[46px] px-4 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-sm flex items-center gap-3 text-left active:bg-white/20"
+        >
+          <Search size={18} className="text-white/90 shrink-0" />
+
+          <span className="text-[13px] text-white/85 truncate">
+            ถาม POONPOON เช่น "หิวแล้ว กินอะไรดี?"
+          </span>
         </button>
       </div>
 
-      <div className="px-5 mt-5 grid grid-cols-2 gap-3">
-        <FeatureCard icon={Aperture} titleEn="Another Lens" titleTh="ภารกิจมองกาญอีกมุม" hue="from-cyan-500 to-blue-500" onClick={() => onNavigate("anotherLens")} />
-        <FeatureCard icon={ImageIcon} titleEn="MABOKKAN" titleTh="เรื่องราวจากทุกคน" hue="from-fuchsia-500 to-pink-500" onClick={() => onNavigate("mabokkan")} />
-        <FeatureCard icon={Compass} titleEn="Explore Map" titleTh="แผนที่กิจกรรม" hue="from-emerald-500 to-teal-500" onClick={() => onNavigate("exploreMap")} />
-        <FeatureCard icon={MessageCircle} titleEn="POONPOON AI" titleTh="ถาม POONPOON" hue="from-amber-500 to-orange-500" onClick={() => onNavigate("ai")} />
-      </div>
+      {/* ================= SCROLL CONTENT ================= */}
+      <div className="flex-1 overflow-y-auto pb-24">
 
-      <div className="mt-7">
-        <div className="flex items-center justify-between px-5 mb-3">
-          <h2 className="text-sm font-bold text-slate-800">กิจกรรมใกล้คุณ</h2>
-        </div>
-        <div className="flex gap-3 px-5 overflow-x-auto pb-1">
-          <ActivityCard title="RelaxKAN" subtitle="Wellness & Recovery" hue="from-teal-400 to-cyan-300" icon={Waves} onClick={() => onOpenMarker("relaxkan")} />
-          <ActivityCard title="SUP Experience" subtitle="Outdoor Activity" hue="from-blue-400 to-indigo-300" icon={Navigation} onClick={() => onOpenMarker("sup")} />
-          <ActivityCard title="อร่อยเมืองกาญ" subtitle="Local Food" hue="from-orange-400 to-amber-300" icon={UtensilsCrossed} onClick={onOpenFoodList} />
-        </div>
-      </div>
+        {/* FEATURE GRID */}
+        <div className="px-5 pt-5 grid grid-cols-2 gap-3">
+          <FeatureCard
+            icon={Aperture}
+            titleEn="Another Lens"
+            titleTh="ภารกิจมองกาญอีกมุม"
+            hue="from-cyan-500 to-blue-500"
+            onClick={() => onNavigate("anotherLens")}
+          />
 
-      <div className="mt-7 px-5">
-        <h2 className="text-sm font-bold text-slate-800 mb-3">วันนี้ในงาน</h2>
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm divide-y divide-slate-100">
-          {SCHEDULE.map((s) => (
-            <div key={s.time} className="flex items-center gap-3 px-4 py-3">
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                <s.icon size={16} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-slate-700 font-medium leading-tight truncate">{s.title}</p>
-              </div>
-              <span className="text-xs font-semibold text-slate-400">{s.time}</span>
-            </div>
-          ))}
+          <FeatureCard
+            icon={ImageIcon}
+            titleEn="MABOKKAN"
+            titleTh="เรื่องราวจากทุกคน"
+            hue="from-fuchsia-500 to-pink-500"
+            onClick={() => onNavigate("mabokkan")}
+          />
+
+          <FeatureCard
+            icon={Compass}
+            titleEn="Explore Map"
+            titleTh="แผนที่กิจกรรม"
+            hue="from-emerald-500 to-teal-500"
+            onClick={() => onNavigate("exploreMap")}
+          />
+
+          <FeatureCard
+            icon={MessageCircle}
+            titleEn="POONPOON AI"
+            titleTh="ถาม POONPOON"
+            hue="from-amber-500 to-orange-500"
+            onClick={() => onNavigate("ai")}
+          />
         </div>
+
+        {/* ================= NEARBY ================= */}
+        <div className="mt-6">
+          <div className="px-5 mb-3">
+            <h2 className="text-[15px] font-extrabold text-slate-800">
+              กิจกรรมใกล้คุณ
+            </h2>
+          </div>
+
+          <div className="flex gap-3 px-5 overflow-x-auto pb-2">
+            <ActivityCard
+              title="RelaxKAN"
+              subtitle="Wellness & Recovery"
+              hue="from-teal-400 to-cyan-300"
+              icon={Waves}
+              onClick={() => onOpenMarker("relaxkan")}
+            />
+
+            <ActivityCard
+              title="SUP Experience"
+              subtitle="Outdoor Activity"
+              hue="from-blue-400 to-indigo-300"
+              icon={Navigation}
+              onClick={() => onOpenMarker("sup")}
+            />
+
+            <ActivityCard
+              title="อร่อยเมืองกาญ"
+              subtitle="Local Food"
+              hue="from-orange-400 to-amber-300"
+              icon={UtensilsCrossed}
+              onClick={onOpenFoodList}
+            />
+          </div>
+        </div>
+
+        {/* ================= TODAY SCHEDULE ================= */}
+        <div className="mt-6 px-5">
+          <h2 className="text-[15px] font-extrabold text-slate-800 mb-3">
+            วันนี้ในงาน
+          </h2>
+
+          <div className="bg-white rounded-2xl border border-slate-100 shadow-sm divide-y divide-slate-100">
+            {SCHEDULE.map((s) => (
+              <div
+                key={s.time}
+                className="flex items-center gap-3 px-4 py-3"
+              >
+                <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                  <s.icon size={16} />
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm text-slate-700 font-medium leading-tight">
+                    {s.title}
+                  </p>
+                </div>
+
+                <span className="text-xs font-semibold text-slate-400 shrink-0">
+                  {s.time}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </div>
   );
 }
-
 /* ============================================================
    ANOTHER LENS
    ============================================================ */
