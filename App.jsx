@@ -2455,7 +2455,7 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
   title="RelaxKAN"
   subtitle="Wellness & Recovery"
   image={relaxkanLogo}
-  onClick={() => onOpenMarker("relaxkan")}
+  onClick={() => onOpenMarker("relaxkan-1")}
 />
 
 <ActivityCard
@@ -3135,7 +3135,7 @@ function MarkerSheet({ marker, onClose, onOpenRestaurant, onOpenFoodList, savedI
     );
   }
 
-  if (marker.id === "relaxkan") {
+  if (marker.type === "relaxkan") {
     return (
       <BottomSheet open={!!marker} onClose={onClose} title="RelaxKAN">
         <ImagePlaceholder hue="from-teal-400 to-cyan-300" icon={Waves} className="w-full h-32 mb-3" />
