@@ -1232,11 +1232,11 @@ function RegisterForm({ type, onBack, onDone }) {
               transition-transform
               relative
             "
-            style={{
-              backgroundImage: `url(${item.backgroundImage})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+style={{
+  backgroundImage: `url(${item.backgroundImage})`,
+  backgroundSize: "125% auto",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
             }}
           >
             {/* overlay */}
