@@ -3308,33 +3308,6 @@ function HomeScreen({
     </div>
   </button>
 </div>
-{/* ================= SHARE TO CHANCE ================= */}
-<div className="px-5 mt-5">
-  <div
-    className="
-      w-full
-      rounded-[20px]
-      overflow-hidden
-      shadow-sm
-      border
-      border-slate-100
-      bg-white
-    "
-  >
-    <img
-      src={shareToChance}
-      alt="Share to Chance"
-      className="
-        w-full
-        h-auto
-        block
-        object-cover
-      "
-    />
-  </div>
-</div>
-
-
 {/* ================= RECYCLED FINISHER SHIRT ================= */}
 <div className="px-5 mt-4">
   <div
