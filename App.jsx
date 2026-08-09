@@ -2700,6 +2700,13 @@ const markers =
   const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 });
 
   const mapAreaRef = useRef(null);
+  const filterBarRef = useRef(null);
+
+useEffect(() => {
+  if (filterBarRef.current) {
+    filterBarRef.current.scrollLeft = 0;
+  }
+}, []);
 
   const pointersRef = useRef(new Map());
 
@@ -2836,7 +2843,10 @@ const markers =
       />
 
       {/* ================= FILTER ================= */}
-      <div className="flex gap-2 px-5 pb-3 overflow-x-auto">
+      <div
+  ref={filterBarRef}
+  className="flex gap-2 px-5 pb-3 overflow-x-auto"
+>
         {MAP_FILTERS.map((f) => (
           <button
             key={f.id}
