@@ -1068,35 +1068,37 @@ function RegisterForm({ type, onBack, onDone }) {
   const [step, setStep] = useState("select");
 
   const isLogin = type === "login";
-
   const packages = {
-    "3.5 KM Freedom": {
-      short: "3.5 KM",
-      route: "FREEDOM ROUTE",
-      price: 700,
-      image: package35,
-      gradient:
-        "linear-gradient(135deg,#008C8C 0%,#50C7A5 45%,#F4C542 100%)",
-    },
+  "3.5 KM Freedom": {
+    short: "3.5 KM",
+    route: "FREEDOM ROUTE",
+    price: 700,
+    image: package35,
+    backgroundImage: race35bg,
+    gradient:
+      "linear-gradient(135deg,#008C8C 0%,#50C7A5 45%,#F4C542 100%)",
+  },
 
-    "5 KM City": {
-      short: "5 KM",
-      route: "CITY ROUTE",
-      price: 900,
-      image: package5,
-      gradient:
-        "linear-gradient(135deg,#F04418 0%,#FF7A1A 52%,#FFC83D 100%)",
-    },
+  "5 KM City": {
+    short: "5 KM",
+    route: "CITY ROUTE",
+    price: 900,
+    image: package5,
+    backgroundImage: race5bg,
+    gradient:
+      "linear-gradient(135deg,#F04418 0%,#FF7A1A 52%,#FFC83D 100%)",
+  },
 
-    "10 KM Heritage": {
-      short: "10 KM",
-      route: "HERITAGE ROUTE",
-      price: 1200,
-      image: package10,
-      gradient:
-        "linear-gradient(135deg,#0B3A82 0%,#1D63C9 52%,#58CBB7 100%)",
-    },
-  };
+  "10 KM Heritage": {
+    short: "10 KM",
+    route: "HERITAGE ROUTE",
+    price: 1200,
+    image: package10,
+    backgroundImage: race10bg,
+    gradient:
+      "linear-gradient(135deg,#0B3A82 0%,#1D63C9 52%,#58CBB7 100%)",
+  },
+};
 
   const currentPackage = packages[selectedDistance];
 
@@ -1231,7 +1233,12 @@ function RegisterForm({ type, onBack, onDone }) {
             >
               <div
                 className="p-5 text-white"
-                style={{ background: item.gradient }}
+                style={{
+  backgroundImage: `linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18)), url(${item.backgroundImage})`,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
+  backgroundRepeat: "no-repeat",
+}}
               >
                 <p className="text-[10px] font-bold text-white/75">
                   RACE PACKAGE
