@@ -332,21 +332,206 @@ const FOOD_FILTERS = [
 ];
 
 const MAP_MARKERS = [
-  { id: "relaxkan", name: "RelaxKAN", type: "wellness", icon: Waves, x: 38, y: 30 },
-  { id: "sup", name: "SUP Experience", type: "activity", icon: Navigation, x: 62, y: 22 },
-  { id: "stage", name: "Main Stage", type: "activity", icon: PartyPopper, x: 50, y: 50 },
-  { id: "medical", name: "Medical", type: "service", icon: ShieldPlus, x: 30, y: 55 },
-  { id: "toilet", name: "Toilet", type: "service", icon: DoorOpen, x: 70, y: 55 },
-  { id: "shuttle", name: "Shuttle", type: "service", icon: Bus, x: 15, y: 75 },
-  { id: "info", name: "Information", type: "service", icon: Info, x: 85, y: 30 },
-  ...RESTAURANTS.map((r) => ({ id: `food-${r.id}`, name: r.name, type: "food", icon: UtensilsCrossed, x: r.x, y: r.y, restaurant: r })),
+
+  // =====================================================
+  // RELAXKAN
+  // กิจกรรม Wellness กระจายตามแนวแม่น้ำ
+  // =====================================================
+
+  {
+    id: "relaxkan-1",
+    name: "RelaxKAN · Wellness",
+    subtitle: "Wellness Activity",
+    type: "relaxkan",
+    logo: relaxkanLogo,
+    x: 37,
+    y: 25,
+  },
+
+  {
+    id: "relaxkan-2",
+    name: "RelaxKAN · Massage",
+    subtitle: "Massage & Recovery",
+    type: "relaxkan",
+    logo: relaxkanLogo,
+    x: 34,
+    y: 34,
+  },
+
+  {
+    id: "relaxkan-3",
+    name: "RelaxKAN · Ice Bath",
+    subtitle: "Ice Bath & Recovery",
+    type: "relaxkan",
+    logo: relaxkanLogo,
+    x: 39,
+    y: 44,
+  },
+
+  {
+    id: "relaxkan-4",
+    name: "RelaxKAN · Sound Healing",
+    subtitle: "Sound Healing Session",
+    type: "relaxkan",
+    logo: relaxkanLogo,
+    x: 43,
+    y: 55,
+  },
+
+  {
+    id: "relaxkan-5",
+    name: "RelaxKAN · Yoga",
+    subtitle: "Yoga by the River",
+    type: "relaxkan",
+    logo: relaxkanLogo,
+    x: 46,
+    y: 65,
+  },
+
+  {
+    id: "relaxkan-6",
+    name: "RelaxKAN · Wellness Resort",
+    subtitle: "Wellness Activity",
+    type: "relaxkan",
+    logo: relaxkanLogo,
+    x: 50,
+    y: 73,
+  },
+
+
+  // =====================================================
+  // SUP EXPERIENCE
+  // เหลือจุดเดียว ใกล้สะพานข้ามแม่น้ำแคว
+  // =====================================================
+
+  {
+    id: "sup",
+    name: "SUP Experience",
+    subtitle: "River Kwai SUP Activity",
+    type: "sup",
+    logo: supLogo,
+    x: 43,
+    y: 29,
+  },
+
+
+  // =====================================================
+  // SERVICE
+  // จุดบริการใน Prototype
+  // =====================================================
+
+  {
+    id: "medical",
+    name: "Medical",
+    type: "service",
+    icon: ShieldPlus,
+    x: 30,
+    y: 55,
+  },
+
+  {
+    id: "toilet",
+    name: "Toilet",
+    type: "service",
+    icon: DoorOpen,
+    x: 70,
+    y: 55,
+  },
+
+  {
+    id: "shuttle",
+    name: "Shuttle",
+    type: "service",
+    icon: Bus,
+    x: 15,
+    y: 75,
+  },
+
+  {
+    id: "info",
+    name: "Information",
+    type: "service",
+    icon: Info,
+    x: 85,
+    y: 30,
+  },
+
+
+  // =====================================================
+  // GAS / EV SERVICE
+  // จุดนี้เป็นตำแหน่งสำหรับ Prototype
+  // =====================================================
+
+  {
+    id: "gas-1",
+    name: "Gas Station",
+    subtitle: "สถานีบริการน้ำมัน",
+    type: "service",
+    serviceType: "gas",
+    icon: MapPin,
+    x: 76,
+    y: 39,
+  },
+
+  {
+    id: "gas-2",
+    name: "Gas Station",
+    subtitle: "สถานีบริการน้ำมัน",
+    type: "service",
+    serviceType: "gas",
+    icon: MapPin,
+    x: 72,
+    y: 69,
+  },
+
+  {
+    id: "ev-1",
+    name: "EV Charging Station",
+    subtitle: "สถานีชาร์จรถยนต์ไฟฟ้า",
+    type: "service",
+    serviceType: "ev",
+    icon: Sparkles,
+    x: 78,
+    y: 48,
+  },
+
+  {
+    id: "ev-2",
+    name: "EV Charging Station",
+    subtitle: "สถานีชาร์จรถยนต์ไฟฟ้า",
+    type: "service",
+    serviceType: "ev",
+    icon: Sparkles,
+    x: 68,
+    y: 77,
+  },
+
+
+  // =====================================================
+  // อร่อยเมืองกาญ
+  // ใช้ตำแหน่งร้านเดิมทั้งหมด — ไม่ย้าย
+  // =====================================================
+
+  ...RESTAURANTS.map((r) => ({
+    id: `food-${r.id}`,
+    name: r.name,
+    type: "food",
+
+    // ใช้ logo อร่อยเมืองกาญ
+    logo: aroikanLogo,
+
+    // ใช้พิกัดเดิมของร้าน
+    x: r.x,
+    y: r.y,
+
+    restaurant: r,
+  })),
 ];
 
 const MAP_FILTERS = [
-  { id: "all", label: "ทั้งหมด" },
-  { id: "wellness", label: "Wellness" },
-  { id: "activity", label: "Activity" },
-  { id: "food", label: "Food" },
+  { id: "relaxkan", label: "RelaxKAN" },
+  { id: "food", label: "อร่อยเมืองกาญ" },
+  { id: "sup", label: "SUP Experience" },
   { id: "service", label: "Service" },
 ];
 
