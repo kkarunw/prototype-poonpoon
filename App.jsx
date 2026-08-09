@@ -1317,6 +1317,9 @@ function NavigationBar({ screen, onNavigate }) {
 /* ============================================================
 LANDING SCREEN
 ============================================================ */
+/* ============================================================
+LANDING SCREEN
+============================================================ */
 function LandingScreen({
   onRegisterRace,
   onAboutEvent,
@@ -1335,31 +1338,47 @@ function LandingScreen({
       }}
     >
       {/* ================= LOGO ================= */}
-      <div className="relative z-20 w-full flex justify-center pt-3">
+      <div className="w-full flex justify-center pt-3 shrink-0">
         <img
           src={poonpoonLogo}
           alt="POONPOON Kanchanaburi"
           className="object-contain"
           style={{
-            width: "250px",
-            height: "72px",
+            width: "230px",
+            height: "70px",
           }}
         />
       </div>
 
       {/* ================= MASCOT ================= */}
       <div className="relative flex-1 min-h-0 overflow-visible">
-        <div className="absolute w-60 h-60 rounded-full bg-white/20 blur-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+        <div
+          className="
+            absolute
+            w-60 h-60
+            rounded-full
+            bg-white/20
+            blur-3xl
+            left-1/2 top-1/2
+            -translate-x-1/2 -translate-y-1/2
+          "
+        />
 
         <PoonpoonMascot
-          size={620}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+          size={520}
+          className="
+            absolute
+            left-1/2 top-1/2
+            -translate-x-1/2 -translate-y-1/2
+            max-w-none
+          "
         />
       </div>
 
-      {/* ================= CTA AREA ================= */}
+      {/* ================= BOTTOM AREA ================= */}
       <div className="relative z-20 px-5 pb-6 shrink-0">
-        {/* ABOUT EVENT */}
+
+        {/* ================= ABOUT EVENT BUTTON ================= */}
         <button
           type="button"
           onClick={onAboutEvent}
@@ -1380,6 +1399,8 @@ function LandingScreen({
           }}
         >
           <div className="flex items-center gap-3">
+
+            {/* ICON */}
             <div
               className="
                 w-12 h-12
@@ -1393,6 +1414,7 @@ function LandingScreen({
               <Info size={25} strokeWidth={2.3} />
             </div>
 
+            {/* TEXT */}
             <div className="flex-1 min-w-0">
               <span className="text-[11px] font-bold text-cyan-100">
                 ตลอดกาญ(น.)
@@ -1407,6 +1429,7 @@ function LandingScreen({
               </p>
             </div>
 
+            {/* ARROW */}
             <div
               className="
                 w-9 h-9
@@ -1422,12 +1445,15 @@ function LandingScreen({
           </div>
         </button>
 
+        {/* ================= TAGLINE ================= */}
         <p className="text-center text-[11px] text-blue-900/70 font-medium mt-2 mb-3">
           จากสงคราม สู่สันติภาพ และอิสรภาพ
         </p>
 
-        {/* BUTTONS */}
+        {/* ================= BUTTONS ================= */}
         <div className="grid grid-cols-2 gap-3">
+
+          {/* REGISTER */}
           <button
             type="button"
             onClick={onRegisterRace}
@@ -1450,6 +1476,7 @@ function LandingScreen({
             🏃 สมัครวิ่ง
           </button>
 
+          {/* LOGIN */}
           <button
             type="button"
             onClick={onLogin}
@@ -1472,33 +1499,43 @@ function LandingScreen({
         </div>
       </div>
 
-      {/* ================= POSTER MODAL ================= */}
+      {/* ================= REGISTER POSTER ================= */}
       {showPoster && (
         <div className="absolute inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
           <div className="relative w-full max-w-[360px]">
+
             <img
               src={posterRegister}
               alt="Run for Peace Run for Freedom"
-              className="w-full max-h-[85dvh] object-contain rounded-2xl shadow-2xl"
+              className="
+                w-full
+                max-h-[85dvh]
+                object-contain
+                rounded-2xl
+                shadow-2xl
+              "
             />
 
             <button
               type="button"
               onClick={() => setShowPoster(false)}
               className="
-                absolute -top-3 -right-3
+                absolute
+                -top-3 -right-3
                 w-10 h-10
                 rounded-full
                 bg-white
                 text-slate-800
                 shadow-lg
-                flex items-center justify-center
+                flex items-center
+                justify-center
                 active:scale-95
               "
               aria-label="ปิดโปสเตอร์"
             >
               <X size={22} />
             </button>
+
           </div>
         </div>
       )}
@@ -3859,27 +3896,26 @@ export default function App() {
         <Toast message={toast} />
 
         {screen === "landing" && (
-          <LandingScreen
-  showPoster={showPoster}
-  setShowPoster={setShowPoster}
+  <LandingScreen
+    showPoster={showPoster}
+    setShowPoster={setShowPoster}
 
-  onRegisterRace={() => {
-    setShowPoster(false);
-    setScreen("registerRace");
-  }}
+    onRegisterRace={() => {
+      setShowPoster(false);
+      setScreen("registerRace");
+    }}
 
-  onAsk={() => {
-    setShowPoster(false);
-    setAiFromLanding(true);
-    setScreen("ai");
-  }}
+    onAboutEvent={() => {
+      setShowPoster(false);
+      setScreen("home");
+    }}
 
-  onLogin={() => {
-    setShowPoster(false);
-    setScreen("login");
-  }}
-/>
-        )}
+    onLogin={() => {
+      setShowPoster(false);
+      setScreen("login");
+    }}
+  />
+)}
 
         {screen === "registerRace" && <RegisterForm type="race" onBack={() => setScreen("landing")} onDone={() => navigate("home")} />}
         {screen === "login" && <RegisterForm type="login" onBack={() => setScreen("landing")} onDone={() => navigate("home")} />}
