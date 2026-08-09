@@ -21,6 +21,7 @@ import race10bg from "./race10bg.png";
 import aroikanLogo from "./aroikan.png";
 import relaxkanLogo from "./relaxkan.png";
 import supLogo from "./sup-experience.png";
+import shareToChance from "./sharetochance.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -2441,7 +2442,26 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
             onClick={() => onNavigate("ai")}
           />
         </div>
-
+{/* ================= SHARE TO CHANCE ================= */}
+<div className="px-5 mt-4">
+  <div
+    className="
+      w-full
+      rounded-[22px]
+      overflow-hidden
+      bg-white
+      shadow-sm
+      border border-slate-100
+    "
+  >
+    <img
+  src={shareToChance}
+  alt="Share to Chance"
+  className="w-full h-[112px] object-cover block"
+  draggable={false}
+/>
+  </div>
+</div>
         {/* ================= NEARBY ================= */}
         <div className="mt-6">
           <div className="px-5 mb-3">
