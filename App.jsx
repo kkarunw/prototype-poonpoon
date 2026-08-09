@@ -11,6 +11,7 @@ import poonpoonHero from "./poonpoon-hero.png";
 import kanchanaburiMap from "./kanchanaburi-map.png";
 import posterRegister from "./Poster-Rigister.png";
 import poonpoonBackground from "./poonpoon-background.png";
+import poonpoonLogo from "./poonpoon-logo.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -440,12 +441,17 @@ function LandingScreen({
       <div className="absolute inset-0 opacity-[0.08]" style={{
         backgroundImage: "repeating-linear-gradient(115deg, #fff 0px, #fff 2px, transparent 2px, transparent 40px)"
       }} />
-      <div className="relative flex flex-col items-center pt-16 px-6">
-        <h1 className="text-5xl font-extrabold tracking-tight bg-clip-text text-transparent text-center leading-none" style={{ backgroundImage: rainbowText }}>
-          POONPOON
-        </h1>
-        <p className="text-white/90 tracking-[0.35em] text-sm font-semibold mt-2">KANCHANABURI</p>
-      </div>
+      <div className="relative flex flex-col items-center pt-10 px-6 shrink-0">
+  <img
+    src={poonpoonLogo}
+    alt="POONPOON Kanchanaburi"
+    className="object-contain"
+    style={{
+      width: "300px",
+      height: "90px"
+    }}
+  />
+</div>
 
       <div className="relative flex-1 min-h-0 overflow-visible">
         <div className="absolute w-56 h-56 rounded-full bg-white/10 blur-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
