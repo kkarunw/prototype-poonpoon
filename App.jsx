@@ -421,8 +421,8 @@ function NavigationBar({ screen, onNavigate }) {
 }
 
 /* ============================================================
-   LANDING SCREEN
-   ============================================================ */
+LANDING SCREEN
+============================================================ */
 function LandingScreen({
   onRegisterRace,
   onAsk,
@@ -431,84 +431,172 @@ function LandingScreen({
   setShowPoster
 }) {
   return (
-    <div className="h-full w-full flex flex-col justify-between relative overflow-hidden" style={{
-    backgroundImage: `url(${poonpoonBackground})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  }}
->
-      <div className="relative flex flex-col items-center pt-10 px-6 shrink-0">
-  <img
-    src={poonpoonLogo}
-    alt="POONPOON Kanchanaburi"
-    className="object-contain"
-    style={{
-      width: "300px",
-      height: "90px"
-    }}
-  />
-</div>
-
-      <div className="relative flex-1 min-h-0 overflow-visible">
-        <div className="absolute w-56 h-56 rounded-full bg-white/10 blur-2xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-        <PoonpoonMascot
-        size={800}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
-      />
+    <div
+      className="h-full w-full flex flex-col relative overflow-hidden"
+      style={{
+        backgroundImage: `url(${poonpoonBackground})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* ================= LOGO ================= */}
+      <div className="relative z-10 flex justify-center pt-6 px-6 shrink-0">
+        <img
+          src={poonpoonLogo}
+          alt="POONPOON Kanchanaburi"
+          className="object-contain"
+          style={{
+            width: "290px",
+            height: "82px",
+          }}
+        />
       </div>
 
-      <div className="relative px-6 pb-8 space-y-3">
-        <div className="flex gap-3">
+      {/* ================= MASCOT ================= */}
+      <div className="relative flex-1 min-h-0 overflow-visible">
+        <div className="absolute w-60 h-60 rounded-full bg-white/20 blur-3xl left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+
+        <PoonpoonMascot
+          size={720}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+        />
+      </div>
+
+      {/* ================= CTA AREA ================= */}
+      <div className="relative z-20 px-5 pb-6 shrink-0">
+
+        {/* MAIN AI CTA */}
+        <button
+          onClick={onAsk}
+          className="
+            w-full
+            rounded-[22px]
+            px-5 py-4
+            text-left
+            text-white
+            shadow-xl
+            active:scale-[0.98]
+            transition-transform
+            border border-white/40
+          "
+          style={{
+            background:
+              "linear-gradient(110deg,#123E8C 0%,#1D63C9 48%,#2FB6D9 100%)",
+          }}
+        >
+          <div className="flex items-center gap-3">
+            {/* Icon */}
+            <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
+              <MessageCircle size={25} strokeWidth={2.3} />
+            </div>
+
+            {/* Text */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] font-bold text-cyan-100">
+                  ✨ POONPOON AI
+                </span>
+              </div>
+
+              <p className="font-extrabold text-[17px] leading-tight mt-0.5">
+                ถาม POONPOON เกี่ยวกับงาน
+              </p>
+
+              <p className="text-[11px] text-white/80 mt-1">
+                กิจกรรม • ร้านอาหาร • เส้นทาง • ตารางงาน
+              </p>
+            </div>
+
+            <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+              <ArrowRight size={18} />
+            </div>
+          </div>
+        </button>
+
+        {/* Hint */}
+        <p className="text-center text-[11px] text-blue-900/70 font-medium mt-2 mb-3">
+          ลองถาม เช่น “วันนี้มีอะไรน่าสนใจบ้าง?”
+        </p>
+
+        {/* SECONDARY BUTTONS */}
+        <div className="grid grid-cols-2 gap-3">
+          {/* REGISTER */}
           <button
             onClick={onRegisterRace}
-            className="flex-1 py-3.5 rounded-full font-bold text-sm text-blue-900 shadow-lg active:scale-[0.97] transition-transform"
-            style={{ background: "linear-gradient(180deg,#FFDE7A,#F5A623)" }}
+            className="
+              py-3.5
+              rounded-full
+              font-bold
+              text-sm
+              text-blue-900
+              shadow-lg
+              border-2 border-white
+              active:scale-[0.97]
+              transition-transform
+            "
+            style={{
+              background:
+                "linear-gradient(180deg,#FFE273 0%,#FFAE1A 100%)",
+            }}
           >
-            สมัครวิ่ง
+            🏃 สมัครวิ่ง
           </button>
+
+          {/* LOGIN */}
           <button
-            onClick={onAsk}
-            className="flex-1 py-3.5 rounded-full font-bold text-sm text-white border-2 border-white/70 active:scale-[0.97] transition-transform backdrop-blur-sm bg-white/10"
+            onClick={onLogin}
+            className="
+              py-3.5
+              rounded-full
+              font-bold
+              text-sm
+              text-blue-700
+              bg-white/90
+              border-2 border-white
+              shadow-lg
+              active:scale-[0.97]
+              transition-transform
+              backdrop-blur-sm
+            "
           >
-            สอบถามข้อมูล
+            เข้าสู่ระบบ
           </button>
         </div>
-        <button
-          onClick={onLogin}
-          className="w-full py-3.5 rounded-full font-bold text-sm text-white shadow-lg active:scale-[0.97] transition-transform"
-          style={{ background: "linear-gradient(90deg,#1D63C9,#2FB6D9)" }}
-        >
-          เข้าสู่ระบบ
-        </button>
       </div>
-     {/* Poster Popup */}
-  {showPoster && (
-    <div className="absolute inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
-      <div className="relative w-full max-w-[360px]">
-        
-        <img
-          src={posterRegister}
-          alt="Run for Peace Run for Freedom"
-          className="w-full max-h-[85dvh] object-contain rounded-2xl shadow-2xl"
-        />
 
-        <button
-          onClick={() => setShowPoster(false)}
-          className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-white text-slate-800 shadow-lg flex items-center justify-center active:scale-95"
-          aria-label="ปิดโปสเตอร์"
-        >
-          <X size={22} />
-        </button>
+      {/* ================= POSTER POPUP ================= */}
+      {showPoster && (
+        <div className="absolute inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-[360px]">
+            <img
+              src={posterRegister}
+              alt="Run for Peace Run for Freedom"
+              className="w-full max-h-[85dvh] object-contain rounded-2xl shadow-2xl"
+            />
 
-      </div>
+            <button
+              onClick={() => setShowPoster(false)}
+              className="
+                absolute -top-3 -right-3
+                w-10 h-10
+                rounded-full
+                bg-white
+                text-slate-800
+                shadow-lg
+                flex items-center justify-center
+                active:scale-95
+              "
+              aria-label="ปิดโปสเตอร์"
+            >
+              <X size={22} />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
-  )}
-
-</div>
-);
+  );
 }
-
 /* ============================================================
    REGISTRATION FORMS (mock)
    ============================================================ */
