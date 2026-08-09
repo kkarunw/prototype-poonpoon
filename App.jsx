@@ -27,6 +27,17 @@ import anotherLensMenu from "./Anotherlens.png";
 import exploreMapMenu from "./Exploremap.png";
 import mabokkanMenu from "./Mabokkan.png";
 import poonpoonAIMenu from "./PoonpoonAIMENU.png";
+import freedom1 from "./freedom1.png";
+import freedom2 from "./freedom2.png";
+
+import nature1 from "./nature1.png";
+import nature2 from "./nature2.png";
+
+import people1 from "./people1.png";
+import people2 from "./people2.png";
+
+import sky1 from "./sky1.jpg";
+import sky2 from "./sky2.jpg";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -90,14 +101,89 @@ const MISSIONS = [
 ];
 
 const INITIAL_GALLERY = [
-  { id: 1, caption: "วันนี้ฟ้าเหนือแม่น้ำแควสงบกว่าที่คิด", name: "มิว", location: "สะพานข้ามแม่น้ำแคว", tag: "AnotherLens01", category: "ท้องฟ้า", hue: "from-blue-400 to-cyan-300" },
-  { id: 2, caption: "รอยยิ้มของลุงขายของริมทาง ทำให้เช้านี้อบอุ่นขึ้นเยอะ", name: "Anonymous", location: "ตลาดริมน้ำกาญจนบุรี", tag: "AnotherLens02", category: "ผู้คน", hue: "from-amber-400 to-orange-300" },
-  { id: 3, caption: "สีเขียวของนาข้าวสดใสมากตอนเช้า", name: "แนน", location: "ทุ่งนาแม่น้ำแคว", tag: "AnotherLens03", category: "ธรรมชาติ", hue: "from-emerald-400 to-lime-300" },
-  { id: 4, caption: "อิสระคือการวิ่งโดยไม่มองนาฬิกา", name: "ต้น", location: "เส้นทางวิ่งริมเขื่อน", tag: "AnotherLens04", category: "Freedom", hue: "from-fuchsia-400 to-pink-300" },
-  { id: 5, caption: "เมฆลอยผ่านภูเขาเหมือนฉากในหนัง", name: "พลอย", location: "จุดชมวิวเขาแหลม", tag: "AnotherLens01", category: "ท้องฟ้า", hue: "from-sky-400 to-indigo-300" },
-  { id: 6, caption: "เด็ก ๆ วิ่งเล่นข้างสนามด้วยรอยยิ้มไม่หยุด", name: "Anonymous", location: "ลานกิจกรรมหลัก", tag: "AnotherLens02", category: "ผู้คน", hue: "from-rose-400 to-red-300" },
-  { id: 7, caption: "หมอกยามเช้าคลุมแม่น้ำแควบางเบาแบบพอดี", name: "เจได", location: "ริมแม่น้ำแคว", tag: "AnotherLens03", category: "ธรรมชาติ", hue: "from-teal-400 to-emerald-300" },
-  { id: 8, caption: "ปล่อยให้ลมพัดผ่านแล้วก็แค่รู้สึก", name: "มายด์", location: "จุดสตาร์ท 10K", tag: "AnotherLens04", category: "Freedom", hue: "from-yellow-400 to-amber-300" },
+  {
+    id: 1,
+    caption: "วันนี้ฟ้าเหนือแม่น้ำแควสงบกว่าที่คิด",
+    name: "มิว",
+    location: "สะพานข้ามแม่น้ำแคว",
+    tag: "AnotherLens01",
+    category: "ท้องฟ้า",
+    photo: sky1,
+    hue: "from-blue-400 to-cyan-300",
+  },
+  {
+    id: 2,
+    caption: "เมฆลอยผ่านภูเขาเหมือนฉากในหนัง",
+    name: "พลอย",
+    location: "จุดชมวิวกาญจนบุรี",
+    tag: "AnotherLens01",
+    category: "ท้องฟ้า",
+    photo: sky2,
+    hue: "from-sky-400 to-indigo-300",
+  },
+
+  {
+    id: 3,
+    caption: "รอยยิ้มของผู้คนระหว่างทาง ทำให้วันนี้อบอุ่นขึ้น",
+    name: "Anonymous",
+    location: "เมืองกาญจนบุรี",
+    tag: "AnotherLens02",
+    category: "ผู้คน",
+    photo: people1,
+    hue: "from-amber-400 to-orange-300",
+  },
+  {
+    id: 4,
+    caption: "อีกหนึ่งช่วงเวลาของผู้คนที่ได้พบระหว่างทาง",
+    name: "เจ",
+    location: "พื้นที่กิจกรรม",
+    tag: "AnotherLens02",
+    category: "ผู้คน",
+    photo: people2,
+    hue: "from-rose-400 to-red-300",
+  },
+
+  {
+    id: 5,
+    caption: "สีเขียวของธรรมชาติเมืองกาญวันนี้สดใสมาก",
+    name: "แนน",
+    location: "กาญจนบุรี",
+    tag: "AnotherLens03",
+    category: "ธรรมชาติ",
+    photo: nature1,
+    hue: "from-emerald-400 to-lime-300",
+  },
+  {
+    id: 6,
+    caption: "ธรรมชาติระหว่างทางทำให้รู้สึกอยากหยุดมองนานกว่านี้",
+    name: "Anonymous",
+    location: "กาญจนบุรี",
+    tag: "AnotherLens03",
+    category: "ธรรมชาติ",
+    photo: nature2,
+    hue: "from-teal-400 to-emerald-300",
+  },
+
+  {
+    id: 7,
+    caption: "อิสระคือการได้ออกไปในเส้นทางของตัวเอง",
+    name: "ต้น",
+    location: "เส้นทางวิ่ง",
+    tag: "AnotherLens04",
+    category: "Freedom",
+    photo: freedom1,
+    hue: "from-fuchsia-400 to-pink-300",
+  },
+  {
+    id: 8,
+    caption: "Freedom ในวันนี้ คือการได้ปล่อยตัวเองไปกับช่วงเวลา",
+    name: "มายด์",
+    location: "กาญจนบุรี",
+    tag: "AnotherLens04",
+    category: "Freedom",
+    photo: freedom2,
+    hue: "from-yellow-400 to-amber-300",
+  },
 ];
 
 const GALLERY_FILTERS = [
@@ -1272,10 +1358,28 @@ function MissionCard({ mission, onClick }) {
 
 function GalleryCard({ post, onClick }) {
   return (
-    <button onClick={() => onClick(post)} className="text-left active:scale-[0.97] transition-transform">
-      <ImagePlaceholder hue={post.hue} icon={ImageIcon} className="w-full aspect-[3/4]" />
-      <p className="text-[11px] font-medium text-slate-700 mt-1.5 leading-snug line-clamp-2">{post.caption}</p>
-      <p className="text-[10px] text-slate-400 mt-0.5">{post.name === "Anonymous" ? "Anonymous" : post.name} · 📍{post.location}</p>
+    <button
+      type="button"
+      onClick={() => onClick(post)}
+      className="text-left active:scale-[0.97] transition-transform"
+    >
+      <ImagePlaceholder
+        src={post.photo}
+        hue={post.hue}
+        icon={ImageIcon}
+        className="w-full aspect-[4/5]"
+        rounded="rounded-[20px]"
+      />
+
+      <p className="text-[11px] font-semibold text-slate-700 leading-snug mt-2 line-clamp-2">
+        {post.caption}
+      </p>
+
+      <p className="text-[9px] text-slate-400 mt-1 leading-snug">
+        {post.name === "Anonymous" ? "Anonymous" : post.name}
+        {" · "}
+        📍 {post.location}
+      </p>
     </button>
   );
 }
