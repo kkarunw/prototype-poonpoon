@@ -1100,9 +1100,7 @@ function RegisterForm({ type, onBack, onDone }) {
 
   const currentPackage = packages[selectedDistance];
 
-  /* =========================
-     LOGIN
-  ========================= */
+  /* ================= LOGIN ================= */
   if (isLogin) {
     if (submitted) {
       return (
@@ -1110,7 +1108,7 @@ function RegisterForm({ type, onBack, onDone }) {
           className="h-full flex flex-col items-center justify-center px-8 text-center text-white"
           style={{ background: heroGradient }}
         >
-          <PoonpoonMascot size={180} />
+          <PoonpoonMascot size={170} />
 
           <h2 className="text-2xl font-extrabold mt-4">
             เข้าสู่ระบบสำเร็จ!
@@ -1158,10 +1156,6 @@ function RegisterForm({ type, onBack, onDone }) {
               type="password"
             />
           </div>
-
-          <button className="text-xs font-semibold text-blue-600 mt-4">
-            ลืมรหัสผ่าน?
-          </button>
         </div>
 
         <div className="px-5 pb-7">
@@ -1174,21 +1168,12 @@ function RegisterForm({ type, onBack, onDone }) {
           >
             เข้าสู่ระบบ
           </button>
-
-          <p className="text-center text-xs text-slate-400 mt-3">
-            ยังไม่มีบัญชี?{" "}
-            <span className="text-blue-600 font-semibold">
-              สมัครสมาชิก
-            </span>
-          </p>
         </div>
       </div>
     );
   }
 
-  /* =========================
-     SUCCESS
-  ========================= */
+  /* ================= SUCCESS ================= */
   if (submitted) {
     return (
       <div
@@ -1224,9 +1209,7 @@ function RegisterForm({ type, onBack, onDone }) {
     );
   }
 
-  /* =========================
-     STEP 1 : SELECT DISTANCE
-  ========================= */
+  /* ================= SELECT ================= */
   if (step === "select") {
     return (
       <div className="h-full flex flex-col bg-slate-50">
@@ -1236,75 +1219,55 @@ function RegisterForm({ type, onBack, onDone }) {
           onBack={onBack}
         />
 
-        <div className="flex-1 overflow-y-auto px-5 py-5 pb-8">
-          <div className="space-y-4">
-
-            {Object.entries(packages).map(([key, item]) => (
-              <button
-                key={key}
-                onClick={() => {
-                  setSelectedDistance(key);
-                  setStep("detail");
-                }}
-                className="w-full rounded-[26px] overflow-hidden text-left shadow-md active:scale-[0.98] transition-transform"
+        <div className="flex-1 overflow-y-auto px-5 py-5 pb-8 space-y-4">
+          {Object.entries(packages).map(([key, item]) => (
+            <button
+              key={key}
+              onClick={() => {
+                setSelectedDistance(key);
+                setStep("detail");
+              }}
+              className="w-full rounded-[26px] overflow-hidden text-left shadow-md active:scale-[0.98] transition-transform"
+            >
+              <div
+                className="p-5 text-white"
+                style={{ background: item.gradient }}
               >
-                <div
-                  className="p-5 text-white"
-                  style={{ background: item.gradient }}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-[10px] font-bold text-white/75">
-                        RACE PACKAGE
-                      </p>
+                <p className="text-[10px] font-bold text-white/75">
+                  RACE PACKAGE
+                </p>
 
-                      <h2 className="text-[38px] leading-none font-black mt-2">
-                        {item.short}
-                      </h2>
+                <div className="flex items-end justify-between mt-2">
+                  <div>
+                    <h2 className="text-[38px] font-black leading-none">
+                      {item.short}
+                    </h2>
 
-                      <p className="text-sm font-extrabold mt-1">
-                        {item.route}
-                      </p>
+                    <p className="text-sm font-extrabold mt-2">
+                      {item.route}
+                    </p>
 
-                      <p className="text-[10px] text-white/75 mt-5">
-                        ค่าสมัคร
-                      </p>
+                    <p className="text-[10px] text-white/75 mt-5">
+                      ค่าสมัคร
+                    </p>
 
-                      <p className="text-2xl font-black">
-                        {item.price.toLocaleString()}
-                        <span className="text-xs ml-1 font-semibold">
-                          บาท
-                        </span>
-                      </p>
-                    </div>
-
-                    <div className="w-11 h-11 rounded-full bg-white/15 flex items-center justify-center">
-                      <ChevronRight size={24} />
-                    </div>
+                    <p className="text-2xl font-black">
+                      {item.price.toLocaleString()}
+                      <span className="text-xs ml-1">บาท</span>
+                    </p>
                   </div>
+
+                  <ChevronRight size={26} />
                 </div>
-              </button>
-            ))}
-
-          </div>
-
-          <div className="mt-5 bg-white rounded-2xl border border-slate-100 p-4 text-center shadow-sm">
-            <p className="text-xs font-bold text-slate-700">
-              ทุกระยะได้รับ Race Package
-            </p>
-
-            <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
-              พร้อมสิทธิ์เข้าร่วม Concert • Drone Show • Lighting Show
-            </p>
-          </div>
+              </div>
+            </button>
+          ))}
         </div>
       </div>
     );
   }
 
-  /* =========================
-     STEP 2 : PACKAGE DETAIL
-  ========================= */
+  /* ================= DETAIL ================= */
   if (step === "detail") {
     return (
       <div className="h-full flex flex-col bg-slate-50 relative">
@@ -1315,90 +1278,42 @@ function RegisterForm({ type, onBack, onDone }) {
         />
 
         <div className="flex-1 overflow-y-auto pb-28">
-
-          {/* ภาพ Package จริง */}
-          <div className="px-3 pt-4">
-            <div className="rounded-[24px] overflow-hidden bg-white shadow-md border border-slate-100">
-              <img
-                src={currentPackage.image}
-                alt={`${currentPackage.short} ${currentPackage.route}`}
-                className="w-full h-auto block object-contain"
-              />
-            </div>
-          </div>
-
-          {/* ข้อมูลเล็กด้านล่าง */}
-          <div className="px-5 mt-4">
-            <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] text-slate-400">
-                    ระยะที่เลือก
-                  </p>
-
-                  <p className="text-lg font-black text-slate-800">
-                    {currentPackage.short}
-                  </p>
-
-                  <p className="text-[11px] font-bold text-slate-500">
-                    {currentPackage.route}
-                  </p>
-                </div>
-
-                <div className="text-right">
-                  <p className="text-[10px] text-slate-400">
-                    ค่าสมัคร
-                  </p>
-
-                  <p className="text-xl font-black text-blue-900">
-                    {currentPackage.price.toLocaleString()}
-                    <span className="text-xs ml-1">
-                      บาท
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <img
+            src={currentPackage.image}
+            alt={`${currentPackage.short} ${currentPackage.route}`}
+            className="w-full h-auto block"
+          />
         </div>
 
-        {/* STICKY CTA */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-5 py-4 z-30">
+        <div className="absolute bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-100 px-5 py-4">
           <div className="flex items-center gap-4">
-
-            <div className="shrink-0">
+            <div>
               <p className="text-[10px] text-slate-400">
                 ค่าสมัคร
               </p>
 
               <p className="text-xl font-black text-slate-800">
                 {currentPackage.price.toLocaleString()}
-                <span className="text-xs ml-1 font-medium">
-                  บาท
-                </span>
+                <span className="text-xs ml-1">บาท</span>
               </p>
             </div>
 
             <button
               onClick={() => setStep("confirm")}
-              className="flex-1 py-3.5 rounded-full text-white text-sm font-extrabold shadow-lg active:scale-[0.98] transition-transform"
+              className="flex-1 py-3.5 rounded-full text-white font-extrabold shadow-md"
               style={{
                 background: currentPackage.gradient,
               }}
             >
               สมัครเลย
             </button>
-
           </div>
         </div>
       </div>
     );
   }
 
-  /* =========================
-     STEP 3 : CONFIRM
-  ========================= */
+  /* ================= CONFIRM ================= */
   if (step === "confirm") {
     return (
       <div className="h-full flex flex-col bg-slate-50 relative">
@@ -1409,19 +1324,11 @@ function RegisterForm({ type, onBack, onDone }) {
         />
 
         <div className="flex-1 overflow-y-auto px-5 py-5 pb-28">
-
-          {/* PACKAGE */}
           <div
             className="rounded-[24px] p-5 text-white shadow-md"
-            style={{
-              background: currentPackage.gradient,
-            }}
+            style={{ background: currentPackage.gradient }}
           >
-            <p className="text-[10px] font-bold text-white/75">
-              RACE PACKAGE
-            </p>
-
-            <p className="text-3xl font-black mt-1">
+            <p className="text-3xl font-black">
               {currentPackage.short}
             </p>
 
@@ -1429,94 +1336,53 @@ function RegisterForm({ type, onBack, onDone }) {
               {currentPackage.route}
             </p>
 
-            <div className="mt-4 pt-4 border-t border-white/20 flex justify-between items-end">
-              <span className="text-xs text-white/80">
-                ค่าสมัคร
-              </span>
-
-              <span className="text-2xl font-black">
-                {currentPackage.price.toLocaleString()} บาท
-              </span>
-            </div>
-          </div>
-
-          {/* USER DATA */}
-          <div className="mt-6">
-            <p className="text-xs font-extrabold text-slate-800 mb-3">
-              ข้อมูลผู้สมัคร
+            <p className="text-2xl font-black mt-4">
+              {currentPackage.price.toLocaleString()} บาท
             </p>
-
-            <div className="space-y-3">
-              <Field
-                label="ชื่อ - นามสกุล"
-                placeholder="กรอกชื่อและนามสกุล"
-              />
-
-              <Field
-                label="เบอร์โทรศัพท์"
-                placeholder="08X-XXX-XXXX"
-              />
-
-              <Field
-                label="อีเมล"
-                placeholder="you@email.com"
-                type="email"
-              />
-
-              <Field
-                label="ไซซ์เสื้อ"
-                placeholder="S / M / L / XL"
-              />
-            </div>
           </div>
 
-          {/* PAYMENT */}
-          <div className="mt-6">
-            <p className="text-xs font-extrabold text-slate-800 mb-3">
-              ช่องทางการชำระเงิน
-            </p>
+          <div className="mt-6 space-y-3">
+            <Field
+              label="ชื่อ - นามสกุล"
+              placeholder="กรอกชื่อและนามสกุล"
+            />
 
-            <div className="bg-white rounded-2xl border-2 border-blue-500 p-4 flex items-center gap-3 shadow-sm">
-              <div className="w-11 h-11 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                <QrCode size={22} />
-              </div>
+            <Field
+              label="เบอร์โทรศัพท์"
+              placeholder="08X-XXX-XXXX"
+            />
 
-              <div className="flex-1">
-                <p className="text-sm font-bold text-slate-800">
-                  QR Code / PromptPay
-                </p>
+            <Field
+              label="อีเมล"
+              placeholder="you@email.com"
+              type="email"
+            />
 
-                <p className="text-[10px] text-slate-400 mt-0.5">
-                  ชำระผ่าน Mobile Banking
-                </p>
-              </div>
-
-              <div className="w-5 h-5 rounded-full bg-blue-600 flex items-center justify-center">
-                <Check size={12} className="text-white" />
-              </div>
-            </div>
+            <Field
+              label="ไซซ์เสื้อ"
+              placeholder="S / M / L / XL"
+            />
           </div>
 
-          {/* TOTAL */}
-          <div className="mt-5 bg-blue-50 rounded-2xl p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-bold text-slate-700">
-                ยอดรวม
-              </span>
+          <div className="mt-6 bg-white rounded-2xl border-2 border-blue-500 p-4 flex items-center gap-3">
+            <QrCode size={22} className="text-blue-600" />
 
-              <span className="text-xl font-black text-blue-900">
-                {currentPackage.price.toLocaleString()} บาท
-              </span>
+            <div>
+              <p className="text-sm font-bold text-slate-800">
+                QR Code / PromptPay
+              </p>
+
+              <p className="text-[10px] text-slate-400">
+                ชำระผ่าน Mobile Banking
+              </p>
             </div>
           </div>
-
         </div>
 
-        {/* CONFIRM CTA */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-5 py-4 z-30">
+        <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 px-5 py-4">
           <button
             onClick={() => setSubmitted(true)}
-            className="w-full py-3.5 rounded-full text-white font-extrabold text-sm shadow-lg active:scale-[0.98]"
+            className="w-full py-3.5 rounded-full text-white font-extrabold shadow-md"
             style={{
               background: currentPackage.gradient,
             }}
@@ -1549,13 +1415,6 @@ function Field({ label, placeholder, type = "text" }) {
       />
     </label>
   );
-}
-/* ============================================================
-HOME SCREEN
-============================================================ */
-
-function HomeScreen(...) {
-   ...
 }
 /* ============================================================
 HOME SCREEN
