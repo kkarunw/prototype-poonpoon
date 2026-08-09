@@ -2837,7 +2837,7 @@ useEffect(() => {
     <div className="h-full flex flex-col bg-slate-50">
 
       <ScreenHeader
-        title="Explore Kanchanaburi"
+        title="Explore Kanchanaburi ALL TEST"
         subtitle="ค้นหากิจกรรมและประสบการณ์รอบตัวคุณ"
         onBack={onBack}
       />
