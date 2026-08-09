@@ -2506,13 +2506,27 @@ function Field({ label, placeholder, type = "text" }) {
 /* ============================================================
 HOME SCREEN
 ============================================================ */
-function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
+function HomeScreen({
+  onNavigate,
+  onOpenMarker,
+  onOpenFoodList,
+  onBack,
+}) {
   return (
-    <div className="h-full flex flex-col bg-slate-50 overflow-hidden">
+    <div className="h-full flex flex-col bg-slate-50">
 
-      {/* ================= COMPACT HERO ================= */}
+      {/* ================= HERO ================= */}
       <div
-        className="relative shrink-0 px-5 pt-5 pb-4 text-white rounded-b-[28px] overflow-hidden"
+        className="
+          relative
+          shrink-0
+          px-5
+          pt-5
+          pb-4
+          text-white
+          rounded-b-[28px]
+          overflow-hidden
+        "
         style={{
           background:
             "linear-gradient(145deg,#123E8C 0%,#1D63C9 55%,#2FB6D9 100%)",
@@ -2521,15 +2535,29 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
         {/* BACK */}
         {onBack && (
           <button
+            type="button"
             onClick={onBack}
-            className="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center active:bg-white/20"
+            className="
+              absolute
+              top-4
+              left-4
+              z-20
+              w-8
+              h-8
+              rounded-full
+              bg-white/10
+              flex
+              items-center
+              justify-center
+              active:bg-white/20
+            "
             aria-label="ย้อนกลับ"
           >
-            <ChevronLeft size={19} className="text-white" />
+            <ChevronLeft size={19} />
           </button>
         )}
 
-        {/* GREETING + MASCOT */}
+        {/* GREETING */}
         <div className="flex items-start justify-between pl-8 min-h-[78px]">
           <div className="pt-1">
             <p className="text-[17px] font-extrabold leading-tight">
@@ -2541,19 +2569,41 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
             </p>
           </div>
 
-          {/* เล็กลง และไม่กินพื้นที่ header */}
           <div className="relative w-[88px] h-[78px] shrink-0">
             <PoonpoonMascot
               size={120}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
+              className="
+                absolute
+                left-1/2
+                top-1/2
+                -translate-x-1/2
+                -translate-y-1/2
+                max-w-none
+              "
             />
           </div>
         </div>
 
         {/* SEARCH */}
         <button
+          type="button"
           onClick={() => onNavigate("ai")}
-          className="mt-3 w-full h-[46px] px-4 rounded-2xl bg-white/15 border border-white/25 backdrop-blur-sm flex items-center gap-3 text-left active:bg-white/20"
+          className="
+            mt-3
+            w-full
+            h-[46px]
+            px-4
+            rounded-2xl
+            bg-white/15
+            border
+            border-white/25
+            backdrop-blur-sm
+            flex
+            items-center
+            gap-3
+            text-left
+            active:bg-white/20
+          "
         >
           <Search size={18} className="text-white/90 shrink-0" />
 
@@ -2564,73 +2614,448 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
       </div>
 
       {/* ================= SCROLL CONTENT ================= */}
-      <div className="flex-1 overflow-y-auto pb-24">
+      <div className="flex-1 overflow-y-auto pb-28">
+
         {/* ================= RACE REGISTRATION ================= */}
-<div className="px-5 pt-5">
-  <button
-    onClick={() => onNavigate("registerRace")}
-    className="
-      w-full
-      rounded-[22px]
-      px-5 py-4
-      text-left
-      text-white
-      shadow-md
-      active:scale-[0.98]
-      transition-transform
-      relative
-      overflow-hidden
-    "
-    style={{
-      background:
-        "linear-gradient(110deg,#14B8A6 0%,#2FB6D9 48%,#F4C542 100%)",
-    }}
-  >
-    <div className="flex items-center gap-3">
+        <div className="px-5 mt-5">
+          <button
+            type="button"
+            onClick={() => onNavigate("registerRace")}
+            className="
+              w-full
+              rounded-[24px]
+              px-5
+              py-4
+              text-left
+              text-white
+              shadow-lg
+              active:scale-[0.98]
+              transition-transform
+            "
+            style={{
+              background:
+                "linear-gradient(110deg,#10BFB2 0%,#52C8B0 50%,#F2CA3C 100%)",
+            }}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="
+                  w-11 h-11
+                  rounded-2xl
+                  bg-white/20
+                  flex
+                  items-center
+                  justify-center
+                  shrink-0
+                "
+              >
+                <Flag size={21} />
+              </div>
 
-      <div className="
-        w-11 h-11
-        rounded-2xl
-        bg-white/20
-        flex items-center
-        justify-center
-        shrink-0
-      ">
-        <Flag size={21} />
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-bold text-white/80">
+                  RUN FOR PEACE • RUN FOR FREEDOM
+                </p>
+
+                <p className="text-[16px] font-extrabold leading-tight mt-0.5">
+                  สมัครการแข่งขัน
+                </p>
+
+                <p className="text-[11px] text-white/85 mt-1">
+                  3.5 KM • 5 KM • 10 KM
+                </p>
+              </div>
+
+              <div
+                className="
+                  w-9 h-9
+                  rounded-full
+                  bg-white/20
+                  flex
+                  items-center
+                  justify-center
+                  shrink-0
+                "
+              >
+                <ChevronRight size={19} />
+              </div>
+            </div>
+          </button>
+        </div>
+
+        {/* ================= FEATURE GRID ================= */}
+        <div className="grid grid-cols-2 gap-3 px-5 mt-5">
+
+          {/* ANOTHER LENS */}
+          <button
+            type="button"
+            onClick={() => onNavigate("anotherLens")}
+            className="
+              relative
+              w-full
+              h-[145px]
+              rounded-[22px]
+              overflow-hidden
+              shadow-md
+              active:scale-[0.97]
+              transition-transform
+              text-left
+            "
+          >
+            <img
+              src={anotherLensMenu}
+              alt="Another Lens"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+              }}
+            />
+
+            <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+              <p className="text-[15px] font-extrabold leading-tight">
+                Another Lens
+              </p>
+
+              <p className="text-[10px] font-medium text-white/90 mt-1">
+                ภารกิจมองกาญอีกมุม
+              </p>
+            </div>
+          </button>
+
+          {/* MABOKKAN */}
+          <button
+            type="button"
+            onClick={() => onNavigate("mabokkan")}
+            className="
+              relative
+              w-full
+              h-[145px]
+              rounded-[22px]
+              overflow-hidden
+              shadow-md
+              active:scale-[0.97]
+              transition-transform
+              text-left
+            "
+          >
+            <img
+              src={mabokkanMenu}
+              alt="MABOKKAN"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+              }}
+            />
+
+            <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+              <p className="text-[15px] font-extrabold leading-tight">
+                MABOKKAN
+              </p>
+
+              <p className="text-[10px] font-medium text-white/90 mt-1">
+                เรื่องราวจากทุกคน
+              </p>
+            </div>
+          </button>
+
+          {/* EXPLORE MAP */}
+          <button
+            type="button"
+            onClick={() => onNavigate("exploreMap")}
+            className="
+              relative
+              w-full
+              h-[145px]
+              rounded-[22px]
+              overflow-hidden
+              shadow-md
+              active:scale-[0.97]
+              transition-transform
+              text-left
+            "
+          >
+            <img
+              src={exploreMapMenu}
+              alt="Explore Map"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+              }}
+            />
+
+            <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+              <p className="text-[15px] font-extrabold leading-tight">
+                Explore Map
+              </p>
+
+              <p className="text-[10px] font-medium text-white/90 mt-1">
+                แผนที่กิจกรรม
+              </p>
+            </div>
+          </button>
+
+          {/* POONPOON AI */}
+          <button
+            type="button"
+            onClick={() => onNavigate("ai")}
+            className="
+              relative
+              w-full
+              h-[145px]
+              rounded-[22px]
+              overflow-hidden
+              shadow-md
+              active:scale-[0.97]
+              transition-transform
+              text-left
+            "
+          >
+            <img
+              src={poonpoonAIMenu}
+              alt="POONPOON AI"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent 35%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.68) 100%)",
+              }}
+            />
+
+            <div className="absolute left-4 right-4 bottom-4 z-10 text-white">
+              <p className="text-[15px] font-extrabold leading-tight">
+                POONPOON AI
+              </p>
+
+              <p className="text-[10px] font-medium text-white/90 mt-1">
+                ถาม POONPOON
+              </p>
+            </div>
+          </button>
+        </div>
+
+        {/* ================= SHARE TO CHANCE ================= */}
+        <div className="px-5 mt-5">
+          <div
+            className="
+              w-full
+              rounded-[22px]
+              overflow-hidden
+              bg-white
+              shadow-sm
+              border
+              border-slate-100
+            "
+          >
+            <img
+              src={shareToChance}
+              alt="Share to Chance"
+              className="w-full h-auto block"
+            />
+          </div>
+        </div>
+
+        {/* ================= POONPOON RUN ================= */}
+        <div className="px-5 mt-5">
+          <button
+            type="button"
+            onClick={() => onNavigate("poonpoonRun")}
+            className="
+              w-full
+              rounded-[24px]
+              px-4
+              py-4
+              text-left
+              text-white
+              shadow-lg
+              active:scale-[0.98]
+              transition-transform
+            "
+            style={{
+              background:
+                "linear-gradient(120deg,#123E8C 0%,#1D63C9 50%,#2FB6D9 100%)",
+            }}
+          >
+            <div className="flex items-center gap-3">
+
+              <div
+                className="
+                  relative
+                  w-[64px]
+                  h-[64px]
+                  shrink-0
+                  rounded-2xl
+                  bg-white/15
+                  overflow-hidden
+                "
+              >
+                <PoonpoonMascot
+                  size={92}
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    -translate-x-1/2
+                    -translate-y-1/2
+                    max-w-none
+                  "
+                />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-bold text-cyan-100">
+                  🎮 MINI GAME
+                </p>
+
+                <p className="text-[18px] font-black leading-tight mt-0.5">
+                  POONPOON RUN!
+                </p>
+
+                <p className="text-[11px] text-white/80 mt-1">
+                  วิ่งเก็บสีแห่งอิสรภาพ
+                </p>
+              </div>
+
+              <div
+                className="
+                  w-10
+                  h-10
+                  rounded-full
+                  bg-white/15
+                  flex
+                  items-center
+                  justify-center
+                  shrink-0
+                "
+              >
+                <ChevronRight size={20} />
+              </div>
+
+            </div>
+          </button>
+        </div>
+
+        {/* ================= RECYCLED FINISHER SHIRT ================= */}
+        <div className="px-5 mt-5">
+          <div
+            className="
+              w-full
+              rounded-[22px]
+              overflow-hidden
+              bg-white
+              border
+              border-slate-100
+              shadow-sm
+            "
+          >
+            <img
+              src={bottleShirt}
+              alt="Recycled Finisher Shirt"
+              className="w-full h-auto block"
+            />
+          </div>
+        </div>
+
+        {/* ================= ACTIVITIES ================= */}
+        <div className="mt-6">
+          <h2 className="px-5 text-[15px] font-extrabold text-slate-800 mb-3">
+            กิจกรรมใกล้คุณ
+          </h2>
+
+          <div className="flex gap-3 px-5 overflow-x-auto pb-2">
+            <ActivityCard
+              title="RelaxKAN"
+              subtitle="Wellness & Recovery"
+              image={relaxkanLogo}
+              onClick={() => onOpenMarker("relaxkan-1")}
+            />
+
+            <ActivityCard
+              title="SUP Experience"
+              subtitle="Outdoor Activity"
+              image={supLogo}
+              onClick={() => onOpenMarker("sup")}
+            />
+          </div>
+        </div>
+
+        {/* ================= TODAY SCHEDULE ================= */}
+        <div className="mt-6 px-5">
+          <h2 className="text-[15px] font-extrabold text-slate-800 mb-3">
+            วันนี้ในงาน
+          </h2>
+
+          <div
+            className="
+              bg-white
+              rounded-2xl
+              border
+              border-slate-100
+              shadow-sm
+              divide-y
+              divide-slate-100
+            "
+          >
+            {SCHEDULE.map((s) => {
+              const Icon = s.icon;
+
+              return (
+                <div
+                  key={s.time}
+                  className="flex items-center gap-3 px-4 py-3"
+                >
+                  <div
+                    className="
+                      w-9
+                      h-9
+                      rounded-xl
+                      bg-blue-50
+                      text-blue-600
+                      flex
+                      items-center
+                      justify-center
+                      shrink-0
+                    "
+                  >
+                    <Icon size={16} />
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm text-slate-700 font-medium leading-tight">
+                      {s.title}
+                    </p>
+                  </div>
+
+                  <span className="text-xs font-semibold text-slate-400 shrink-0">
+                    {s.time}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
       </div>
-
-      <div className="flex-1 min-w-0">
-        <p className="text-[10px] font-bold text-white/75">
-          RUN FOR PEACE • RUN FOR FREEDOM
-        </p>
-
-        <p className="text-[16px] font-extrabold leading-tight mt-0.5">
-          สมัครการแข่งขัน
-        </p>
-
-        <p className="text-[11px] text-white/80 mt-1">
-          3.5 KM • 5 KM • 10 KM
-        </p>
-      </div>
-
-      <div className="
-        w-9 h-9
-        rounded-full
-        bg-white/20
-        flex items-center
-        justify-center
-        shrink-0
-      ">
-        <ChevronRight size={19} />
-      </div>
-
     </div>
-  </button>
-</div>
-
-{/* ================= FEATURE GRID ================= */}
-<div className="px-5 pt-5 grid grid-cols-2 gap-3">
-
+  );
+}
   {/* ================= ANOTHER LENS ================= */}
   <button
     type="button"
@@ -5215,7 +5640,12 @@ export default function App() {
     onBack={() => navigate("home")}
   />
 )}
-        {screen === "profile" && <ProfileScreen missions={missions} savedIds={savedIds} />}
+        {screen === "profile" && (
+  <ProfileScreen
+    missions={missions}
+    savedIds={savedIds}
+  />
+)}
 
         {activeMission && <MissionFlow mission={activeMission} onClose={() => setActiveMission(null)} onComplete={completeMission} />}
 
