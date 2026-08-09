@@ -3034,112 +3034,6 @@ function HomeScreen({
 
           </div>
         </button>
-        {/* ================= RECYCLED FINISHER SHIRT ================= */}
-        <div className="px-5 mt-5">
-          <div
-            className="
-              w-full
-              rounded-[22px]
-              overflow-hidden
-              bg-white
-              shadow-sm
-              border
-              border-slate-100
-            "
-          >
-            <img
-              src={bottleShirt}
-              alt="Recycled Finisher Shirt"
-              className="w-full h-auto block"
-            />
-          </div>
-        </div>
-
-
-        {/* ================= ACTIVITIES ================= */}
-        <div className="mt-6">
-          <h2 className="px-5 text-[15px] font-extrabold text-slate-800 mb-3">
-            กิจกรรมใกล้คุณ
-          </h2>
-
-          <div className="flex gap-3 px-5 overflow-x-auto pb-2">
-
-            <ActivityCard
-              title="RelaxKAN"
-              subtitle="Wellness & Recovery"
-              image={relaxkanLogo}
-              onClick={() => onOpenMarker("relaxkan-1")}
-            />
-
-            <ActivityCard
-              title="SUP Experience"
-              subtitle="Outdoor Activity"
-              image={supLogo}
-              onClick={() => onOpenMarker("sup")}
-            />
-
-          </div>
-        </div>
-        {/* ================= TODAY SCHEDULE ================= */}
-        <div className="mt-6 px-5">
-          <h2 className="text-[15px] font-extrabold text-slate-800 mb-3">
-            วันนี้ในงาน
-          </h2>
-
-          <div
-            className="
-              bg-white
-              rounded-2xl
-              border
-              border-slate-100
-              shadow-sm
-              divide-y
-              divide-slate-100
-            "
-          >
-            {SCHEDULE.map((s) => {
-              const Icon = s.icon;
-
-              return (
-                <div
-                  key={s.time}
-                  className="flex items-center gap-3 px-4 py-3"
-                >
-                  <div
-                    className="
-                      w-9
-                      h-9
-                      rounded-xl
-                      bg-blue-50
-                      text-blue-600
-                      flex
-                      items-center
-                      justify-center
-                      shrink-0
-                    "
-                  >
-                    <Icon size={16} />
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-slate-700 font-medium leading-tight">
-                      {s.title}
-                    </p>
-                  </div>
-
-                  <span className="text-xs font-semibold text-slate-400 shrink-0">
-                    {s.time}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-      </div>
-    </div>
-  );
-}
   {/* ================= ANOTHER LENS ================= */}
   <button
     type="button"
@@ -3307,7 +3201,6 @@ function HomeScreen({
       </p>
     </div>
   </button>
-</div>
 {/* ================= RECYCLED FINISHER SHIRT ================= */}
 <div className="px-5 mt-4">
   <div
