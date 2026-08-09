@@ -22,6 +22,7 @@ import aroikanLogo from "./aroikan.png";
 import relaxkanLogo from "./relaxkan.png";
 import supLogo from "./sup-experience.png";
 import shareToChance from "./sharetochance.png";
+import bottleShirt from "./bottleshirt.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -2462,6 +2463,25 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
 />
   </div>
 </div>
+        {/* ================= SHARE TO CHANCE ================= */}
+<div className="px-5 mt-4">
+  <img
+    src={shareToChance}
+    alt="Share to Chance"
+    className="w-full h-auto rounded-2xl shadow-sm"
+    draggable={false}
+  />
+</div>
+
+{/* ================= RECYCLED FINISHER SHIRT ================= */}
+<div className="px-5 mt-3">
+  <img
+    src={bottleShirt}
+    alt="Finisher Shirt from Recycled PET Bottles"
+    className="w-full h-auto rounded-2xl shadow-sm"
+    draggable={false}
+  />
+</div>
         {/* ================= NEARBY ================= */}
         <div className="mt-6">
           <div className="px-5 mb-3">
@@ -2857,7 +2877,7 @@ useEffect(() => {
     <div className="h-full flex flex-col bg-slate-50">
 
       <ScreenHeader
-        title="Explore Kanchanaburi ALL TEST"
+        title="Explore Kanchanaburi"
         subtitle="ค้นหากิจกรรมและประสบการณ์รอบตัวคุณ"
         onBack={onBack}
       />
