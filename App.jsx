@@ -23,6 +23,10 @@ import relaxkanLogo from "./relaxkan.png";
 import supLogo from "./sup-experience.png";
 import shareToChance from "./sharetochance.png";
 import bottleShirt from "./bottleshirt.png";
+import anotherLensMenu from "./Anotherlens.png";
+import exploreMapMenu from "./Exploremap.png";
+import mabokkanMenu from "./Mabokkan.png";
+import poonpoonAIMenu from "./PoonpoonAIMENU.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
@@ -2472,40 +2476,98 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
   </button>
 </div>
 
-        {/* FEATURE GRID */}
-        <div className="px-5 pt-5 grid grid-cols-2 gap-3">
-          <FeatureCard
-            icon={Aperture}
-            titleEn="Another Lens"
-            titleTh="ภารกิจมองกาญอีกมุม"
-            hue="from-cyan-500 to-blue-500"
-            onClick={() => onNavigate("anotherLens")}
-          />
+        {/* ================= FEATURE GRID ================= */}
+<div className="px-5 pt-5 grid grid-cols-2 gap-3">
 
-          <FeatureCard
-            icon={ImageIcon}
-            titleEn="MABOKKAN"
-            titleTh="เรื่องราวจากทุกคน"
-            hue="from-fuchsia-500 to-pink-500"
-            onClick={() => onNavigate("mabokkan")}
-          />
+  {/* ANOTHER LENS */}
+  <button
+    type="button"
+    onClick={() => onNavigate("anotherLens")}
+    className="
+      relative
+      w-full
+      aspect-[1.35/1]
+      rounded-[22px]
+      overflow-hidden
+      shadow-md
+      active:scale-[0.97]
+      transition-transform
+    "
+  >
+    <img
+      src={anotherLensMenu}
+      alt="Another Lens"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  </button>
 
-          <FeatureCard
-            icon={Compass}
-            titleEn="Explore Map"
-            titleTh="แผนที่กิจกรรม"
-            hue="from-emerald-500 to-teal-500"
-            onClick={() => onNavigate("exploreMap")}
-          />
+  {/* MABOKKAN */}
+  <button
+    type="button"
+    onClick={() => onNavigate("mabokkan")}
+    className="
+      relative
+      w-full
+      aspect-[1.35/1]
+      rounded-[22px]
+      overflow-hidden
+      shadow-md
+      active:scale-[0.97]
+      transition-transform
+    "
+  >
+    <img
+      src={mabokkanMenu}
+      alt="MABOKKAN"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  </button>
 
-          <FeatureCard
-            icon={MessageCircle}
-            titleEn="POONPOON AI"
-            titleTh="ถาม POONPOON"
-            hue="from-amber-500 to-orange-500"
-            onClick={() => onNavigate("ai")}
-          />
-        </div>
+  {/* EXPLORE MAP */}
+  <button
+    type="button"
+    onClick={() => onNavigate("exploreMap")}
+    className="
+      relative
+      w-full
+      aspect-[1.35/1]
+      rounded-[22px]
+      overflow-hidden
+      shadow-md
+      active:scale-[0.97]
+      transition-transform
+    "
+  >
+    <img
+      src={exploreMapMenu}
+      alt="Explore Map"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  </button>
+
+  {/* POONPOON AI */}
+  <button
+    type="button"
+    onClick={() => onNavigate("ai")}
+    className="
+      relative
+      w-full
+      aspect-[1.35/1]
+      rounded-[22px]
+      overflow-hidden
+      shadow-md
+      active:scale-[0.97]
+      transition-transform
+    "
+  >
+    <img
+      src={poonpoonAIMenu}
+      alt="POONPOON AI"
+      className="absolute inset-0 w-full h-full object-cover"
+    />
+  </button>
+
+</div>
         {/* ================= SHARE TO CHANCE ================= */}
 <div className="px-5 mt-4">
   <img
