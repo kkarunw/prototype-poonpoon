@@ -2500,7 +2500,12 @@ function GalleryDetailSheet({ post, onClose }) {
    EXPLORE MAP
    ============================================================ */
 function ExploreMapScreen({ onBack, mapFilter, setMapFilter, onMarkerClick }) {
-  const markers = mapFilter === "all" ? MAP_MARKERS : MAP_MARKERS.filter((m) => m.type === mapFilter);
+  const markers =
+    mapFilter === "all"
+      ? MAP_MARKERS
+      : MAP_MARKERS.filter((m) => m.type === mapFilter);
+
+  const [mapZoom, setMapZoom] = useState(1);
   return (
     <div className="h-full flex flex-col bg-slate-50">
       <ScreenHeader title="Explore Kanchanaburi" subtitle="ค้นหากิจกรรมและประสบการณ์รอบตัวคุณ" onBack={onBack} />
@@ -2511,20 +2516,79 @@ function ExploreMapScreen({ onBack, mapFilter, setMapFilter, onMarkerClick }) {
           </button>
         ))}
       </div>
-      <div
-        className="flex-1 relative mx-5 mb-5 rounded-3xl overflow-hidden border border-slate-200"
-        style={
-          IMAGES.map.base
-? {
-    backgroundImage: `url(${IMAGES.map.base})`,
-    backgroundSize: "100% auto",
-    backgroundPosition: "center center",
-    backgroundRepeat: "no-repeat",
-    backgroundColor: "#eef8f5"
-  }
-            : { background: "linear-gradient(135deg,#E6F4EA 0%,#DCEFFB 45%,#EAF7F5 100%)" }
-        }
+      <div className="flex-1 relative mx-5 mb-5 rounded-3xl overflow-hidden border border-slate-200 bg-[#eef8f5]">
+
+  {/* MAP + MARKERS */}
+  <div
+    className="absolute inset-0"
+    style={{
+      transform: `scale(${mapZoom})`,
+      transformOrigin: "center center",
+      transition: "transform 0.2s ease",
+    }}
+  >
+
+    {IMAGES.map.base && (
+      <img
+        src={IMAGES.map.base}
+        alt="Kanchanaburi Map"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+    )}
+
+    {markers.map((m) => (
+      <button
+        key={m.id}
+        onClick={() => onMarkerClick(m)}
+        className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center active:scale-95 transition-transform"
+        style={{
+          left: `${m.x}%`,
+          top: `${m.y}%`,
+        }}
       >
+        <div
+          className={`w-9 h-9 rounded-full flex items-center justify-center text-white shadow-md border-2 border-white ${markerColor(
+            m.type
+          )}`}
+        >
+          <m.icon size={16} />
+        </div>
+      </button>
+    ))}
+
+  </div>
+
+  {/* ZOOM BUTTONS */}
+  <div className="absolute right-3 bottom-3 z-30 flex flex-col gap-2">
+
+    <button
+      onClick={() =>
+        setMapZoom((z) => Math.min(z + 0.25, 3))
+      }
+      className="w-10 h-10 rounded-full bg-white shadow-md text-slate-700 text-xl font-bold flex items-center justify-center"
+    >
+      +
+    </button>
+
+    <button
+      onClick={() =>
+        setMapZoom((z) => Math.max(z - 0.25, 1))
+      }
+      className="w-10 h-10 rounded-full bg-white shadow-md text-slate-700 text-xl font-bold flex items-center justify-center"
+    >
+      −
+    </button>
+
+    <button
+      onClick={() => setMapZoom(1)}
+      className="w-10 h-10 rounded-full bg-white shadow-md text-slate-600 text-sm font-bold flex items-center justify-center"
+    >
+      ↺
+    </button>
+
+  </div>
+
+</div>
         {!IMAGES.map.base && (
           <svg className="absolute inset-0 w-full h-full opacity-40" preserveAspectRatio="none" viewBox="0 0 100 100">
             <path d="M0 65 Q 30 55 45 70 T 100 60" stroke="#7FD1E8" strokeWidth="6" fill="none" />
