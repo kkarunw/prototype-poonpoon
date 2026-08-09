@@ -1358,51 +1358,67 @@ function LandingScreen({
       {/* ================= CTA AREA ================= */}
       <div className="relative z-20 px-5 pb-6 shrink-0">
 
-        <button
-          onClick={onAsk}
-          className="
-            w-full
-            rounded-[22px]
-            px-5 py-4
-            text-left
-            text-white
-            shadow-xl
-            active:scale-[0.98]
-            transition-transform
-            border border-white/40
-          "
-          style={{
-            background:
-              "linear-gradient(110deg,#123E8C 0%,#1D63C9 48%,#2FB6D9 100%)",
-          }}
-        >
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center shrink-0">
-              <MessageCircle size={25} strokeWidth={2.3} />
-            </div>
+       <button
+  onClick={onAboutEvent}
+  className="
+    w-full
+    rounded-[22px]
+    px-5 py-4
+    text-left
+    text-white
+    shadow-xl
+    active:scale-[0.98]
+    transition-transform
+    border border-white/40
+  "
+  style={{
+    background:
+      "linear-gradient(110deg,#123E8C 0%,#1D63C9 48%,#2FB6D9 100%)",
+  }}
+>
+  <div className="flex items-center gap-3">
 
-            <div className="flex-1 min-w-0">
-              <span className="text-[11px] font-bold text-cyan-100">
-                ✨ POONPOON AI
-              </span>
+    <div className="
+      w-12 h-12
+      rounded-2xl
+      bg-white/20
+      flex items-center
+      justify-center
+      shrink-0
+    ">
+      <Info size={25} strokeWidth={2.3} />
+    </div>
 
-              <p className="font-extrabold text-[17px] leading-tight mt-0.5">
-                ถาม POONPOON เกี่ยวกับงาน
-              </p>
+    <div className="flex-1 min-w-0">
+      <span className="text-[11px] font-bold text-cyan-100">
+        ตลอดกาญ(น.)
+      </span>
 
-              <p className="text-[11px] text-white/80 mt-1">
-                กิจกรรม • ร้านอาหาร • เส้นทาง • ตารางงาน
-              </p>
-            </div>
+      <p className="font-extrabold text-[16px] leading-tight mt-0.5">
+        RUN FOR PEACE • RUN FOR FREEDOM
+      </p>
 
-            <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
-              <ArrowRight size={18} />
-            </div>
-          </div>
-        </button>
+      <p className="text-[11px] text-white/80 mt-1">
+        รู้จักแนวคิด • เรื่องราว • กิจกรรมภายในงาน
+      </p>
+    </div>
+
+    <div className="
+      w-9 h-9
+      rounded-full
+      bg-white/15
+      flex items-center
+      justify-center
+      shrink-0
+    ">
+      <ArrowRight size={18} />
+    </div>
+
+  </div>
+</button>
 
         <p className="text-center text-[11px] text-blue-900/70 font-medium mt-2 mb-3">
-          ลองถาม เช่น “วันนี้มีอะไรน่าสนใจบ้าง?”
+          จากสงคราม สู่สันติภาพ และอิสรภาพ”
         </p>
 
         <div className="grid grid-cols-2 gap-3">
