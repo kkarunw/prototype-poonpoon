@@ -2511,6 +2511,134 @@ function ExploreMapScreen({
       : MAP_MARKERS.filter((m) => m.type === mapFilter);
 
   const [mapZoom, setMapZoom] = useState(1);
+  const [mapPosition, setMapPosition] = useState({ x: 0, y: 0 });
+
+  const mapAreaRef = useRef(null);
+
+  const pointersRef = useRef(new Map());
+
+  const dragStartRef = useRef({
+    x: 0,
+    y: 0,
+    mapX: 0,
+    mapY: 0,
+  });
+
+  const pinchRef = useRef({
+    distance: 0,
+    zoom: 1,
+  });
+
+  const clampZoom = (zoom) => {
+    return Math.min(Math.max(zoom, 1), 4);
+  };
+
+  const getPointerDistance = () => {
+    const points = [...pointersRef.current.values()];
+
+    if (points.length < 2) return 0;
+
+    const dx = points[0].x - points[1].x;
+    const dy = points[0].y - points[1].y;
+
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const handlePointerDown = (e) => {
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+
+    pointersRef.current.set(e.pointerId, {
+      x: e.clientX,
+      y: e.clientY,
+    });
+
+    if (pointersRef.current.size === 1) {
+      dragStartRef.current = {
+        x: e.clientX,
+        y: e.clientY,
+        mapX: mapPosition.x,
+        mapY: mapPosition.y,
+      };
+    }
+
+    if (pointersRef.current.size === 2) {
+      pinchRef.current = {
+        distance: getPointerDistance(),
+        zoom: mapZoom,
+      };
+    }
+  };
+
+  const handlePointerMove = (e) => {
+    if (!pointersRef.current.has(e.pointerId)) return;
+
+    pointersRef.current.set(e.pointerId, {
+      x: e.clientX,
+      y: e.clientY,
+    });
+
+    /* =========================
+       PINCH ZOOM
+    ========================= */
+    if (pointersRef.current.size === 2) {
+      const distance = getPointerDistance();
+
+      if (!pinchRef.current.distance) return;
+
+      const scale =
+        distance / pinchRef.current.distance;
+
+      const nextZoom = clampZoom(
+        pinchRef.current.zoom * scale
+      );
+
+      setMapZoom(nextZoom);
+      return;
+    }
+
+    /* =========================
+       PAN / DRAG
+    ========================= */
+    if (pointersRef.current.size === 1) {
+      const dx =
+        e.clientX - dragStartRef.current.x;
+
+      const dy =
+        e.clientY - dragStartRef.current.y;
+
+      setMapPosition({
+        x: dragStartRef.current.mapX + dx,
+        y: dragStartRef.current.mapY + dy,
+      });
+    }
+  };
+
+  const handlePointerUp = (e) => {
+    pointersRef.current.delete(e.pointerId);
+
+    if (pointersRef.current.size === 1) {
+      const point = [...pointersRef.current.values()][0];
+
+      dragStartRef.current = {
+        x: point.x,
+        y: point.y,
+        mapX: mapPosition.x,
+        mapY: mapPosition.y,
+      };
+    }
+
+    if (pointersRef.current.size < 2) {
+      pinchRef.current.distance = 0;
+    }
+  };
+
+  const resetMap = () => {
+    setMapZoom(1);
+    setMapPosition({
+      x: 0,
+      y: 0,
+    });
+  };
 
   return (
     <div className="h-full flex flex-col bg-slate-50">
@@ -2521,7 +2649,7 @@ function ExploreMapScreen({
         onBack={onBack}
       />
 
-      {/* FILTERS */}
+      {/* ================= FILTER ================= */}
       <div className="flex gap-2 px-5 pb-3 overflow-x-auto">
         {MAP_FILTERS.map((f) => (
           <button
@@ -2533,62 +2661,161 @@ function ExploreMapScreen({
                 : "bg-white text-slate-500 border-slate-200"
             }`}
           >
-            {f.id === "all" && <Filter size={11} />}
+            {f.id === "all" && (
+              <Filter size={11} />
+            )}
+
             {f.label}
           </button>
         ))}
       </div>
 
-      {/* MAP FRAME */}
-      <div className="flex-1 relative mx-5 mb-20 rounded-3xl overflow-hidden border border-slate-200 bg-[#eef8f5]">
+      {/* ================= MAP VIEWPORT ================= */}
+      <div
+        ref={mapAreaRef}
+        className="
+          flex-1
+          relative
+          mx-5
+          mb-20
+          rounded-3xl
+          overflow-hidden
+          border
+          border-slate-200
+          bg-[#eef8f5]
+          select-none
+        "
+        style={{
+          touchAction: "none",
+          cursor: "grab",
+        }}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+      >
 
-        {/* MAP + MARKERS ซูมพร้อมกัน */}
+        {/* ================= MOVING MAP ================= */}
         <div
           className="absolute inset-0"
           style={{
-            transform: `scale(${mapZoom})`,
+            transform: `
+              translate(${mapPosition.x}px, ${mapPosition.y}px)
+              scale(${mapZoom})
+            `,
             transformOrigin: "center center",
-            transition: "transform 0.25s ease",
+            willChange: "transform",
           }}
         >
+
+          {/* MAP IMAGE */}
           {IMAGES.map.base && (
             <img
               src={IMAGES.map.base}
               alt="Kanchanaburi Map"
-              className="absolute inset-0 w-full h-full object-cover"
+              draggable={false}
+              className="
+                absolute
+                inset-0
+                w-full
+                h-full
+                object-cover
+                pointer-events-none
+                select-none
+              "
             />
           )}
 
+          {/* ================= MARKERS ================= */}
           {markers.map((m) => (
             <button
               key={m.id}
-              onClick={() => onMarkerClick(m)}
-              className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center active:scale-95 transition-transform"
+              onPointerDown={(e) => {
+                e.stopPropagation();
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onMarkerClick(m);
+              }}
+              className="
+                absolute
+                flex
+                items-center
+                justify-center
+                z-20
+              "
               style={{
                 left: `${m.x}%`,
                 top: `${m.y}%`,
+
+                /*
+                  สำคัญ:
+                  scale(1 / mapZoom)
+                  ทำให้หมุดคงขนาดเดิม
+                */
+                transform: `
+                  translate(-50%, -50%)
+                  scale(${1 / mapZoom})
+                `,
               }}
             >
               <div
-                className={`w-9 h-9 rounded-full flex items-center justify-center text-white shadow-md border-2 border-white ${markerColor(
-                  m.type
-                )}`}
+                className={`
+                  w-9 h-9
+                  rounded-full
+                  flex
+                  items-center
+                  justify-center
+                  text-white
+                  shadow-md
+                  border-2
+                  border-white
+                  ${markerColor(m.type)}
+                `}
               >
                 <m.icon size={16} />
               </div>
             </button>
           ))}
+
         </div>
 
-        {/* ZOOM CONTROLS */}
-        <div className="absolute right-3 bottom-3 z-50 flex flex-col gap-2">
+
+        {/* ================= ZOOM CONTROLS ================= */}
+        <div
+          className="
+            absolute
+            right-3
+            bottom-3
+            z-50
+            flex
+            flex-col
+            gap-2
+          "
+          onPointerDown={(e) => e.stopPropagation()}
+        >
 
           <button
             type="button"
             onClick={() =>
-              setMapZoom((z) => Math.min(z + 0.25, 3))
+              setMapZoom((z) =>
+                clampZoom(z + 0.25)
+              )
             }
-            className="w-10 h-10 rounded-full bg-white shadow-lg border border-slate-200 text-slate-700 text-xl font-bold flex items-center justify-center"
+            className="
+              w-10 h-10
+              rounded-full
+              bg-white
+              shadow-lg
+              border
+              border-slate-200
+              text-slate-700
+              text-xl
+              font-bold
+              flex
+              items-center
+              justify-center
+            "
           >
             +
           </button>
@@ -2596,22 +2823,73 @@ function ExploreMapScreen({
           <button
             type="button"
             onClick={() =>
-              setMapZoom((z) => Math.max(z - 0.25, 1))
+              setMapZoom((z) =>
+                clampZoom(z - 0.25)
+              )
             }
-            className="w-10 h-10 rounded-full bg-white shadow-lg border border-slate-200 text-slate-700 text-xl font-bold flex items-center justify-center"
+            className="
+              w-10 h-10
+              rounded-full
+              bg-white
+              shadow-lg
+              border
+              border-slate-200
+              text-slate-700
+              text-xl
+              font-bold
+              flex
+              items-center
+              justify-center
+            "
           >
             −
           </button>
 
           <button
             type="button"
-            onClick={() => setMapZoom(1)}
-            className="w-10 h-10 rounded-full bg-white shadow-lg border border-slate-200 text-slate-600 text-sm font-bold flex items-center justify-center"
+            onClick={resetMap}
+            className="
+              w-10 h-10
+              rounded-full
+              bg-white
+              shadow-lg
+              border
+              border-slate-200
+              text-slate-600
+              text-sm
+              font-bold
+              flex
+              items-center
+              justify-center
+            "
           >
             ↺
           </button>
 
         </div>
+
+        {/* ================= ZOOM LEVEL ================= */}
+        {mapZoom > 1 && (
+          <div
+            className="
+              absolute
+              left-3
+              bottom-3
+              z-40
+              bg-black/50
+              text-white
+              text-[10px]
+              font-semibold
+              px-2.5
+              py-1.5
+              rounded-full
+              pointer-events-none
+            "
+          >
+            {Math.round(mapZoom * 100)}%
+          </div>
+        )}
+
       </div>
 
     </div>
