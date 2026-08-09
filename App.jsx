@@ -2036,14 +2036,20 @@ export default function App() {
         )}
 
         {screen === "ai" && (
-          <AIScreen
-            onNavigateMarker={openMarkerById}
-            onNavigateFoodList={openFoodList}
-            onNavigateHome={() => navigate("home")}
-            onBack={aiFromLanding ? () => { setAiFromLanding(false); setScreen("landing"); } : undefined}
-          />
-        )}
-
+  <AIScreen
+    onNavigateMarker={openMarkerById}
+    onNavigateFoodList={openFoodList}
+    onNavigateHome={() => navigate("home")}
+    onBack={() => {
+      if (aiFromLanding) {
+        setAiFromLanding(false);
+        setScreen("landing");
+      } else {
+        setScreen("home");
+      }
+    }}
+  />
+)}
         {screen === "profile" && <ProfileScreen missions={missions} savedIds={savedIds} />}
 
         {activeMission && <MissionFlow mission={activeMission} onClose={() => setActiveMission(null)} onComplete={completeMission} />}
