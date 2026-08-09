@@ -2615,7 +2615,85 @@ function HomeScreen({
 
       {/* ================= SCROLL CONTENT ================= */}
       <div className="flex-1 overflow-y-auto pb-28">
+     {/* ================= POONPOON RUN ================= */}
+        <div className="px-5 mt-5">
+          <button
+            type="button"
+            onClick={() => onNavigate("poonpoonRun")}
+            className="
+              w-full
+              rounded-[24px]
+              px-4
+              py-4
+              text-left
+              text-white
+              shadow-lg
+              active:scale-[0.98]
+              transition-transform
+            "
+            style={{
+              background:
+                "linear-gradient(120deg,#123E8C 0%,#1D63C9 50%,#2FB6D9 100%)",
+            }}
+          >
+            <div className="flex items-center gap-3">
 
+              <div
+                className="
+                  relative
+                  w-[64px]
+                  h-[64px]
+                  shrink-0
+                  rounded-2xl
+                  bg-white/15
+                  overflow-hidden
+                "
+              >
+                <PoonpoonMascot
+                  size={92}
+                  className="
+                    absolute
+                    left-1/2
+                    top-1/2
+                    -translate-x-1/2
+                    -translate-y-1/2
+                    max-w-none
+                  "
+                />
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <p className="text-[10px] font-bold text-cyan-100">
+                  🎮 MINI GAME
+                </p>
+
+                <p className="text-[18px] font-black leading-tight mt-0.5">
+                  POONPOON RUN!
+                </p>
+
+                <p className="text-[11px] text-white/80 mt-1">
+                  วิ่งเก็บสีแห่งอิสรภาพ
+                </p>
+              </div>
+
+              <div
+                className="
+                  w-10
+                  h-10
+                  rounded-full
+                  bg-white/15
+                  flex
+                  items-center
+                  justify-center
+                  shrink-0
+                "
+              >
+                <ChevronRight size={20} />
+              </div>
+
+            </div>
+          </button>
+        </div>
         {/* ================= RACE REGISTRATION ================= */}
         <div className="px-5 mt-5">
           <button
@@ -2870,86 +2948,6 @@ function HomeScreen({
               className="w-full h-auto block"
             />
           </div>
-        </div>
-
-        {/* ================= POONPOON RUN ================= */}
-        <div className="px-5 mt-5">
-          <button
-            type="button"
-            onClick={() => onNavigate("poonpoonRun")}
-            className="
-              w-full
-              rounded-[24px]
-              px-4
-              py-4
-              text-left
-              text-white
-              shadow-lg
-              active:scale-[0.98]
-              transition-transform
-            "
-            style={{
-              background:
-                "linear-gradient(120deg,#123E8C 0%,#1D63C9 50%,#2FB6D9 100%)",
-            }}
-          >
-            <div className="flex items-center gap-3">
-
-              <div
-                className="
-                  relative
-                  w-[64px]
-                  h-[64px]
-                  shrink-0
-                  rounded-2xl
-                  bg-white/15
-                  overflow-hidden
-                "
-              >
-                <PoonpoonMascot
-                  size={92}
-                  className="
-                    absolute
-                    left-1/2
-                    top-1/2
-                    -translate-x-1/2
-                    -translate-y-1/2
-                    max-w-none
-                  "
-                />
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <p className="text-[10px] font-bold text-cyan-100">
-                  🎮 MINI GAME
-                </p>
-
-                <p className="text-[18px] font-black leading-tight mt-0.5">
-                  POONPOON RUN!
-                </p>
-
-                <p className="text-[11px] text-white/80 mt-1">
-                  วิ่งเก็บสีแห่งอิสรภาพ
-                </p>
-              </div>
-
-              <div
-                className="
-                  w-10
-                  h-10
-                  rounded-full
-                  bg-white/15
-                  flex
-                  items-center
-                  justify-center
-                  shrink-0
-                "
-              >
-                <ChevronRight size={20} />
-              </div>
-
-            </div>
-          </button>
         </div>
 {/* ================= RECYCLED FINISHER SHIRT ================= */}
 <div className="px-5 mt-4">
