@@ -1268,51 +1268,479 @@ function RegisterForm({ type, onBack, onDone }) {
   }
 
   /* ================= DETAIL ================= */
-  if (step === "detail") {
-    return (
-      <div className="h-full flex flex-col bg-slate-50 relative">
-        <ScreenHeader
-          title="Package Detail"
-          subtitle="รายละเอียดแพ็กเกจการแข่งขัน"
-          onBack={() => setStep("select")}
+if (step === "detail") {
+  const packageDetails = {
+    "3.5 KM Freedom": {
+      includes: [
+        {
+          icon: Shirt,
+          title: "Finisher T-Shirt",
+          desc: "เสื้อวิ่ง Finisher T-Shirt ลาย Freedom Route",
+        },
+        {
+          icon: Star,
+          title: "Finisher Medal",
+          desc: "เหรียญที่ระลึกสำหรับผู้เข้าเส้นชัย",
+        },
+        {
+          icon: QrCode,
+          title: "Race BIB",
+          desc: "หมายเลขการแข่งขันสำหรับระยะ 3.5 KM",
+        },
+        {
+          icon: Flag,
+          title: "Bandana",
+          desc: "Bandana รุ่นพิเศษ RUN FOR PEACE • RUN FOR FREEDOM",
+        },
+        {
+          icon: Sparkles,
+          title: "Neon Wristband",
+          desc: "สายรัดข้อมือสำหรับใช้ร่วมกิจกรรมภายใน Festival",
+        },
+      ],
+
+      extraTitle: null,
+      extras: [],
+    },
+
+    "5 KM City": {
+      includes: [
+        {
+          icon: Shirt,
+          title: "Finisher T-Shirt",
+          desc: "เสื้อวิ่ง Finisher T-Shirt ลาย City Route",
+        },
+        {
+          icon: Star,
+          title: "Finisher Medal",
+          desc: "เหรียญที่ระลึกสำหรับผู้เข้าเส้นชัย",
+        },
+        {
+          icon: QrCode,
+          title: "Race BIB",
+          desc: "หมายเลขการแข่งขันสำหรับระยะ 5 KM",
+        },
+        {
+          icon: Flag,
+          title: "Bandana",
+          desc: "Bandana รุ่นพิเศษ RUN FOR PEACE • RUN FOR FREEDOM",
+        },
+        {
+          icon: Sparkles,
+          title: "Neon Wristband",
+          desc: "สายรัดข้อมือสำหรับใช้ร่วมกิจกรรมภายใน Festival",
+        },
+      ],
+
+      extraTitle: "สิทธิพิเศษเพิ่มเติมสำหรับ 5 KM",
+      extras: [
+        {
+          icon: Check,
+          title: "Running Socks",
+          desc: "ถุงเท้าวิ่ง POONPOON รุ่นพิเศษ",
+        },
+        {
+          icon: Check,
+          title: "Finisher Bag",
+          desc: "กระเป๋า Finisher Bag สำหรับนักวิ่ง 5 KM",
+        },
+        {
+          icon: Check,
+          title: "E-Certificate",
+          desc: "ใบประกาศนียบัตรออนไลน์หลังจบการแข่งขัน",
+        },
+      ],
+    },
+
+    "10 KM Heritage": {
+      includes: [
+        {
+          icon: Shirt,
+          title: "Finisher T-Shirt",
+          desc: "เสื้อวิ่ง Finisher T-Shirt ลาย Heritage Route",
+        },
+        {
+          icon: Star,
+          title: "Finisher Medal",
+          desc: "เหรียญที่ระลึกสำหรับผู้เข้าเส้นชัย",
+        },
+        {
+          icon: QrCode,
+          title: "Race BIB",
+          desc: "หมายเลขการแข่งขันสำหรับระยะ 10 KM",
+        },
+        {
+          icon: Flag,
+          title: "Bandana",
+          desc: "Bandana รุ่นพิเศษ RUN FOR PEACE • RUN FOR FREEDOM",
+        },
+        {
+          icon: Sparkles,
+          title: "Neon Wristband",
+          desc: "สายรัดข้อมือสำหรับใช้ร่วมกิจกรรมภายใน Festival",
+        },
+      ],
+
+      extraTitle: "สิทธิพิเศษเพิ่มเติมสำหรับ 10 KM",
+      extras: [
+        {
+          icon: Check,
+          title: "Running Socks",
+          desc: "ถุงเท้าวิ่ง POONPOON รุ่นพิเศษ",
+        },
+        {
+          icon: Check,
+          title: "Finisher Bag",
+          desc: "กระเป๋า Finisher Bag สำหรับนักวิ่ง 10 KM",
+        },
+        {
+          icon: Check,
+          title: "Limited Edition Tumbler",
+          desc: "แก้ว Limited Edition เฉพาะนักวิ่ง 10 KM",
+        },
+        {
+          icon: Check,
+          title: "Finisher Towel",
+          desc: "ผ้าขนหนู Finisher รุ่น Heritage Route",
+        },
+        {
+          icon: Check,
+          title: "10K Exclusive Finisher Pin",
+          desc: "เข็มกลัด Exclusive สำหรับผู้เข้าเส้นชัย 10 KM",
+        },
+      ],
+    },
+  };
+
+  const detail = packageDetails[selectedDistance];
+
+  return (
+    <div className="h-full flex flex-col bg-slate-50 relative">
+
+      <ScreenHeader
+        title="Package Detail"
+        subtitle="รายละเอียดแพ็กเกจการแข่งขัน"
+        onBack={() => setStep("select")}
+      />
+
+      <div className="flex-1 overflow-y-auto pb-32">
+
+        {/* ================= PACKAGE ARTWORK ================= */}
+        <img
+          src={currentPackage.image}
+          alt={`${currentPackage.short} ${currentPackage.route}`}
+          className="w-full h-auto block"
         />
 
-        <div className="flex-1 overflow-y-auto pb-28">
-          <img
-            src={currentPackage.image}
-            alt={`${currentPackage.short} ${currentPackage.route}`}
-            className="w-full h-auto block"
-          />
-        </div>
+        {/* ================= PACKAGE INFO ================= */}
+        <div className="px-5 pt-5">
 
-        <div className="absolute bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-100 px-5 py-4">
-          <div className="flex items-center gap-4">
-            <div>
-              <p className="text-[10px] text-slate-400">
-                ค่าสมัคร
-              </p>
+          <div className="flex items-center gap-2 mb-3">
+            <Sparkles
+              size={16}
+              className="text-blue-600"
+            />
 
-              <p className="text-xl font-black text-slate-800">
-                {currentPackage.price.toLocaleString()}
-                <span className="text-xs ml-1">บาท</span>
-              </p>
-            </div>
+            <h3 className="text-[14px] font-extrabold text-slate-800">
+              สิ่งที่ได้รับในแพ็กเกจ
+            </h3>
+          </div>
 
-            <button
-              onClick={() => setStep("confirm")}
-              className="flex-1 py-3.5 rounded-full text-white font-extrabold shadow-md"
-              style={{
-                background: currentPackage.gradient,
-              }}
-            >
-              สมัครเลย
-            </button>
+          <div className="bg-white rounded-[22px] border border-slate-100 shadow-sm overflow-hidden">
+
+            {detail.includes.map((item, index) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.title}
+                  className={`
+                    flex items-center gap-3
+                    px-4 py-3.5
+                    ${
+                      index < detail.includes.length - 1
+                        ? "border-b border-slate-100"
+                        : ""
+                    }
+                  `}
+                >
+
+                  <div
+                    className="
+                      w-9 h-9
+                      rounded-xl
+                      bg-blue-50
+                      text-blue-600
+                      flex items-center justify-center
+                      shrink-0
+                    "
+                  >
+                    <Icon size={17} />
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+
+                    <p className="text-[12px] font-extrabold text-slate-800">
+                      {item.title}
+                    </p>
+
+                    <p className="text-[10px] leading-relaxed text-slate-400 mt-0.5">
+                      {item.desc}
+                    </p>
+
+                  </div>
+
+                  <Check
+                    size={16}
+                    className="text-emerald-500 shrink-0"
+                  />
+
+                </div>
+              );
+            })}
+
           </div>
         </div>
-      </div>
-    );
-  }
 
+
+        {/* ================= EXTRA BENEFITS ================= */}
+        {detail.extras.length > 0 && (
+          <div className="px-5 mt-5">
+
+            <div className="flex items-center gap-2 mb-3">
+
+              <Plus
+                size={16}
+                className={
+                  selectedDistance === "5 KM City"
+                    ? "text-orange-500"
+                    : "text-blue-600"
+                }
+              />
+
+              <h3 className="text-[14px] font-extrabold text-slate-800">
+                {detail.extraTitle}
+              </h3>
+
+            </div>
+
+            <div
+              className="
+                bg-white
+                rounded-[22px]
+                border border-slate-100
+                shadow-sm
+                overflow-hidden
+              "
+            >
+
+              {detail.extras.map((item, index) => {
+                const Icon = item.icon;
+
+                return (
+                  <div
+                    key={item.title}
+                    className={`
+                      flex items-center gap-3
+                      px-4 py-3.5
+                      ${
+                        index < detail.extras.length - 1
+                          ? "border-b border-slate-100"
+                          : ""
+                      }
+                    `}
+                  >
+
+                    <div
+                      className="
+                        w-9 h-9
+                        rounded-xl
+                        flex items-center justify-center
+                        text-white
+                        shrink-0
+                      "
+                      style={{
+                        background: currentPackage.gradient,
+                      }}
+                    >
+                      <Icon size={16} />
+                    </div>
+
+                    <div className="flex-1 min-w-0">
+
+                      <p className="text-[12px] font-extrabold text-slate-800">
+                        {item.title}
+                      </p>
+
+                      <p className="text-[10px] leading-relaxed text-slate-400 mt-0.5">
+                        {item.desc}
+                      </p>
+
+                    </div>
+
+                  </div>
+                );
+              })}
+
+            </div>
+          </div>
+        )}
+
+
+        {/* ================= FESTIVAL ACCESS ================= */}
+        <div className="px-5 mt-5 mb-5">
+
+          <div className="bg-white rounded-[22px] border border-slate-100 shadow-sm p-4">
+
+            <div className="flex items-center justify-center gap-2">
+
+              <PartyPopper
+                size={16}
+                className="text-emerald-500"
+              />
+
+              <p className="text-[12px] font-extrabold text-slate-800">
+                Festival Access Included
+              </p>
+
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 mt-4">
+
+              <div className="flex flex-col items-center text-center">
+                <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                  <Volume2 size={17} />
+                </div>
+
+                <p className="text-[10px] font-bold text-slate-600 mt-1.5">
+                  Concert
+                </p>
+              </div>
+
+
+              <div className="flex flex-col items-center text-center">
+                <div className="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center">
+                  <Sparkles size={17} />
+                </div>
+
+                <p className="text-[10px] font-bold text-slate-600 mt-1.5">
+                  Drone Show
+                </p>
+              </div>
+
+
+              <div className="flex flex-col items-center text-center">
+                <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-500 flex items-center justify-center">
+                  <Sun size={17} />
+                </div>
+
+                <p className="text-[10px] font-bold text-slate-600 mt-1.5">
+                  Lighting Show
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        {/* ================= SUMMARY ================= */}
+        <div className="px-5 mb-6">
+
+          <div
+            className="rounded-[20px] p-[1px]"
+            style={{
+              background: currentPackage.gradient,
+            }}
+          >
+
+            <div className="bg-white rounded-[19px] px-4 py-3">
+
+              <div className="flex items-center justify-between">
+
+                <div>
+                  <p className="text-[10px] text-slate-400">
+                    ระยะที่เลือก
+                  </p>
+
+                  <p className="text-[13px] font-extrabold text-slate-800">
+                    {currentPackage.short} · {currentPackage.route}
+                  </p>
+                </div>
+
+                <div className="text-right">
+                  <p className="text-[10px] text-slate-400">
+                    ค่าสมัคร
+                  </p>
+
+                  <p className="text-lg font-black text-slate-800">
+                    {currentPackage.price.toLocaleString()}
+                    <span className="text-[10px] ml-1">
+                      บาท
+                    </span>
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      {/* ================= STICKY CTA ================= */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 bg-white border-t border-slate-100 px-5 py-4">
+
+        <div className="flex items-center gap-4">
+
+          <div className="shrink-0">
+
+            <p className="text-[10px] text-slate-400">
+              ค่าสมัคร
+            </p>
+
+            <p className="text-xl font-black text-slate-800">
+              {currentPackage.price.toLocaleString()}
+
+              <span className="text-xs ml-1 font-medium">
+                บาท
+              </span>
+            </p>
+
+          </div>
+
+
+          <button
+            onClick={() => setStep("confirm")}
+            className="
+              flex-1
+              py-3.5
+              rounded-full
+              text-white
+              font-extrabold
+              text-sm
+              shadow-lg
+              active:scale-[0.98]
+              transition-transform
+            "
+            style={{
+              background: currentPackage.gradient,
+            }}
+          >
+            สมัครเลย
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
   /* ================= CONFIRM ================= */
   if (step === "confirm") {
     return (
