@@ -15,6 +15,9 @@ import poonpoonLogo from "./poonpoon-logo.png";
 import package35 from "./package-35.png";
 import package5 from "./package-5.png";
 import package10 from "./package-10.png";
+import race35bg from "./race35bg.png";
+import race5bg from "./race5bg.png";
+import race10bg from "./race10bg.png";
 
 /* ============================================================
    IMAGE ASSET CONFIG
