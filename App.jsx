@@ -4883,7 +4883,14 @@ export default function App() {
     setTimeout(() => setToast(null), 2200);
   };
 
-  const mainScreens = ["home", "anotherLens", "mabokkan", "exploreMap", "ai", "profile"];
+  const mainScreens = [
+  "home",
+  "anotherLens",
+  "mabokkan",
+  "exploreMap",
+  "ai",
+  "profile"
+];
   const showNav = mainScreens.includes(screen);
 
   const navigate = (target) => {
@@ -5008,6 +5015,11 @@ export default function App() {
         setScreen("home");
       }
     }}
+  />
+)}
+        {screen === "poonpoonRun" && (
+  <PoonpoonRunScreen
+    onBack={() => navigate("home")}
   />
 )}
         {screen === "profile" && <ProfileScreen missions={missions} savedIds={savedIds} />}
