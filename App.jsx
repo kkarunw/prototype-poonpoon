@@ -438,9 +438,6 @@ function LandingScreen({
     backgroundRepeat: "no-repeat",
   }}
 >
-      <div className="absolute inset-0 opacity-[0.08]" style={{
-        backgroundImage: "repeating-linear-gradient(115deg, #fff 0px, #fff 2px, transparent 2px, transparent 40px)"
-      }} />
       <div className="relative flex flex-col items-center pt-10 px-6 shrink-0">
   <img
     src={poonpoonLogo}
