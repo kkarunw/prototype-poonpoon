@@ -2656,11 +2656,17 @@ function RestaurantDetail({ r, saved, onToggleSave }) {
         <p><span className="text-slate-400">เมนูแนะนำ:</span> {r.menu}</p>
         <p><span className="text-slate-400">ระยะทาง:</span> {r.distance}</p>
         <p><span className="text-slate-400">เปิดถึง:</span> {r.closes}</p>
+        <p><span className="text-slate-400">ที่อยู่:</span> {r.address}</p>
       </div>
       <div className="flex gap-2 mt-5">
-        <button className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-full bg-blue-600 text-white text-sm font-semibold">
-          <Navigation size={15} /> นำทาง
-        </button>
+       <button
+  type="button"
+  onClick={() => window.open(r.mapUrl, "_blank", "noopener,noreferrer")}
+  className="flex-1 flex items-center justify-center gap-1.5 py-3 rounded-full bg-blue-600 text-white text-sm font-semibold"
+>
+  <Navigation size={15} />
+  นำทาง
+</button>
         <button className="flex-1 py-3 rounded-full bg-slate-100 text-slate-600 text-sm font-semibold">ดูรายละเอียด</button>
         <button onClick={() => onToggleSave(r.id)} className="w-12 flex items-center justify-center rounded-full bg-slate-100">
           <Bookmark size={17} className={saved ? "fill-amber-400 text-amber-400" : "text-slate-400"} />
