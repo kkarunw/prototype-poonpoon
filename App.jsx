@@ -1159,7 +1159,7 @@ function Field({ label, placeholder, type = "text" }) {
 function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
   return (
     <div className="h-full overflow-y-auto pb-24 bg-slate-50">
-      <div className="px-5 pt-6 pb-8 rounded-b-[32px] text-white relative overflow-hidden" style={{ background: heroGradient }}>
+      <div className="px-5 pt-6 pb-5 rounded-b-[32px] text-white relative overflow-hidden" style={{ background: heroGradient }}>
         <button
   onClick={onBack}
   className="absolute top-5 left-4 z-20 w-9 h-9 rounded-full bg-white/15 flex items-center justify-center active:bg-white/25"
@@ -1170,7 +1170,7 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
           <div>
             <p className="text-lg font-bold">สวัสดี 👋</p>
             <p className="text-sm text-white/85 mt-1 leading-snug max-w-[190px]">วันนี้อยากให้ POONPOON พาไปไหน?</p>
-          <div className="relative h-36 flex items-center justify-center overflow-visible">
+          <div className="relative h-24 flex items-center justify-center overflow-visible">
   <PoonpoonMascot
     size={260}
     className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-none"
