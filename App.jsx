@@ -2695,7 +2695,142 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
     </div>
   </button>
 </div>
+{/* ================= SHARE TO CHANCE ================= */}
+<div className="px-5 mt-5">
+  <div
+    className="
+      w-full
+      rounded-[20px]
+      overflow-hidden
+      shadow-sm
+      border
+      border-slate-100
+      bg-white
+    "
+  >
+    <img
+      src={shareToChance}
+      alt="Share to Chance"
+      className="
+        w-full
+        h-auto
+        block
+        object-cover
+      "
+    />
+  </div>
+</div>
 
+
+{/* ================= RECYCLED FINISHER SHIRT ================= */}
+<div className="px-5 mt-4">
+  <div
+    className="
+      w-full
+      rounded-[20px]
+      overflow-hidden
+      shadow-sm
+      border
+      border-slate-100
+      bg-white
+    "
+  >
+    <img
+      src={bottleShirt}
+      alt="Recycled Finisher Shirt"
+      className="
+        w-full
+        h-auto
+        block
+        object-cover
+      "
+    />
+  </div>
+</div>
+
+
+{/* ================= POONPOON RUN ================= */}
+<button
+  type="button"
+  onClick={() => onNavigate("poonpoonRun")}
+  className="
+    mx-5
+    mt-5
+    w-[calc(100%-2.5rem)]
+    rounded-[24px]
+    px-5
+    py-4
+    text-left
+    text-white
+    shadow-lg
+    active:scale-[0.98]
+    transition-transform
+  "
+  style={{
+    background:
+      "linear-gradient(120deg,#123E8C 0%,#1D63C9 50%,#2FB6D9 100%)",
+  }}
+>
+  <div className="flex items-center gap-4">
+
+    {/* POONPOON */}
+    <div
+      className="
+        relative
+        w-[64px]
+        h-[64px]
+        shrink-0
+        rounded-2xl
+        bg-white/15
+        overflow-hidden
+      "
+    >
+      <PoonpoonMascot
+        size={92}
+        className="
+          absolute
+          left-1/2
+          top-1/2
+          -translate-x-1/2
+          -translate-y-1/2
+          max-w-none
+        "
+      />
+    </div>
+
+    {/* TEXT */}
+    <div className="flex-1 min-w-0">
+      <p className="text-[10px] font-bold text-cyan-100">
+        🎮 MINI GAME
+      </p>
+
+      <p className="text-[18px] font-black leading-tight mt-0.5">
+        POONPOON RUN!
+      </p>
+
+      <p className="text-[11px] text-white/80 mt-1">
+        วิ่งเก็บสีแห่งอิสรภาพ
+      </p>
+    </div>
+
+    {/* ARROW */}
+    <div
+      className="
+        w-10
+        h-10
+        rounded-full
+        bg-white/15
+        flex
+        items-center
+        justify-center
+        shrink-0
+      "
+    >
+      <ChevronRight size={20} />
+    </div>
+
+  </div>
+</button>
 {/* ================= POONPOON RUN ================= */}
 <div className="px-5 mt-4">
   <button
