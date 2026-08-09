@@ -2055,22 +2055,25 @@ function HomeScreen({ onNavigate, onOpenMarker, onOpenFoodList, onBack }) {
           <div className="flex gap-3 px-5 overflow-x-auto pb-2">
 
   <ActivityCard
-    image={relaxkanLogo}
-    title="RelaxKAN"
-    onClick={() => onOpenMarker("relaxkan")}
-  />
+  title="RelaxKAN"
+  subtitle="Wellness & Recovery"
+  image={relaxkanLogo}
+  onClick={() => onOpenMarker("relaxkan")}
+/>
 
-  <ActivityCard
-    image={supLogo}
-    title="SUP Experience"
-    onClick={() => onOpenMarker("sup")}
-  />
+<ActivityCard
+  title="SUP Experience"
+  subtitle="Outdoor Activity"
+  image={supLogo}
+  onClick={() => onOpenMarker("sup")}
+/>
 
-  <ActivityCard
-    image={aroikanLogo}
-    title="อร่อยเมืองกาญ"
-    onClick={() => onOpenMarker("food")}
-  />
+<ActivityCard
+  title="อร่อยเมืองกาญ"
+  subtitle="Local Food"
+  image={aroikanLogo}
+  onClick={onOpenFoodList}
+/>
 
 </div>
         </div>
